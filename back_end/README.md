@@ -4,7 +4,11 @@
 1.  Node.js 다운
     - https://nodejs.org/en/download/stable/
 2. 
-    `npm install express-session --save`
+```
+npm install mysql
+npm install express-session --save
+```
+
 
 ### Running Server
 ```

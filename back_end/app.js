@@ -10,4 +10,3 @@ app.listen(port, function() {
 app.get('/', function(req, res){
     res.status(200).json({'msg' : 'Hello World'})
 })
-
