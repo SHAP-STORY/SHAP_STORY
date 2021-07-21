@@ -1,6 +1,6 @@
 CREATE DATABASE backend;
 USE backend;
-CREATE TABLE User (id VARCHAR(25) PK, passwd VARCHAR(255), name VARCHAR(255), grade INT(20));
-CREATE TABLE BaseClass (contant VARCHAR(255), title VARCHAR(255), INDEX num (title));
-CREATE TABLE HardClass (contant VARCHAR(255), title VARCHAR(255), INDEX num (title));
-CREATE TABLE LessonRate(id VARCHAR(255) PK, complete TINYINT(1), class_num INT(255), level VARCHAR(4));
+CREATE TABLE Student (id VARCHAR(255) PK, passwd VARCHAR(255), name VARCHAR(255), grade INT(255));
+CREATE TABLE Post (title VARCHAR(255), body VARCHAR(255), show TINYINT(1), student_id VARCHAR(255), date DATETIME DEFAULT NOW());
+CREATE TABLE Subject (title VARCHAR(255), contents VARCHAR(255), type VARCHAR(255)  INDEX classid (title));
+CREATE TABLE LessonRate(class_id INT(255), student_id VARCHAR(255), complete TinyINT(1));
