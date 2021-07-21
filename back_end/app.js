@@ -1,4 +1,5 @@
 "use strict";
+const bodyParser = require('body-parser');
 // module
 var express = require('express');
 var app = express();
@@ -15,7 +16,7 @@ app.set("view engine", "ejs");
 
 //use -> 미들웨어 등록해주는 메서드
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use("/", home);
 
 
