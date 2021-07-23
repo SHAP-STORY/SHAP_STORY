@@ -3,10 +3,11 @@
 ### Getting Started
 1.  Node.js 다운
     - https://nodejs.org/en/download/stable/
-2. 
+    
+2. Package 다운
 ```
-npm install mysql
-npm install express-session --save
+npm install
+npm update
 ```
 
 
