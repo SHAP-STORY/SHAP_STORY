@@ -5,7 +5,7 @@ CREATE TABLE Student (
   `passwd` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `grade` INT(255) NOT NULL,
-  `phone_number` INT(255) NOT NULL,
+  `phone_number` CHAR(11) NOT NULL,
   PRIMARY KEY(id)
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 CREATE TABLE Post (
