@@ -1,3 +1,5 @@
+"use strict";
+const bodyParser = require('body-parser');
 // module
 var express = require('express');
 var app = express();
@@ -47,6 +49,4 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", home);
 
-app.listen(port, () => {
-    console.log('app listening', port);
-});
+module.exports = app;
