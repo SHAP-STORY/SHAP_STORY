@@ -25,10 +25,10 @@ router.get('/register', ctrl.register);
 
 router.post('/register', (req, res, next) => {
     console.log(req.body);
-    const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade]
+    const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number]
     bcrypt.hash(param[1], saltRounds, (err, hash) => {
         param[1] = hash;
-        db.query('INSERT INTO user(`id`, `passwd`, `name`, `grade`) VALUES (?,?,?,?)', param, (err, row) => {
+        db.query('INSERT INTO student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
             if (err) console.log(err);
         });
     });
@@ -47,27 +47,30 @@ router.get('/login', function(req, res, next) {
 
 // login function (main -> login clink)
 router.post('/login', (req, res, next) => {
+    const param = [req.body.id, req.body.pw]
     console.log('Login Data:', (req.body));
-    param = [req.body.id, req.body.pw]
     db.query('SELECT id, passwd FROM student WHERE id=?', param[0], (err, row) => {
         if(err) {
             console.log('ERROR: DB: Login:')
             console.log(err)
         }
+
         if(row.length > 0){
             //ID가 존재합니다.
-            bcrypt.compare(param[1], row[0].pw, (error, result) =>{
+            bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
+                console.log('Check 2', result)
                 if(result){
-                    console.log(req.seesion.loginData)
-                    //req.seesion.loginData = //유저데이터
+                    //console.log(req.session.loginData)
+                    req.session.loginData = req.body
                     req.session.save(error => {if(error) {
-                        console,log('Error: Login: save session')
+                        console.log('Error: Login: save session')
                         console.log(error)
                     }}) 
-                    res.json({message: 'success'})                
+                    
+                    console.log('success');               
                 }else{
-                    console,log('Error: Login: can not find id')
-                    res.json({message: 'fail'})
+                    console.log('Error: Login: can not find id')
+                    console.log('fail');   
                 }
             })
         }else {

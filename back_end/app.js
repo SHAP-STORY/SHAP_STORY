@@ -1,5 +1,4 @@
 "use strict";
-const bodyParser = require('body-parser');
 // module
 var express = require('express');
 var app = express();
