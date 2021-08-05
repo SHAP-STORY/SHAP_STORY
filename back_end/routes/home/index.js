@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     if(req.cookies){
         console.log(req.cookies);
     }
-    res.send("환영합니다 ~");
+    res.render("home/home");
 });
 
 //register 화면
@@ -38,7 +38,6 @@ router.post('/register', (req, res, next) => {
 // 로그인 GET
 router.get('/login', function(req, res, next) {
     let session = req.session;
-
     res.render("user/login", {
         session : session
     });

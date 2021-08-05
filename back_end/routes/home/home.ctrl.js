@@ -6,12 +6,11 @@ const register = (req, res) => {
 };
 
 const login = (req, res) => {
-    res.render("home/login");
+    res.render("user/login");
 };
 
 //외부에서 사용할 수 있도록 내보내는 것 
 module.exports = {
     register, 
     login,
-
 };
