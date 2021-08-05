@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+
 // mysql
 const db = require('../../db/database');
+
 // 비밀번호 암호화 bcrypt hash 함수
 const bcrypt = require('bcrypt');
 const saltRounds = 10; //ANCHOR passwd varchar(255)로 바꿔줌.(그 전에걸로 했을 때 data가 길다는 오류가 뜸.)
@@ -57,16 +59,13 @@ router.post('/login', (req, res, next) => {
         if(row.length > 0){
             //ID가 존재합니다.
             bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
-                console.log('Check 2', result)
                 if(result){
-                    //console.log(req.session.loginData)
                     req.session.loginData = req.body
                     req.session.save(error => {if(error) {
                         console.log('Error: Login: save session')
                         console.log(error)
                     }}) 
-                    
-                    console.log('success');               
+                    console.log('success');          
                 }else{
                     console.log('Error: Login: can not find id')
                     console.log('fail');   

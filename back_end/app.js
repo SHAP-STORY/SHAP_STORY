@@ -10,7 +10,6 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const axios = require('axios');
 
-//TEST
 // Access-Control-Allow-Origin 오류를 방지하기 위해
 app.use(cors({ 
     origin: true,// CHECK true보다는 url을 적는 것이 좋다
@@ -38,6 +37,7 @@ const port = 3000;
 
 // routing
 const home = require("./routes/home");
+const mypage = require("./routes/mypage")
 
 //app setting
 app.set("views", "./views");
@@ -47,5 +47,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", home);
+app.use('/mypage', mypage);
+
 
 module.exports = app;
