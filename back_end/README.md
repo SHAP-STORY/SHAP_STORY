@@ -3,8 +3,13 @@
 ### Getting Started
 1.  Node.js 다운
     - https://nodejs.org/en/download/stable/
-2. 
-    `npm install express-session --save`
+    
+2. Package 다운
+```
+npm install
+npm update
+```
+
 
 ### Running Server
 ```
