@@ -13,8 +13,8 @@ const register = (req, res, next) => {
     res.render("home/register");
 };
 
-const login = (req, res, next) => {
-    res.render("home/login");
+const login = (req, res) => {
+    res.render("user/login");
 };
 
 //외부에서 사용할 수 있도록 내보내는 것 
@@ -22,5 +22,4 @@ module.exports = {
     home,
     register,
     login,
-
 };

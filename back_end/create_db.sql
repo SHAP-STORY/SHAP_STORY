@@ -25,3 +25,4 @@ CREATE TABLE LessonRate(
   `student_id` VARCHAR(255) NOT NULL,
   `complete` TINYINT(1) NOT NULL
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
