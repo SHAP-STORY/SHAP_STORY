@@ -12,6 +12,7 @@
     <h1>게시판 목록</h1>
     <table border="2">
         <tr>
+            <th>글번호</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>공개여부</th>
@@ -19,6 +20,9 @@
         </tr>
         <% for(var i=0; i<rows.length; i++) { %>
             <tr>
+                <td>
+                    <%=rows[i].idx%>
+                </td>
                 <td>
                     <a href="/posts/read/<%=rows[i].idx%>">
                         <%=rows[i].title%>
