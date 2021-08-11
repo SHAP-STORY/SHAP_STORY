@@ -16,6 +16,11 @@ const Home = (props) => {
                 <ContentButton>마이페이지</ContentButton>
                 <RoundButton>로그인</RoundButton>
             </Header>
+            <Body>
+                <Title>Hello, #STORY</Title>
+                <Text>마이크로비트를 이용한<br/>코딩교육 웹사이트<br/>쉽고 재미있게 코딩을 배워보아요 😍</Text>
+                <RoundButton2>학습하기</RoundButton2>
+            </Body>
 
         </Background>
     );
@@ -73,6 +78,40 @@ const RoundButton = styled.button`
     border-radius: 30px;
 `;
 
+//--------------------------------------------------------
+// BODY
+const Body = styled.div`
+    float: left;
+    margin: 25vh 0px 0px 35vh;
+    display: flex;
+    flex-direction: column;
+    item-align: baseline;
+    justify-content: space-between;
+`;
+
+const Title = styled.h1`
+    font-size: 40px;
+    text-align: left;
+    align: left;
+`;
+
+const Text = styled.text`
+    text-align: left;
+    align: left;
+    font-size: 20px;
+`;
+
+const RoundButton2 = styled.button`
+    font-size: 20px;
+    margin-top: 50px;
+    float: right;
+    background-color: #3F3D56;
+    border: 0;
+    color: white;
+    width: 130px;
+    height: 45px;
+    border-radius: 30px;
+`;
 
 
 
