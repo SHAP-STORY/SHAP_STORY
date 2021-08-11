@@ -22,6 +22,9 @@ const Home = (props) => {
                 <RoundButton2>학습하기</RoundButton2>
             </Body>
 
+            <BackBar>
+                <Our>방희연 서현주 이채영 김효민</Our>
+            </BackBar>
         </Background>
     );
 }
@@ -32,7 +35,6 @@ const Background = styled.div`
     background-image: url(${background});
     resizeMode="stretch"
 `;
-
 
 const Header = styled.div`    
     height: 60px;
@@ -113,6 +115,35 @@ const RoundButton2 = styled.button`
     border-radius: 30px;
 `;
 
+//-----------------------------------------------------
 
+const move = keyframes`
+    0%{
+        left: 0%;
+    }
+  
+    100%{
+        left: 86%;
+    }
+`;
+
+const BackBar = styled.div`
+    position:absolute;
+    bottom:0;
+    background: #5FDBB2;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Our = styled.div`
+    color: white;
+    position:absolute;
+    bottom:0;
+    font-size : 17px;
+    animation : ${move} 5s 1s infinite;
+`;
 
 export default Home;
