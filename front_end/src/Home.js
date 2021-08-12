@@ -1,6 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import background from "./home_background2.png";
+import background from "./image/home_background2.png";
+import background2 from "./image/home_background3.png"
 
 
 const Home = (props) => {
@@ -59,17 +60,24 @@ const HomeButton = styled.button`
     font-size: 35px;
 `;
 
+
 const ContentButton = styled.button`
     margin: 60px 30px 0px 0px;
     font-size: 17px;
     float: right;
     background-color: #00ff0000;
     border:0;
-    height: 20px; 
+    padding: 5px 10px 10px 10px;
+    border-radius: 20px;
+    height: 35px; 
+    
+    &:hover {
+    background: #dadbdb;
+    }
 `;
 
 const RoundButton = styled.button`
-    margin: 65px 50px 0px 15px;
+    margin: 60px 50px 0px 15px;
     font-size: 17px;
     float: right;
     background-color: #3F3D56;
@@ -82,13 +90,28 @@ const RoundButton = styled.button`
 
 //--------------------------------------------------------
 // BODY
+
+const SlideIn = keyframes `
+  from {
+    margin-left: 100%;
+    width: 300%
+  }
+
+  to {
+    margin-left: 35vh;
+    width: 100%;
+  }
+}
+`;
+
 const Body = styled.div`
     float: left;
-    margin: 25vh 0px 0px 35vh;
+    margin: 20vh 0px 0px 35vh;
     display: flex;
     flex-direction: column;
     item-align: baseline;
     justify-content: space-between;
+    animation : ${SlideIn} 5s 1s
 `;
 
 const Title = styled.h1`
