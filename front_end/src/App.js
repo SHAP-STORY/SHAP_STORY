@@ -1,8 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import React from "react";
+import {
+BrowserRouter as Router,
+Switch,
+Route,
+Link
+} from "react-router-dom";
 
 import Home from "./Home";
+import QnABoard from "./Questions";
+import Questions from "./Questions";
 
 
 class App extends React.Component {
@@ -14,7 +22,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <Home/>
+                <Route path="/" exact component={Home}/>
+                <Route path="/questions" component={Questions}/>
             </div>
         );
     }
