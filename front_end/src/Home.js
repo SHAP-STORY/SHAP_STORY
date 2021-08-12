@@ -57,12 +57,12 @@ const HomeButton = styled.button`
     margin: 60px 0px 0px 30px;
     background-color: #54B192;
     border: 0;
-    color: white;
+    color: #3F3D56;
     width: 60px;
     height: 60px;
     border-radius: 30px;
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
 `;
 
 
@@ -112,7 +112,6 @@ const Body = styled.div`
     margin: 20vh 0px 0px 35vh;
     display: flex;
     flex-direction: column;
-    item-align: baseline;
     justify-content: space-between;
     animation : ${SlideIn} 5s 1s
 `;
