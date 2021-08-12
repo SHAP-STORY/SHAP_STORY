@@ -24,7 +24,7 @@ const Home = (props) => {
             </Body>
 
             <BackBar>
-                <Our>방희연 서현주 이채영 김효민</Our>
+                <Our><b>#SHAP-STORY™ 방희연 서현주 이채영 김효민</b></Our>
             </BackBar>
         </Background>
     );
@@ -142,11 +142,13 @@ const RoundButton2 = styled.button`
 
 const move = keyframes`
     0%{
-        left: 0%;
+        left: 10%;
     }
-  
+    50% {
+        left 80%
+    }
     100%{
-        left: 86%;
+        left: 10%;
     }
 `;
 
@@ -166,7 +168,7 @@ const Our = styled.div`
     position:absolute;
     bottom:0;
     font-size : 17px;
-    animation : ${move} 5s 1s infinite;
+    animation : ${move} 10s 1s infinite;
 `;
 
 export default Home;
