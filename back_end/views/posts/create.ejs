@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+</html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+
+
+<body>
+    <h1>게시판 작성</h1>
+    <form method="post" action="/posts/create" onsubmit="onWriteSubmit()">
+        <table border="2">
+            <tr>
+                <th>글쓴이</th>
+                <td><input type="text" name="student_id" id="student_id" required /></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" id="title" required /></td>
+            </tr>
+            <tr>
+                <th>공개여부</th>
+                <td><input type="text" name="show" id="show" required /></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea cols="50" role="12" name="content" id="content" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="등록"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function onWriteSubmit() {
+            if ($("#student_id").val().trim() == "") {
+                var message = "아이디를 입력해 주세요";
+                $("#student_id").val("");
+                $("#student_id").focus();
+                alert(message);
+                return false;
+            };
+
+            if ($("#title").val().trim() == "") {
+                var message = "제목을 입력해 주세요";
+                $("#title").val("");
+                $("#title").focus();
+                alert(message);
+                return false;
+            };
+
+            if ($("#show").val().trim() == "") {
+                var message = "공개 여부를 써주세요";
+                $("#show").val("");
+                $("#show").focus();
+                alert(message);
+                return false;
+            };
+
+            if ($("#content").val().trim() == "") {
+                var message = "본문 내용을 입력해 주세요";
+                $("#content").val("");
+                $("#content").focus();
+                alert(message);
+                return false;
+            };
+        };
+    </script>
+    <a href="/posts">게시글 목록</a>
+</body>
