@@ -93,13 +93,11 @@ const RoundButton = styled.button`
 
 const SlideIn = keyframes `
   from {
-    margin-left: 100%;
-    width: 300%
+    margin-left: 70%;
   }
 
   to {
     margin-left: 35vh;
-    width: 100%;
   }
 }
 `;
