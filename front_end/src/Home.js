@@ -1,19 +1,24 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 import background from "./image/home_background2.png";
-import background2 from "./image/home_background3.png"
+import background2 from "./image/home_background3.png";
 
+import {Link} from "react-router-dom";
 
 const Home = (props) => {
     return (
 
         <Background>
             <Header>
-                <HomeButton>#.</HomeButton>
+                <Link to={"/"}>
+                    <HomeButton>#.</HomeButton>
+                </Link>
                 <MarginLeft/>
                 <ContentButton>기초학습</ContentButton>
                 <ContentButton>심화학습</ContentButton>
-                <ContentButton>질문하기</ContentButton>
+                <Link to="./questions">
+                    <ContentButton>질문하기</ContentButton>
+                </Link>
                 <ContentButton>마이페이지</ContentButton>
                 <RoundButton>로그인</RoundButton>
             </Header>
