@@ -1,7 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 import {Link} from "react-router-dom";
-import background from "./image/home_background2.png";
+import profile from "./image/profile.png"
 
 const Questions = (props) => {
     return (
@@ -19,19 +19,53 @@ const Questions = (props) => {
                 <ContentButton>마이페이지</ContentButton>
                 <RoundButton>로그인</RoundButton>
             </Header>
+
+            <QuestionBar>
+                <Search></Search>
+                <SearchButton>검색</SearchButton>
+            </QuestionBar>
+
+            <QuestionBoard>
+                <ContentDiv>
+                    <ProfileImg src={profile}></ProfileImg>
+                    <Title_Author>
+                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                    </Title_Author>
+                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                </ContentDiv>
+                <ContentDiv>
+                    <ProfileImg src={profile}></ProfileImg>
+                    <Title_Author>
+                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                    </Title_Author>
+                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                </ContentDiv>
+                <ContentDiv>
+                    <ProfileImg src={profile}></ProfileImg>
+                    <Title_Author>
+                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                    </Title_Author>
+                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                </ContentDiv>
+                <ContentDiv>
+                    <ProfileImg src={profile}></ProfileImg>
+                    <Title_Author>
+                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                    </Title_Author>
+                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                </ContentDiv>
+
+            </QuestionBoard>
         </div>
     );
 }
 
-const Background = styled.div`
-    width: 100%;
-    height: 100vh;
-    background-image: url(${background});
-    resizeMode="stretch"
-`;
-
 const Header = styled.div`    
-    height: 60px;
+    height: 70px;
     width: 100%;
     display: flex;
     align-items: center; 
@@ -45,12 +79,12 @@ const HomeButton = styled.button`
     margin: 60px 0px 0px 30px;
     background-color: #54B192;
     border: 0;
-    color: white;
+    color: #3F3D56;
     width: 60px;
     height: 60px;
     border-radius: 30px;
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
 `;
 
 
@@ -80,5 +114,89 @@ const RoundButton = styled.button`
     height: 40px;
     border-radius: 30px;
 `;
+
+//---------------------------------------------------------------------
+// QuestionBar
+
+const QuestionBar = styled.div`
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 800px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+`;
+
+const Search = styled.input`
+    width: 640px;
+    height: 42px;
+    border-radius: 35px;
+    border: 3px solid #3F3D56;
+    text-align: center;
+    &: focus{
+            outline: none;
+            border: 3px solid #dadbdb;
+        }
+`
+
+const SearchButton = styled.button`
+    margin-left: 30px;
+    font-size: 17px;
+    font-weight: 550;
+    float: right;
+    background-color: #3F3D56;
+    border: 0;
+    color: white;
+    width: 110px;
+    height: 48px;
+    border-radius: 30px;
+    &: hover{
+        background-color: #dadbdb;
+        color: black;
+    }
+`;
+
+// -------------------------------------------------------------------
+// QuestionBoard
+
+// search bar 아래 질문만 포함하는 div
+const QuestionBoard = styled.div`
+    position: absolute;
+    width: 800px;
+    top: 230px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+`;
+
+// 프로필 사진, 제목, 작성자, 작성일 수평정렬을 div : ContentDiv 1개가 질문 1개 
+const ContentDiv = styled.div`
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+`;
+
+// 질문 제목, 작성자 수직정렬을 위한 div
+const Title_Author = styled.div`
+    width: 60%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20px;
+    text-align: left;
+    align: left;
+`;
+
+// profile 이미지 둥글게 만들어줌
+const ProfileImg = styled.img`
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+`
 
 export default Questions;
