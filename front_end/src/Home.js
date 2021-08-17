@@ -1,7 +1,6 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import background from "./image/home_background2.png";
-import background2 from "./image/home_background3.png";
+import background from "./image/homeBg.svg";
 
 import {Link} from "react-router-dom";
 
@@ -36,6 +35,8 @@ const Home = (props) => {
 }
 
 const Background = styled.div`
+    background-position:center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
     background-image: url(${background});
@@ -43,7 +44,7 @@ const Background = styled.div`
 `;
 
 const Header = styled.div`    
-    height: 60px;
+    height: 70px;
     width: 100%;
     display: flex;
     align-items: center; 

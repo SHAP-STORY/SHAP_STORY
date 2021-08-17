@@ -78,6 +78,8 @@ const Questions = (props) => {
 }
 
 const Background = styled.div`
+    background-position:center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
     background-image: url(${background});
