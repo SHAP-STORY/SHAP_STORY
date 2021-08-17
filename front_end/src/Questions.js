@@ -2,10 +2,11 @@ import React from "react";
 import styled, {keyframes} from "styled-components";
 import {Link} from "react-router-dom";
 import profile from "./image/profile.png"
+import background from "./image/questionBg.svg";
 
 const Questions = (props) => {
     return (
-        <div>
+        <Background>
             <Header>
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
@@ -25,7 +26,7 @@ const Questions = (props) => {
                 <SearchButton>검색</SearchButton>
             </QuestionBar>
 
-            <QuestionBoard>
+            <QuestionDiv>
                 <ContentDiv>
                     <ProfileImg src={profile}></ProfileImg>
                     <Title_Author>
@@ -58,11 +59,30 @@ const Questions = (props) => {
                     </Title_Author>
                     <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
+                <SearchButton style={{width: "150px", marginTop: "10px"}}>질문하기</SearchButton>
+            </QuestionDiv>
 
-            </QuestionBoard>
-        </div>
+            <BottomDiv>
+                <PageDiv>
+                    <PageButton>◀</PageButton>
+                    <PageButton>1</PageButton>
+                    <PageButton>2</PageButton>
+                    <PageButton>3</PageButton>
+                    <PageButton>4</PageButton>
+                    <PageButton>5</PageButton>
+                    <PageButton>▶</PageButton>
+                </PageDiv>
+            </BottomDiv>
+        </Background>
     );
 }
+
+const Background = styled.div`
+    width: 100%;
+    height: 100vh;
+    background-image: url(${background});
+    resizeMode="stretch"
+`;
 
 const Header = styled.div`    
     height: 70px;
@@ -160,10 +180,10 @@ const SearchButton = styled.button`
 `;
 
 // -------------------------------------------------------------------
-// QuestionBoard
+// QuestionDiv
 
-// search bar 아래 질문만 포함하는 div
-const QuestionBoard = styled.div`
+// search bar 아래 질문, 질문하기 버튼을 포함하는 div
+const QuestionDiv = styled.div`
     position: absolute;
     width: 800px;
     top: 230px;
@@ -198,5 +218,39 @@ const ProfileImg = styled.img`
     height: 60px;
     border-radius: 30px;
 `
+
+// -------------------------------------------------------------------
+// BottomDiv - 12345 페이지 넘기기
+
+const BottomDiv = styled.div`
+    position: absolute;
+    width: 800px;
+    top: 650px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+`;
+
+const PageDiv = styled.div`
+    margin: 0px 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+`;
+
+const PageButton = styled.button`
+    font-size: 17px;
+    background-color: #00ff0000;
+    border:0;
+    border-radius: 20px;
+    height: 35px; 
+    
+    &:hover {
+    background: #dadbdb;
+    }
+`;
+
+
+
+
 
 export default Questions;
