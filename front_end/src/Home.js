@@ -147,7 +147,7 @@ const move = keyframes`
         left: 10%;
     }
     50% {
-        left 80%
+        left 70%
     }
     100%{
         left: 10%;
