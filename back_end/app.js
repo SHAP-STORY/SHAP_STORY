@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser')
 const axios = require('axios');
 
 // Access-Control-Allow-Origin 오류를 방지하기 위해
-app.use(cors({ 
+app.use(cors({
     origin: true,// CHECK true보다는 url을 적는 것이 좋다
     credentials: true
 }))
@@ -26,7 +26,7 @@ app.use(
         resave: false, // 수정이 되지 않아도 다시 저장할 것인지
         saveUninitialized: true,
         cookie: {
-            maxAge: 60 * 60 *24000, // 쿠키 유효기간 24시간
+            maxAge: 60 * 60 * 24000, // 쿠키 유효기간 24시간
         }
     })
 )
@@ -34,7 +34,7 @@ axios.defaults.withCredentials = true //react 프레임 워크 사용시 axios�
 module.exports = app;
 
 // port number
-const port = 3000;
+const port = 5000;
 
 // routing
 

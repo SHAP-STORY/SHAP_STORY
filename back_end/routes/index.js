@@ -5,10 +5,10 @@ const router = express.Router();
 
 const home = require('./home/index');
 const posts = require('./posts/index');
-const mypage = require("./routes/mypage");
+const mypage = require("./mypage/index");
 
 router.use('/home', home);
 router.use('/posts', posts);
-app.use('/mypage', mypage);
+router.use('/mypage', mypage);
 
 module.exports = router;
