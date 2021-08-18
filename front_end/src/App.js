@@ -9,8 +9,9 @@ Link
 } from "react-router-dom";
 
 import Home from "./Home";
-import QnABoard from "./Questions";
-import Questions from "./Questions";
+import QnABoard from "./QuestionBoard";
+import Questions from "./QuestionBoard";
+import DoQuestion from "./DoQuestion";
 
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
             <div className="App">
                 <Route path="/" exact component={Home}/>
                 <Route path="/questions" component={Questions}/>
+                <Route path="/doQuestion" component={DoQuestion}></Route>
             </div>
         );
     }

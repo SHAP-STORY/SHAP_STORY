@@ -59,7 +59,9 @@ const Questions = (props) => {
                     </Title_Author>
                     <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
-                <SearchButton style={{width: "150px", marginTop: "10px"}}>질문하기</SearchButton>
+                <Link to="./doQuestion">
+                    <SearchButton style={{width: "150px", marginTop: "10px"}}>질문하기</SearchButton>
+                </Link>
             </QuestionDiv>
 
             <BottomDiv>
@@ -250,9 +252,6 @@ const PageButton = styled.button`
     background: #dadbdb;
     }
 `;
-
-
-
 
 
 export default Questions;
