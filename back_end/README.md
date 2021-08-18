@@ -5,15 +5,21 @@
     - https://nodejs.org/en/download/stable/
     
 2. Package 다운
+    - 'back_end'
 ```
+cd back_end
 npm install
 npm update
 ```
-
+    - 'front_end"
+```
+cd front_end
+npm install
+```
 
 ### Running Server
 ```
-node app.js
+npm start
 ```
 
 ## DB table 구성
