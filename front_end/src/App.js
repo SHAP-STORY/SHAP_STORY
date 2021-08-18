@@ -11,6 +11,7 @@ Link
 import Home from "./Home";
 import QnABoard from "./Questions";
 import Questions from "./Questions";
+import DoQuestion from "./DoQuestion";
 
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
             <div className="App">
                 <Route path="/" exact component={Home}/>
                 <Route path="/questions" component={Questions}/>
+                <Route path="/doQuestion" component={DoQuestion}></Route>
             </div>
         );
     }
