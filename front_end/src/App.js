@@ -9,8 +9,8 @@ Link
 } from "react-router-dom";
 
 import Home from "./Home";
-import QnABoard from "./Questions";
-import Questions from "./Questions";
+import QnABoard from "./QuestionBoard";
+import Questions from "./QuestionBoard";
 import DoQuestion from "./DoQuestion";
 
 
