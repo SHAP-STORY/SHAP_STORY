@@ -4,19 +4,25 @@ import background from "./image/homeBg.svg";
 
 import {Link} from "react-router-dom";
 
-const DoQuestion = () => {
+const DoQuestion = (props) => {
 
     return (
         <Background>
             <Modal>
                 <AlignCol>
                     <Title>질문하기</Title>
-                    <Link to="./questions">
-                        <ButtonOut>X</ButtonOut>
-                    </Link>
+                    <ButtonOut
+                        onClick = {() => {
+                            props.history.goBack()
+                        }}
+                    >X</ButtonOut>
                     <Input placeholder="제목을 입력해주세요"/>
                     <Input placeholder="질문을 작성해주세요" style={{height: "330px"}}/>
-                    <SaveButton>저장</SaveButton>
+                    <SaveButton
+                        onClick={() => {
+                            props.history.goBack()
+                        }}
+                    >저장</SaveButton>
                 </AlignCol>
             </Modal>
         </Background>
@@ -105,7 +111,8 @@ const SaveButton = styled.button`
     height: 48px;
     border-radius: 30px;
     &: hover{
-        background-color: #dadbdb;
+        font-weight: 550;
+        background-color: #EAEAEA;
         color: black;
     }
 `;
