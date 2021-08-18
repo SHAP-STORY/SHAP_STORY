@@ -25,9 +25,6 @@ const Background = styled.div`
     background: rgba(0, 0, 0, 0.6);
 `;
 
-const Modal = styled.div`
-
-`;
 
 const Modal = styled.div`
     position: absolute;
