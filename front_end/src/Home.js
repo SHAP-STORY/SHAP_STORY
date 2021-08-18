@@ -1,8 +1,8 @@
 import React from "react";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import background from "./image/homeBg.svg";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
     return (
@@ -11,7 +11,7 @@ const Home = (props) => {
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
                 </Link>
-                <MarginLeft/>
+                <MarginLeft />
                 <ContentButton>기초학습</ContentButton>
                 <ContentButton>심화학습</ContentButton>
                 <Link to="./questions">
@@ -22,7 +22,7 @@ const Home = (props) => {
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
-                <Text>마이크로비트를 이용한<br/>코딩교육 웹사이트<br/>쉽고 재미있게 코딩을 배워보아요 😍</Text>
+                <Text>마이크로비트를 이용한<br />코딩교육 웹사이트<br />쉽고 재미있게 코딩을 배워보아요 😍</Text>
                 <RoundButton2>학습하기</RoundButton2>
             </Body>
 
@@ -96,7 +96,7 @@ const RoundButton = styled.button`
 //--------------------------------------------------------
 // BODY
 
-const SlideIn = keyframes `
+const SlideIn = keyframes`
   from {
     margin-left: 70%;
   }
