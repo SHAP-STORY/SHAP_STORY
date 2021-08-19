@@ -10,6 +10,14 @@ import { Link } from "react-router-dom";
 
 class SignIn extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: '',
+            userpasswd: ''
+        }
+    }
+
     render(){
         return (
             <BackGround>
@@ -68,7 +76,7 @@ const Image = styled.img`
 
 const LoginContent = styled.div`
     position: absolute;
-    top: 80px; left: 750px;
+    top: 100px; left: 750px;
     background: white;
     color: #707070;
 `;
