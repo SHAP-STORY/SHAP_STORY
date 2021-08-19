@@ -109,6 +109,9 @@ const HomeButton = styled.button`
     border-radius: 30px;
     text-align: center;
     font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: -25px; left: 30px;
 `;
 
 
