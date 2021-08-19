@@ -8,28 +8,31 @@ import { Link } from "react-router-dom";
 - # 위치 맞추기 (0: HOME, SIGNIN, QuestionBoard/ X: )
 */
 
-const SignIn = (props) => {
-    return (
-        <BackGround>
-            <Link to={"/"}>
-                <HomeButton>#.</HomeButton>
-            </Link>
-            <Image src={character}></Image>
-            <LoginContent>
-                <h4 style={{textAlign: "right"}}>Welcome to #STORY</h4>
-                <h1 style={{fontSize: "40px", margin: "40px"}}># STORY에 오신걸 환영합니다</h1>
-                <h3 style={{margin: "30px"}}>회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!</h3>
-                <Input placeholder="아이디를 입력해주세요"></Input>
-                <Input placeholder="비밀번호를 입력해주세요"></Input>
+class SignIn extends React.Component {
+
+    render(){
+        return (
+            <BackGround>
                 <Link to={"/"}>
-                    <LoginButton></LoginButton>
+                    <HomeButton>#.</HomeButton>
                 </Link>
-                <Link to="/signup" style={{color:"inherit", textDecoration: "none"}}>
-                    <h3 style={{margin: "70px 0px"}}>계정이 없으신가요? 회원가입</h3>
-                </Link>
-            </LoginContent>
-        </BackGround>
-    );
+                <Image src={character}></Image>
+                <LoginContent>
+                    <h4 style={{textAlign: "right"}}>Welcome to #STORY</h4>
+                    <h1 style={{fontSize: "40px", margin: "40px"}}># STORY에 오신걸 환영합니다</h1>
+                    <h3 style={{margin: "30px"}}>회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!</h3>
+                    <Input placeholder="아이디를 입력해주세요"></Input>
+                    <Input placeholder="비밀번호를 입력해주세요"></Input>
+                    <Link to={"/"}>
+                        <LoginButton></LoginButton>
+                    </Link>
+                    <Link to="/signup" style={{color:"inherit", textDecoration: "none"}}>
+                        <h3 style={{margin: "70px 0px"}}>계정이 없으신가요? 회원가입</h3>
+                    </Link>
+                </LoginContent>
+            </BackGround>
+        );
+    }
 }
 
 const BackGround = styled.div`
