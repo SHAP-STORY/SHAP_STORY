@@ -12,6 +12,7 @@ import Home from "./Home";
 import QnABoard from "./QuestionBoard";
 import Questions from "./QuestionBoard";
 import DoQuestion from "./DoQuestion";
+import SignIn from "./SignIn";
 
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
                 <Route path="/" exact component={Home}/>
                 <Route path="/questions" component={Questions}/>
                 <Route path="/doQuestion" component={DoQuestion}></Route>
+                <Route path="/signIn" component={SignIn}></Route>
             </div>
         );
     }

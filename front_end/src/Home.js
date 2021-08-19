@@ -18,7 +18,10 @@ const Home = (props) => {
                     <ContentButton>질문하기</ContentButton>
                 </Link>
                 <ContentButton>마이페이지</ContentButton>
-                <RoundButton>로그인</RoundButton>
+                <Link to="./signIn">
+                    <RoundButton>로그인</RoundButton>
+                </Link>
+                
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
