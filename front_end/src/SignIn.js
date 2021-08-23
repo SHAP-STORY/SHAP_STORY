@@ -4,6 +4,8 @@ import base from "./image/signin.png";
 import character from "./image/signinCh.png";
 import loginButton from "./image/loginButton.png";
 import { Link } from "react-router-dom";
+
+import HomeButton from './components/HomeButton'
 /* CHECK  
 - # 위치 맞추기 (0: HOME, SIGNIN, QuestionBoard/ X: )
 */
@@ -50,21 +52,6 @@ const BackGround = styled.div`
     height: 100vh;
     background-image: url(${base});
     resizeMode="stretch"
-`;
-
-const HomeButton = styled.button`
-    margin: 60px 0px 0px 30px;
-    background-color: #54B192;
-    border: 0;
-    color: #3F3D56;
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 30px;
-    cursor: pointer;
-    position: absolute;
-    top: -25px; left: 30px;
 `;
 
 const Image = styled.img`
