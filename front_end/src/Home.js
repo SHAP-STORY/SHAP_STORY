@@ -17,7 +17,9 @@ const Home = (props) => {
                 <Link to="./questions">
                     <ContentButton>질문하기</ContentButton>
                 </Link>
-                <ContentButton>마이페이지</ContentButton>
+                <Link to="./mypage">
+                    <ContentButton>마이페이지</ContentButton>
+                </Link>
                 <RoundButton>로그인</RoundButton>
             </Header>
             <Body>
