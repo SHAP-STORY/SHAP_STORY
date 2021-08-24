@@ -6,47 +6,6 @@ const bodyParser = require('body-parser');
 //user_info
 var user_info = require('../varient');
 
-var basic= [
-    {
-      id: "1",
-      title: "개미와 베짱이",
-      achievement: "40",
-      img: "https://placeimg.com/15/15/1",
-    },
-  ]
-  var hard= [
-    {
-      id: "2",
-      title: "알라딘의 요술램프",
-      achievement: "40",
-      img: "https://placeimg.com/15/15/2",
-    },
-    {
-      id: "3",
-      title: "신데렐라",
-      achievement: "100",
-      img: "https://placeimg.com/15/15/3",
-    },
-  ];
-  var mywriting= [
-    {
-      title: "Basic 3강에서 질문있습니다! 자꾸 에러가 나요.",
-      question: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
-      date: "2021.07.24 오전 11:30",
-    },
-    {
-      title: "1강에서 이해가 안되는 것이 있어요.",
-      question: "기타가 어떻게 소리가 나게 되는 건가요!?",
-      date: "2021.07.24 오전 11:30",
-    },
-    {
-      title: "질문이 있습니다.",
-      question:
-        "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
-      date: "2021.07.24 오전 11:15",
-    },
-  ]
-
 // mysql
 const db = require('../../db/database');
 
@@ -66,6 +25,15 @@ router.get('/', function(req, res, next) {
         basic:basic,
         hard:hard
       });
+});
+
+router.get('/user', function (req, res, next) {
+    const data = {
+        'userId': user_info[1],
+        'userName': user_info[2],
+        'userImg': user_info[3]
+    }
+    res.send(data);
 });
 
 router.get('/hardachievement', function(req, res, next) {

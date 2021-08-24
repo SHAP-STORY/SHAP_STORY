@@ -69,7 +69,15 @@ class MyPage extends React.Component {
     };
     //this.serverConnect = this.serverConnect.bind(this);
     this.userphotoChange = this.userphotoChange.bind(this);
+    this.userDataChange = this.userDataChange.bind(this);
   }
+  callUserDataApi = async () => {
+    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
+    const response = await fetch("api/mypage/user");
+    const body = await response.json();
+    return body;
+  };
+
   callMywritingApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
     const response = await fetch("api/mypage/mywriting");
@@ -106,6 +114,15 @@ class MyPage extends React.Component {
       this.callBasicAchievementApi()
       .then((res) => this.setState({hard: res}))
       .catch((err) => console.log(err));
+
+      this.callUserDataApi()
+      .then((res) => this.userDataChange(res))
+      .catch((err) => console.log(err));
+  }
+  userDataChange(data){
+    this.userId = data.userId;
+    this.username = data.userName;
+    this.userImg = data.userImg
   }
 
   userphotoChange(){

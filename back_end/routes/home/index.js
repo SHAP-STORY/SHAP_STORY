@@ -74,7 +74,7 @@ router.post('/login', (req, res, next) => {
                     }}) 
                     console.log('success');
                     user_info[1] = param[0];
-                    user_info[2] = param[2];
+                    user_info[2] = row[2];
                     user_info[0] = true;
                     console.log(user_info);          
                 }else{
