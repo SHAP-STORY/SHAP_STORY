@@ -11,13 +11,11 @@ import HomeButton from "./components/HomeButton";
 //import Axios from "axios";
 //import { useDispatch } from "react-redux";
 //import { loginUser } from "../_actions/user_action";
-console.log("in");
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
       userId: "",
       userPasswd: "",
       userimg: "",
@@ -34,32 +32,53 @@ class SignIn extends React.Component {
 
   passwdChange = (e) => {
     this.setState({
-        userPasswd: e.target.value,
+      userPasswd: e.target.value,
     });
   };
 
-  signinValueChange() {
-    console.log("sumit");
-    console.log(this.state.userId, this.state.userPasswd);
-  }
-
   callApi = async () => {
-    const response = await fetch("/home/login");
+    const response = await fetch("api/home/login");
     const body = await response.json();
     return body;
   };
 
+  signinValueChange() {
+    /*const url = "api/home/login";
+    const formData = new FormData();
+      formData.append("userid", this.state.userId);
+      formData.append("userpasswd", this.state.userPasswd);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      console.log(formData);
+      return post(url, formData, config);*/
+    const post = {
+      id: this.state.userId,
+      passwd: this.state.userPasswd,
+    };
+
+    fetch("http://localhost:5000/api/home/login", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    this.serverConnect();
+  }
+
   serverConnect() {
-    console.log(this.state.userId, this.state.userPasswd);
     this.callApi()
-      .then((res) => this.setState({ user: res }))
+      .then((res) => this.setState({ loginState: res.state }))
       .catch((err) => console.log(err));
     this.setState({
-        user: "",
-        userId: "",
-        userPasswd: "",
-        userimg: "",
-        loginState: false,
+      user: "",
+      userId: "",
+      userPasswd: "",
+      userimg: "",
+      loginState: false,
     });
   }
 
