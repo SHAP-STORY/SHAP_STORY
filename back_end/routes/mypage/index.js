@@ -3,7 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-var userid = "test";
+//user_info
+var user_info = require('../varient');
+
 var basic= [
     {
       id: "1",
@@ -67,7 +69,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/hardachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[userid], function (error, results, fields) {
+    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -76,7 +78,7 @@ router.get('/hardachievement', function(req, res, next) {
 });
 
 router.get('/basicachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[userid], function (error, results, fields) {
+    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -85,7 +87,7 @@ router.get('/basicachievement', function(req, res, next) {
 });
 
 router.get('/mywriting', function(req, res, next) {
-    db.query('SELECT title, body, date FROM Post where student_id= ?',[userid], function (error, results, fields) {
+    db.query('SELECT title, body, date FROM Post where student_id= ?',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }

@@ -67,7 +67,8 @@ class MyPage extends React.Component {
         },
       ],
     };
-    this.serverConnect = this.serverConnect.bind(this);
+    //this.serverConnect = this.serverConnect.bind(this);
+    this.userphotoChange = this.userphotoChange.bind(this);
   }
   callMywritingApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
@@ -90,9 +91,9 @@ class MyPage extends React.Component {
   };
 
   componentDidMount(){
-      console.log(this.props.data);
+      console.log(this.props.user);
       this.timer = setInterval(this.progress, 20);
-      
+
       this.callMywritingApi()
       .then((res) => this.setState({mywriting: res}))
       .catch((err) => console.log(err));
@@ -107,7 +108,8 @@ class MyPage extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  serverConnect(){
+  userphotoChange(){
+    //CHECK Image 올려서 DB에 저장할 수 있게 하기
       console.log('in');
   }
 
@@ -137,7 +139,7 @@ class MyPage extends React.Component {
         <Container>
           <Profile>
             <ProfileImg src={profile}></ProfileImg>
-            <ProfileBtn>
+            <ProfileBtn onClick={this.userphotoChange}>
               <img src={profileButton}></img>
             </ProfileBtn>
           </Profile>
@@ -159,9 +161,9 @@ class MyPage extends React.Component {
                 return (
                   <Contentachievement
                     img={c.img}
-                    id={c.id}
+                    id={c.class_id}
                     title={c.title}
-                    achievement={c.achievement}
+                    achievement={c.complete}
                   />
                 );
               })}
@@ -173,7 +175,7 @@ class MyPage extends React.Component {
                   return (
                     <MyWritinglist
                       title={c.title}
-                      question={c.question}
+                      question={c.body}
                       date={c.date}
                     />
                   );

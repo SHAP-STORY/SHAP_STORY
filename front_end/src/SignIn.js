@@ -100,11 +100,7 @@ class SignIn extends React.Component {
   }
   dataSend() {
     console.log('in');
-    return (
-      <div>
-        <MyPage data={[this.state.userId]} />
-      </div>
-    );
+    return <MyPage user={this.state.userId} />;
   }
 
   render() {

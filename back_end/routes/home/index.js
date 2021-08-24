@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 // mysql
 const db = require('../../db/database');
+//user_info
+var user_info = require('../varient');
 
 // 비밀번호 암호화 bcrypt hash 함수
 const bcrypt = require('bcrypt');
@@ -37,12 +39,11 @@ router.post('/register', (req, res, next) => {
     res.end();
 });
 
-var loginState = false; // login되면 true, logout 혹은 초기값은 false
 // 로그인 GET
 router.get('/login', function (req, res, next) {
     console.log('in -> /api/home/login');
     let session = req.session;
-    if(loginState == false){
+    if(user_info[0] == false){
         res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
     }else{
         res.send('{"state": true}');
@@ -72,11 +73,14 @@ router.post('/login', (req, res, next) => {
                         console.log(error)
                     }}) 
                     console.log('success');
-                    loginState = true;          
+                    user_info[1] = param[0];
+                    user_info[2] = param[2];
+                    user_info[0] = true;
+                    console.log(user_info);          
                 }else{
                     console.log('Error: Login: can not find id')
                     console.log('fail');
-                    loginState = false;
+                    user_info[0] = false;
                 }
             })
         } else {
