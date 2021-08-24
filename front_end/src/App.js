@@ -13,6 +13,8 @@ import QnABoard from "./QuestionBoard";
 import Questions from "./QuestionBoard";
 import DoQuestion from "./DoQuestion";
 import SignIn from "./SignIn";
+import SignUp from './SignUp';
+import SignUpComplete from './SignUpComplete';
 
 
 class App extends React.Component {
@@ -28,6 +30,8 @@ class App extends React.Component {
                 <Route path="/questions" component={Questions}/>
                 <Route path="/doQuestion" component={DoQuestion}></Route>
                 <Route path="/signIn" component={SignIn}></Route>
+                <Route path="/signUp" component={SignUp}></Route>
+                <Route path="/signUpComplete" component={SignUpComplete}></Route>
             </div>
         );
     }
