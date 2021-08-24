@@ -12,6 +12,8 @@ import Home from "./Home";
 import QnABoard from "./QuestionBoard";
 import Questions from "./QuestionBoard";
 import DoQuestion from "./DoQuestion";
+import MyPage from "./MyPage";
+import SignUp from './SignUp';
 
 
 class App extends React.Component {
@@ -26,6 +28,8 @@ class App extends React.Component {
                 <Route path="/" exact component={Home}/>
                 <Route path="/questions" component={Questions}/>
                 <Route path="/doQuestion" component={DoQuestion}></Route>
+                <Route path="/myPage" component={MyPage}></Route>
+                <Route path="/signup" component={SignUp}></Route>
             </div>
         );
     }
