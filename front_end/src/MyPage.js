@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
+import ContentAchivement from "./components/ContentAchivement";
 
 import {
   CircularProgressbarWithChildren,
@@ -44,8 +45,28 @@ class MyPage extends React.Component {
       userId: "",
       userPasswd: "",
       userImg: "",
-      basic: "",
-      hard: "",
+      basic: [
+        {
+          id: "1",
+          title: "개미와 베짱이",
+          achivement: "40",
+          img: contentImage
+        },
+      ],
+      hard: [
+        {
+          id: "2",
+          title: "알라딘의 요술램프",
+          achivement: "40",
+          img: contentImage
+        },
+        {
+            id: "3",
+            title: "신데렐라",
+            achivement: "100",
+            img: contentImage
+          },
+      ],
       mywriting: [
         {
           title: "Basic 3강에서 질문있습니다! 자꾸 에러가 나요.",
@@ -58,10 +79,11 @@ class MyPage extends React.Component {
           date: "2021.07.24 오전 11:15",
         },
         {
-            title: "질문이 있습니다.",
-            question: "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
-            date: "2021.07.24 오전 11:15",
-          },
+          title: "질문이 있습니다.",
+          question:
+            "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
+          date: "2021.07.24 오전 11:15",
+        },
       ],
     };
   }
@@ -97,90 +119,34 @@ class MyPage extends React.Component {
             </ProfileBtn>
           </Profile>
 
-          <div>
-            <div>
+          <div style={{ marginBottom: "60px"}}>
+            <div >
               <Title>진도 현황</Title>
-              <Class>
-                <img
-                  src={contentImage}
-                  style={{
-                    borderTopLeftRadius: "15px",
-                    borderBottomLeftRadius: "15px",
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    textAlign: "left",
-                    margin: "auto",
-                    width: "150px",
-                  }}
-                >
-                  <div style={{ fontWeight: "bold" }}>1차시</div>
-                  <div style={{ fontSize: "14px", marginTop: "5px" }}>
-                    개미와 베짱이
-                  </div>
-                </div>
-                <div style={{ display: "flex", margin: "auto 0" }}>
-                  <Progress done="40%" />
-                  <text
-                    style={{
-                      marginLeft: "15px",
-                      lineHeight: "10px",
-                      color: "#A7A7A7",
-                    }}
-                  >
-                    40%
-                  </text>
-                </div>
-                <PlayButton>
-                  <img src={playIcon}></img>
-                </PlayButton>
-              </Class>
-              <Class>
-                <img
-                  src={contentImage}
-                  style={{
-                    borderTopLeftRadius: "15px",
-                    borderBottomLeftRadius: "15px",
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    textAlign: "left",
-                    margin: "auto",
-                    width: "150px",
-                  }}
-                >
-                  <div style={{ fontWeight: "bold" }}>2차시</div>
-                  <div style={{ fontSize: "14px", marginTop: "5px" }}>
-                    알라딘의 요술램프
-                  </div>
-                </div>
-                <div style={{ display: "flex", margin: "auto 0" }}>
-                  <Progress done="40%" />
-                  <text
-                    style={{
-                      marginLeft: "15px",
-                      lineHeight: "10px",
-                      color: "#A7A7A7",
-                    }}
-                  >
-                    40%
-                  </text>
-                </div>
-                <PlayButton>
-                  <img src={playIcon}></img>
-                </PlayButton>
-              </Class>
+              {this.state.basic.map((c) => {
+                  return (
+                    <ContentAchivement
+                      img={c.img}
+                      id={c.id}
+                      title={c.title}
+                      achivement={c.achivement}
+                    />
+                  );
+                })}
+              {this.state.hard.map((c) => {
+                  return (
+                    <ContentAchivement
+                      img={c.img}
+                      id={c.id}
+                      title={c.title}
+                      achivement={c.achivement}
+                    />
+                  );
+                })}
             </div>
             <div>
-              <Title style={{ marginTop: "60px" }}>내 글 목록</Title>
-              <div >
-                {this.state.mywriting.map((c) => {
+              <Title style={{ marginTop: "60px"}}>내 글 목록</Title>
+              <div>
+              {this.state.mywriting.map((c) => {
                   return (
                     <MyWritinglist
                       title={c.title}
@@ -308,7 +274,6 @@ const ProfileBtn = styled.button`
 //가운데 section (각 수업 진도율/ 나의 질문)
 
 //각 수업 진도율
-
 const Class = styled.div`
   width: 700px;
   height: 120px;
@@ -326,15 +291,6 @@ const PlayButton = styled.button`
   background-color: #32cf9a;
   box-shadow: 2px 2px 2px 2px #e2e2e2;
   margin: auto;
-  cursor: pointer;
-`;
-
-const Question = styled.div`
-  width: 700px;
-  height: 120px;
-  margin: 10px 30px;
-  border-radius: 15px;
-  text-align: left;
   cursor: pointer;
 `;
 
