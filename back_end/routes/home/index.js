@@ -43,7 +43,7 @@ router.get('/login', function (req, res, next) {
     console.log('in -> /api/home/login');
     let session = req.session;
     if(loginState == false){
-        res.send('{"state": false}');
+        res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
     }else{
         res.send('{"state": true}');
     }

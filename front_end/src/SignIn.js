@@ -21,12 +21,13 @@ class SignIn extends React.Component {
       userimg: "",
       loginState: "",
     };
-    this.serverConnect = this.serverConnect.bind(this);
+    // 함수 이름 작성 시 명사+동사, 명사+명사+동사 이런식으로 형식 시키기!(시작 명사 제외하고는 중간 명사, 중간 동사 시작할 때 대문자 사용해야 한다.)
+    this.serverConnect = this.serverConnect.bind(this); 
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
   }
 
-  idChange = (e) => {
+  idChange = (e) => { // 입력한 id 값을 userId에 저장.
     this.setState({
       userId: e.target.value,
     });
@@ -38,13 +39,7 @@ class SignIn extends React.Component {
     });
   };
 
-  callApi = async () => {
-    const response = await fetch("api/home/login");
-    const body = await response.json();
-    return body;
-  };
-
-  signinValueChange() {
+  signinValueChange() { // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       id: this.state.userId,
       passwd: this.state.userPasswd,
@@ -60,10 +55,16 @@ class SignIn extends React.Component {
     this.serverConnect();
   }
 
-  serverConnect() {
+  callApi = async () => { // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
+    const response = await fetch("api/home/login");
+    const body = await response.json();
+    return body;
+  };
+
+  serverConnect() { // signinValueChange()로 보낸 이후 login 성공 여부를 변수로 받아오는 function (get)
     this.callApi()
-      .then((res) => this.setState({ loginState: res.state }))
-      .then((res) => this.siginCheck())
+      .then((res) => this.setState({ loginState: res.state })) // 받은 'state' 데이터를 loginState에 넣기.
+      .then((res) => this.siginCheck()) // 만약 데이터를 받은 이후 다른 동작을 하기 위해 함수를 부름. 같은 함수 내로 작성하면 같이 동작해서 오류발생.
       .catch((err) => console.log(err));
   }
 
@@ -71,7 +72,7 @@ class SignIn extends React.Component {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
-    this.setState({
+    this.setState({ // 변수의 값 바꿀 때는 setState 이용.
       userId: "",
       userPasswd: "",
       loginState: false
@@ -86,7 +87,7 @@ class SignIn extends React.Component {
         nextLink: "/signin",
       });
     }
-    return {
+    return { // redux 전달을 위해서 사용.
       id: id,
       passwd: passwd,
       state: state,
@@ -133,13 +134,13 @@ class SignIn extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({ // ./_reducers/user_reducer.js 의 변수와 이름 동일. state 변수 전달.
   storeId: state.userid,
   storePasswd: state.userpasswd,
   storeLoginstate: state.loginSuccess
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({ // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
   SigninUser: () => dispatch(actions.serverConnect()),
 });
 
