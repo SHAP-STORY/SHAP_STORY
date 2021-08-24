@@ -3,14 +3,13 @@ import styled from "styled-components";
 import profile from "./image/profile.png";
 import profileButton from "./image/changeProfile.png";
 import contentImage from "./image/contentImg.png";
-import playIcon from "./image/playIcon.png";
 import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
 import Contentachievement from "./components/Contentachievement";
-import Signin from "./SignIn"; //로그인 정보를 받아오기 위해
+import SignIn from "./SignIn"; //로그인 정보를 받아오기 위해
 
 import {
   CircularProgressbarWithChildren,
@@ -39,7 +38,7 @@ class MyPage extends React.Component {
         {
           id: "2",
           title: "알라딘의 요술램프",
-          achievement: "40",
+          achievement: "50",
           img: contentImage,
         },
         {
@@ -91,7 +90,9 @@ class MyPage extends React.Component {
   };
 
   componentDidMount(){
+      console.log(this.props.data);
       this.timer = setInterval(this.progress, 20);
+      
       this.callMywritingApi()
       .then((res) => this.setState({mywriting: res}))
       .catch((err) => console.log(err));

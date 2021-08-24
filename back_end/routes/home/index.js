@@ -30,7 +30,7 @@ router.post('/register', (req, res, next) => {
     const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number]
     bcrypt.hash(param[1], saltRounds, (err, hash) => {
         param[1] = hash;
-        db.query('INSERT INTO student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
+        db.query('INSERT INTO Student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
             if (err) console.log(err);
         });
     });
@@ -53,7 +53,8 @@ router.get('/login', function (req, res, next) {
 router.post('/login', (req, res, next) => {
     const param = [req.body.id, req.body.passwd]
     console.log('Login Data:', (param));
-    db.query('SELECT id, passwd FROM Student WHERE id=?', param[0], (err, row) => {
+
+    db.query('SELECT id, passwd, name FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
             console.log('ERROR: Connect DB')
             console.log(err)
@@ -61,6 +62,7 @@ router.post('/login', (req, res, next) => {
 
         if (row.length > 0) {
             //ID가 존재합니다.
+            console.log(row);
             bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
                 console.log(param[1], row[0].passwd);
                 if(result){
