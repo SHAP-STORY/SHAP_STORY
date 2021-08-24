@@ -17,6 +17,17 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+/*
+NOTE 추가해야할 부분
+- 진도 현황에서 연결
+- 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
+- 해당 퍼센트에이지로 칸 변하기
+
+COMMENT
+- 내 글 보기 칸 좀더 추가
+- 로그아웃 버튼
+*/
+
 //마이페이지
 class MyPage extends React.Component {
   constructor(props) {
@@ -110,10 +121,10 @@ class MyPage extends React.Component {
       .then((res) => this.setState({basic: res}))
       .catch((err) => console.log(err));
 
-      
-      this.callBasicAchievementApi()
+      this.callHardAchievementApi()
       .then((res) => this.setState({hard: res}))
       .catch((err) => console.log(err));
+      //NOTE 전체 진도 현황 숫자 수정하게 만들기
 
       this.callUserDataApi()
       .then((res) => this.userDataChange(res))
@@ -167,17 +178,17 @@ class MyPage extends React.Component {
               {this.state.basic.map((c) => {
                 return (
                   <Contentachievement
-                    img={c.img}
-                    id={c.id}
+                    img={contentImage} // FIX 나중에 c.img로 수정
+                    id={c.class_id}
                     title={c.title}
-                    achievement={c.achievement}
+                    achievement={c.complete}
                   />
                 );
               })}
               {this.state.hard.map((c) => {
                 return (
                   <Contentachievement
-                    img={c.img}
+                    img={contentImage} // FIX 나중에 c.img로 수정
                     id={c.class_id}
                     title={c.title}
                     achievement={c.complete}
@@ -186,7 +197,7 @@ class MyPage extends React.Component {
               })}
             </div>
             <div>
-              <Title style={{ marginTop: "60px" }}>내 글 목록</Title>
+              <Title style={{ marginTop: "50px", marginBottom: "60px" }}>내 글 목록</Title>
               <div>
                 {this.state.mywriting.map((c) => {
                   return (
@@ -201,7 +212,7 @@ class MyPage extends React.Component {
             </div>
           </div>
 
-          <div style={{ margin: "auto" }}>
+          <div style={{ margin: "auto", marginTop: "100px" }}>
             <Title>전체 진도 현황</Title>
             <div
               style={{
