@@ -36,171 +36,185 @@ const ProgressDone = styled.div`
 `;
 
 //마이페이지
-const MyPage = (props) => {
-  return (
-    <div>
-      <Header>
-        <Link to={"/"}>
-          <HomeButton>#.</HomeButton>
-        </Link>
-        <MarginLeft/>
-        <TopBar></TopBar>
-        <UserInfo>
-          <img
-            src={profile}
-            style={{
-              width: "35px",
-              height: "35px",
-              borderRadius: "30px",
-              margin: "auto 5px",
-            }}
-          ></img>
-          <div style={{ lineHeight: "40px" }}>ooo님</div>
-        </UserInfo>
-        {/* <RoundButton>로그인</RoundButton> */}
-      </Header>
-      <Container>
-        <Profile>
-          <ProfileImg src={profile}></ProfileImg>
-          <ProfileBtn>
-            <img src={profileButton}></img>
-          </ProfileBtn>
-        </Profile>
+class MyPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: "",
+      userPasswd: "",
+      userImg: "",
+      basic: "",
+      hard: "",
+      mywriting: "",
+    };
+  }
 
-        <div>
+  render() {
+    return (
+      <div>
+        <Header>
+          <Link to={"/"}>
+            <HomeButton>#.</HomeButton>
+          </Link>
+          <MarginLeft />
+          <TopBar></TopBar>
+          <UserInfo>
+            <img
+              src={profile}
+              style={{
+                width: "35px",
+                height: "35px",
+                borderRadius: "30px",
+                margin: "auto 5px",
+              }}
+            ></img>
+            <div style={{ lineHeight: "40px" }}>ooo님</div>
+          </UserInfo>
+          {/* <RoundButton>로그인</RoundButton> */}
+        </Header>
+        <Container>
+          <Profile>
+            <ProfileImg src={profile}></ProfileImg>
+            <ProfileBtn>
+              <img src={profileButton}></img>
+            </ProfileBtn>
+          </Profile>
+
           <div>
-            <Title>진도 현황</Title>
-            <Class>
-              <img
-                src={contentImage}
-                style={{
-                  borderTopLeftRadius: "15px",
-                  borderBottomLeftRadius: "15px",
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  textAlign: "left",
-                  margin: "auto",
-                  width: "150px",
-                }}
-              >
-                <div style={{ fontWeight: "bold" }}>1차시</div>
-                <div style={{ fontSize: "14px", marginTop: "5px" }}>
-                  개미와 베짱이
-                </div>
-              </div>
-              <div style={{ display: "flex", margin: "auto 0" }}>
-                <Progress done="40%" />
-                <text
+            <div>
+              <Title>진도 현황</Title>
+              <Class>
+                <img
+                  src={contentImage}
                   style={{
-                    marginLeft: "15px",
-                    lineHeight: "10px",
-                    color: "#A7A7A7",
+                    borderTopLeftRadius: "15px",
+                    borderBottomLeftRadius: "15px",
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "left",
+                    margin: "auto",
+                    width: "150px",
                   }}
                 >
-                  40%
-                </text>
-              </div>
-              <PlayButton>
-                <img src={playIcon}></img>
-              </PlayButton>
-            </Class>
-            <Class>
-              <img
-                src={contentImage}
-                style={{
-                  borderTopLeftRadius: "15px",
-                  borderBottomLeftRadius: "15px",
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  textAlign: "left",
-                  margin: "auto",
-                  width: "150px",
-                }}
-              >
-                <div style={{ fontWeight: "bold" }}>2차시</div>
-                <div style={{ fontSize: "14px", marginTop: "5px" }}>
-                  알라딘의 요술램프
+                  <div style={{ fontWeight: "bold" }}>1차시</div>
+                  <div style={{ fontSize: "14px", marginTop: "5px" }}>
+                    개미와 베짱이
+                  </div>
                 </div>
-              </div>
-              <div style={{ display: "flex", margin: "auto 0" }}>
-                <Progress done="40%" />
-                <text
+                <div style={{ display: "flex", margin: "auto 0" }}>
+                  <Progress done="40%" />
+                  <text
+                    style={{
+                      marginLeft: "15px",
+                      lineHeight: "10px",
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    40%
+                  </text>
+                </div>
+                <PlayButton>
+                  <img src={playIcon}></img>
+                </PlayButton>
+              </Class>
+              <Class>
+                <img
+                  src={contentImage}
                   style={{
-                    marginLeft: "15px",
-                    lineHeight: "10px",
-                    color: "#A7A7A7",
+                    borderTopLeftRadius: "15px",
+                    borderBottomLeftRadius: "15px",
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "left",
+                    margin: "auto",
+                    width: "150px",
                   }}
                 >
-                  40%
+                  <div style={{ fontWeight: "bold" }}>2차시</div>
+                  <div style={{ fontSize: "14px", marginTop: "5px" }}>
+                    알라딘의 요술램프
+                  </div>
+                </div>
+                <div style={{ display: "flex", margin: "auto 0" }}>
+                  <Progress done="40%" />
+                  <text
+                    style={{
+                      marginLeft: "15px",
+                      lineHeight: "10px",
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    40%
+                  </text>
+                </div>
+                <PlayButton>
+                  <img src={playIcon}></img>
+                </PlayButton>
+              </Class>
+            </div>
+            <div>
+              <Title style={{ marginTop: "60px" }}>내 글 목록</Title>
+              <Question>
+                <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                <text
+                  style={{ position: "relative", top: "-44px", left: "480px" }}
+                >
+                  작성일: 2021.07.24 오전 11:30
                 </text>
-              </div>
-              <PlayButton>
-                <img src={playIcon}></img>
-              </PlayButton>
-            </Class>
+                <text style={{ position: "relative", left: "-210px" }}>
+                  3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
+                </text>
+              </Question>
+              <Question>
+                <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                <text
+                  style={{ position: "relative", top: "-44px", left: "480px" }}
+                >
+                  작성일: 2021.07.24 오전 11:30
+                </text>
+                <text style={{ position: "relative", left: "-210px" }}>
+                  3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
+                </text>
+              </Question>
+            </div>
           </div>
-          <div>
-            <Title style={{ marginTop: "30px" }}>내 글 목록</Title>
-            <Question>
-              <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-              <text
-                style={{ position: "relative", top: "-44px", left: "480px" }}
-              >
-                작성일: 2021.07.24 오전 11:30
-              </text>
-              <text style={{ position: "relative", left: "-210px" }}>
-                3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
-              </text>
-            </Question>
-            <Question>
-              <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-              <text
-                style={{ position: "relative", top: "-44px", left: "480px" }}
-              >
-                작성일: 2021.07.24 오전 11:30
-              </text>
-              <text style={{ position: "relative", left: "-210px" }}>
-                3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
-              </text>
-            </Question>
-          </div>
-        </div>
 
-        <div style={{ margin: "auto" }}>
-          <Title>전체 진도 현황</Title>
-          <div
-            style={{
-              boxShadow: "4px 4px 4px 4px #D6D6D6",
-              borderRadius: "10px",
-              padding: "20px",
-              width: "250px",
-              height: "260px",
-            }}
-          >
-            <CircularProgressbarWithChildren
-              value={50}
-              styles={buildStyles({
-                trailColor: "#D6D6D6",
-                pathColor: "#32CF9A",
-              })}
+          <div style={{ margin: "auto" }}>
+            <Title>전체 진도 현황</Title>
+            <div
+              style={{
+                boxShadow: "4px 4px 4px 4px #D6D6D6",
+                borderRadius: "10px",
+                padding: "20px",
+                width: "250px",
+                height: "260px",
+              }}
             >
-              <div style={{ fontSize: "20px" }}>50%</div>
-              <div style={{ fontSize: "20px" }}>finished</div>
-            </CircularProgressbarWithChildren>
+              <CircularProgressbarWithChildren
+                value={50}
+                styles={buildStyles({
+                  trailColor: "#D6D6D6",
+                  pathColor: "#32CF9A",
+                })}
+              >
+                <div style={{ fontSize: "20px" }}>50%</div>
+                <div style={{ fontSize: "20px" }}>finished</div>
+              </CircularProgressbarWithChildren>
+            </div>
           </div>
-        </div>
-      </Container>
-    </div>
-  );
-};
+        </Container>
+      </div>
+    );
+  }
+}
 
 const Title = styled.div`
   display: flex;
