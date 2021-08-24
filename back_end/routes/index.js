@@ -7,7 +7,7 @@ const home = require('./home/index');
 const posts = require('./posts/index');
 const mypage = require("./mypage/index");
 
-router.use('/home', home);
+router.use('/api/home', home);
 router.use('/posts', posts);
 router.use('/mypage', mypage);
 

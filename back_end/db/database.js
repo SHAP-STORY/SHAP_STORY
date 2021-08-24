@@ -1,15 +1,12 @@
-"user strict";
-
-var mysql = require('mysql');
+var mysql = require('mysql')
 
 var db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  port: 3333,
-  password: '암호',
+  host: "story-database.cxuhc9hooyfo.us-west-1.rds.amazonaws.com",
+  user: "user",
+  port: "3306",
+  password : 'lchy0413',
   database: "story"
 });
 
 db.connect();
-
 module.exports = db;

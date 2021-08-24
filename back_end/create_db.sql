@@ -16,13 +16,13 @@ CREATE TABLE Post (
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 CREATE TABLE Subject (
+  `index` INT PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `contents` VARCHAR(255),
-  `type` VARCHAR(255) INDEX classid (title)
+  `type` VARCHAR(255)
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 CREATE TABLE LessonRate(
   `class_id` INT(255) NOT NULL,
   `student_id` VARCHAR(255) NOT NULL,
   `complete` TINYINT(1) NOT NULL
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-

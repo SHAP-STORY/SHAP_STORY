@@ -4,6 +4,10 @@ import background from "./image/homeBg.svg";
 
 import { Link } from "react-router-dom";
 
+/* CHECK
+- 회원가입 페이지 여부
+*/
+
 const Home = (props) => {
     return (
         <Background>
@@ -66,6 +70,9 @@ const HomeButton = styled.button`
     border-radius: 30px;
     text-align: center;
     font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: -25px; left: 30px;
 `;
 
 

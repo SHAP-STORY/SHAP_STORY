@@ -37,20 +37,23 @@ router.post('/register', (req, res, next) => {
     res.end();
 });
 
+var loginState = false; // login되면 true, logout 혹은 초기값은 false
 // 로그인 GET
 router.get('/login', function (req, res, next) {
+    console.log('in -> /api/home/login');
     let session = req.session;
-    res.render("user/login", {
-        session: session
-    });
+    if(loginState == false){
+        res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
+    }else{
+        res.send('{"state": true}');
+    }
 });
-
 
 // login function (main -> login clink)
 router.post('/login', (req, res, next) => {
-    const param = [req.body.id, req.body.pw]
-    console.log('Login Data:', (req.body));
-    db.query('SELECT id, passwd FROM student WHERE id=?', param[0], (err, row) => {
+    const param = [req.body.id, req.body.passwd]
+    console.log('Login Data:', (param));
+    db.query('SELECT id, passwd FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
             console.log('ERROR: DB: Login:')
             console.log(err)
@@ -65,10 +68,12 @@ router.post('/login', (req, res, next) => {
                         console.log('Error: Login: save session')
                         console.log(error)
                     }}) 
-                    console.log('success');          
+                    console.log('success');
+                    loginState = true;          
                 }else{
                     console.log('Error: Login: can not find id')
                     console.log('fail');
+                    loginState = false;
                 }
             })
         } else {
