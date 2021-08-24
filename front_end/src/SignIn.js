@@ -35,7 +35,7 @@ class SignIn extends React.Component {
   };
 
   passwdChange = (e) => {
-    this.setState({
+    this.setState({  // 변수의 값 바꿀 때는 setState 이용.
       userPasswd: e.target.value,
     });
   };
@@ -76,13 +76,6 @@ class SignIn extends React.Component {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
-    this.setState({
-      // 변수의 값 바꿀 때는 setState 이용.
-      userId: "",
-      userPasswd: "",
-      loginState: false,
-    });
-
     if (this.state.loginState) {
       window.location.href = "/";
       alert("로그인이 완료되었습니다.");

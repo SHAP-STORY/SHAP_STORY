@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
-import ContentAchivement from "./components/ContentAchivement";
+import Contentachievement from "./components/Contentachievement";
+import Signin from "./SignIn"; //로그인 정보를 받아오기 위해
 
 import {
   CircularProgressbarWithChildren,
@@ -17,55 +18,36 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-//수업 별 진도현황의 progress bar 컴포넌트
-const Progress = ({ done }) => {
-  return (
-    <ProgressBar>
-      <ProgressDone style={{ width: done }} />
-    </ProgressBar>
-  );
-};
-
-const ProgressBar = styled.div`
-  width: 200px;
-  height: 5px;
-  background-color: #d6d6d6;
-`;
-
-const ProgressDone = styled.div`
-  height: 5px;
-  background-color: #32cf99;
-`;
-
 //마이페이지
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
+    this.username = "이채영";
+    this.userId = "lchy0413";
+    this.userImg= "";
     this.state = {
-      userId: "",
-      userPasswd: "",
-      userImg: "",
+      All_achievement: "",
       basic: [
         {
           id: "1",
           title: "개미와 베짱이",
-          achivement: "40",
-          img: contentImage
+          achievement: "40",
+          img: contentImage,
         },
       ],
       hard: [
         {
           id: "2",
           title: "알라딘의 요술램프",
-          achivement: "40",
-          img: contentImage
+          achievement: "40",
+          img: contentImage,
         },
         {
-            id: "3",
-            title: "신데렐라",
-            achivement: "100",
-            img: contentImage
-          },
+          id: "3",
+          title: "신데렐라",
+          achievement: "100",
+          img: contentImage,
+        },
       ],
       mywriting: [
         {
@@ -86,6 +68,46 @@ class MyPage extends React.Component {
         },
       ],
     };
+    this.serverConnect = this.serverConnect.bind(this);
+  }
+  callMywritingApi = async () => {
+    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
+    const response = await fetch("api/mypage/mywriting");
+    const body = await response.json();
+    return body;
+  };
+
+  callBasicAchievementApi = async () => {
+    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
+    const response = await fetch("api/mypage/basicachievement");
+    const body = await response.json();
+    return body;
+  };
+  callHardAchievementApi = async () => {
+    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
+    const response = await fetch("api/mypage/hardachievement");
+    const body = await response.json();
+    return body;
+  };
+
+  componentDidMount(){
+      this.timer = setInterval(this.progress, 20);
+      this.callMywritingApi()
+      .then((res) => this.setState({mywriting: res}))
+      .catch((err) => console.log(err));
+
+      this.callBasicAchievementApi()
+      .then((res) => this.setState({basic: res}))
+      .catch((err) => console.log(err));
+
+      
+      this.callBasicAchievementApi()
+      .then((res) => this.setState({hard: res}))
+      .catch((err) => console.log(err));
+  }
+
+  serverConnect(){
+      console.log('in');
   }
 
   render() {
@@ -107,7 +129,7 @@ class MyPage extends React.Component {
                 margin: "auto 5px",
               }}
             ></img>
-            <div style={{ lineHeight: "40px" }}>ooo님</div>
+            <div style={{ lineHeight: "40px" }}>{this.username} 님</div>
           </UserInfo>
           {/* <RoundButton>로그인</RoundButton> */}
         </Header>
@@ -119,34 +141,34 @@ class MyPage extends React.Component {
             </ProfileBtn>
           </Profile>
 
-          <div style={{ marginBottom: "60px"}}>
-            <div >
+          <div style={{ marginBottom: "60px" }}>
+            <div>
               <Title>진도 현황</Title>
               {this.state.basic.map((c) => {
-                  return (
-                    <ContentAchivement
-                      img={c.img}
-                      id={c.id}
-                      title={c.title}
-                      achivement={c.achivement}
-                    />
-                  );
-                })}
+                return (
+                  <Contentachievement
+                    img={c.img}
+                    id={c.id}
+                    title={c.title}
+                    achievement={c.achievement}
+                  />
+                );
+              })}
               {this.state.hard.map((c) => {
-                  return (
-                    <ContentAchivement
-                      img={c.img}
-                      id={c.id}
-                      title={c.title}
-                      achivement={c.achivement}
-                    />
-                  );
-                })}
+                return (
+                  <Contentachievement
+                    img={c.img}
+                    id={c.id}
+                    title={c.title}
+                    achievement={c.achievement}
+                  />
+                );
+              })}
             </div>
             <div>
-              <Title style={{ marginTop: "60px"}}>내 글 목록</Title>
+              <Title style={{ marginTop: "60px" }}>내 글 목록</Title>
               <div>
-              {this.state.mywriting.map((c) => {
+                {this.state.mywriting.map((c) => {
                   return (
                     <MyWritinglist
                       title={c.title}

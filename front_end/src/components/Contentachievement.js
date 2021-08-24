@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import playIcon from "../image/playIcon.png";
 
-class ContentAchivement extends React.Component {
+//NOTE
+// achievement랑 전체 진도 현황 나중에 img말고 그래프로 애니메이션되게 수정
+class ContentAchievement extends React.Component {
   render() {
     return (
       <div>
@@ -37,7 +39,7 @@ class ContentAchivement extends React.Component {
                 color: "#A7A7A7",
               }}
             >
-              {this.props.achivement}%
+              {this.props.achievement}%
             </text>
           </div>
           <PlayButton>
@@ -88,4 +90,4 @@ const PlayButton = styled.button`
   cursor: pointer;
 `;
 
-export default ContentAchivement;
+export default ContentAchievement;

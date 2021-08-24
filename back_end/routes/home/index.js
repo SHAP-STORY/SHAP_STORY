@@ -55,13 +55,14 @@ router.post('/login', (req, res, next) => {
     console.log('Login Data:', (param));
     db.query('SELECT id, passwd FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
-            console.log('ERROR: DB: Login:')
+            console.log('ERROR: Connect DB')
             console.log(err)
         }
 
         if (row.length > 0) {
             //ID가 존재합니다.
             bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
+                console.log(param[1], row[0].passwd);
                 if(result){
                     req.session.loginData = req.body
                     req.session.save(error => {if(error) {
