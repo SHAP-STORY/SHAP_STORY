@@ -37,7 +37,7 @@ router.post('/register', (req, res, next) => {
     res.end();
 });
 
-const loginState = false; // login되면 true, logout 혹은 초기값은 false
+var loginState = false; // login되면 true, logout 혹은 초기값은 false
 // 로그인 GET
 router.get('/login', function (req, res, next) {
     console.log('in -> /api/home/login');
@@ -53,7 +53,7 @@ router.get('/login', function (req, res, next) {
 router.post('/login', (req, res, next) => {
     const param = [req.body.id, req.body.passwd]
     console.log('Login Data:', (param));
-    db.query('SELECT id, passwd FROM student WHERE id=?', param[0], (err, row) => {
+    db.query('SELECT id, passwd FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
             console.log('ERROR: DB: Login:')
             console.log(err)

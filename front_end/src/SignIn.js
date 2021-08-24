@@ -9,8 +9,8 @@ import HomeButton from "./components/HomeButton";
 
 //Redux
 //import Axios from "axios";
-//import { useDispatch } from "react-redux";
-//import { loginUser } from "../_actions/user_action";
+import { connect } from "react-redux";
+import * as actions from "./_actions/user_action";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -19,11 +19,13 @@ class SignIn extends React.Component {
       userId: "",
       userPasswd: "",
       userimg: "",
-      loginState: false,
+      loginState: "",
     };
     this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
+    this.siginCheck = this.siginCheck.bind(this);
   }
+
   idChange = (e) => {
     this.setState({
       userId: e.target.value,
@@ -43,17 +45,6 @@ class SignIn extends React.Component {
   };
 
   signinValueChange() {
-    /*const url = "api/home/login";
-    const formData = new FormData();
-      formData.append("userid", this.state.userId);
-      formData.append("userpasswd", this.state.userPasswd);
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-      console.log(formData);
-      return post(url, formData, config);*/
     const post = {
       id: this.state.userId,
       passwd: this.state.userPasswd,
@@ -72,14 +63,34 @@ class SignIn extends React.Component {
   serverConnect() {
     this.callApi()
       .then((res) => this.setState({ loginState: res.state }))
+      .then((res) => this.siginCheck())
       .catch((err) => console.log(err));
+  }
+
+  siginCheck(){
+    const id = this.state.userId;
+    const passwd = this.state.userPasswd;
+    const state = this.state.loginState;
     this.setState({
-      user: "",
       userId: "",
       userPasswd: "",
-      userimg: "",
-      loginState: false,
+      loginState: false
     });
+
+    if (this.state.loginState) {
+      this.setState({
+        nextLink: "/",
+      });
+    } else {
+      this.setState({
+        nextLink: "/signin",
+      });
+    }
+    return {
+      id: id,
+      passwd: passwd,
+      state: state,
+    };
   }
 
   render() {
@@ -108,7 +119,9 @@ class SignIn extends React.Component {
             type="password"
             onChange={this.passwdChange}
           ></Input>
-          <LoginButton onClick={this.signinValueChange}></LoginButton>
+          <Link to={this.state.nextLink}>
+            <LoginButton onClick={this.signinValueChange}></LoginButton>
+          </Link>
           <Link
             to="/signup"
             style={{ color: "inherit", textDecoration: "none" }}
@@ -120,6 +133,15 @@ class SignIn extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  storeId: state.userid,
+  storePasswd: state.userpasswd,
+  storeLoginstate: state.loginSuccess
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  SigninUser: () => dispatch(actions.serverConnect()),
+});
 
 const BackGround = styled.div`
     background-position:center;
@@ -174,4 +196,4 @@ const LoginButton = styled.button`
   cursor: pointer;
 `;
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
