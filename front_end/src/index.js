@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
+
+// Redux
+//import {composeWithDevTools} from 'redux-devtools-extension';
+//const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore, composeWithDevTools());
+
 ReactDOM.render(
   <BrowserRouter>
     <App />
