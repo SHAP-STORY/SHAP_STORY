@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
+import MyWritinglist from "./components/MyWritinglist";
 
 import {
   CircularProgressbarWithChildren,
@@ -45,7 +46,23 @@ class MyPage extends React.Component {
       userImg: "",
       basic: "",
       hard: "",
-      mywriting: "",
+      mywriting: [
+        {
+          title: "Basic 3강에서 질문있습니다! 자꾸 에러가 나요.",
+          question: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
+          date: "2021.07.24 오전 11:30",
+        },
+        {
+          title: "1강에서 이해가 안되는 것이 있어요.",
+          question: "기타가 어떻게 소리가 나게 되는 건가요!?",
+          date: "2021.07.24 오전 11:15",
+        },
+        {
+            title: "질문이 있습니다.",
+            question: "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
+            date: "2021.07.24 오전 11:15",
+          },
+      ],
     };
   }
 
@@ -162,28 +179,17 @@ class MyPage extends React.Component {
             </div>
             <div>
               <Title style={{ marginTop: "60px" }}>내 글 목록</Title>
-              <Question>
-                <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                <text
-                  style={{ position: "relative", top: "-44px", left: "480px" }}
-                >
-                  작성일: 2021.07.24 오전 11:30
-                </text>
-                <text style={{ position: "relative", left: "-210px" }}>
-                  3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
-                </text>
-              </Question>
-              <Question>
-                <h4>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                <text
-                  style={{ position: "relative", top: "-44px", left: "480px" }}
-                >
-                  작성일: 2021.07.24 오전 11:30
-                </text>
-                <text style={{ position: "relative", left: "-210px" }}>
-                  3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?
-                </text>
-              </Question>
+              <div >
+                {this.state.mywriting.map((c) => {
+                  return (
+                    <MyWritinglist
+                      title={c.title}
+                      question={c.question}
+                      date={c.date}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
 
