@@ -6,11 +6,13 @@ import loginButton from "./image/loginButton.png";
 import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
+import MyPage from "./MyPage";
 
 //Redux
-//import Axios from "axios";
 import { connect } from "react-redux";
 import * as actions from "./_actions/user_action";
+
+// NOTE test 해보려면 id:test, passwd: test로 가능!
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -19,12 +21,14 @@ class SignIn extends React.Component {
       userId: "",
       userPasswd: "",
       userimg: "",
+      userName: "",
       loginState: "",
     };
     // 함수 이름 작성 시 명사+동사, 명사+명사+동사 이런식으로 형식 시키기!(시작 명사 제외하고는 중간 명사, 중간 동사 시작할 때 대문자 사용해야 한다.)
     this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
+    this.dataSend = this.dataSend.bind(this);
   }
 
   idChange = (e) => {
@@ -36,11 +40,13 @@ class SignIn extends React.Component {
 
   passwdChange = (e) => {
     this.setState({
+      // 변수의 값 바꿀 때는 setState 이용.
       userPasswd: e.target.value,
     });
   };
 
   signinValueChange() {
+    var data = "";
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       id: this.state.userId,
@@ -53,8 +59,10 @@ class SignIn extends React.Component {
         "content-type": "application/json",
       },
       body: JSON.stringify(post),
-    });
-    this.serverConnect();
+    })
+    .then(response => data = response.json())
+    .then(this.serverConnect())
+    .then(response => {console.log(response)});
   }
 
   callApi = async () => {
@@ -76,26 +84,26 @@ class SignIn extends React.Component {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
-    this.setState({
-      // 변수의 값 바꿀 때는 setState 이용.
-      userId: "",
-      userPasswd: "",
-      loginState: false,
-    });
-
     if (this.state.loginState) {
-      window.location.href = "/";
       alert("로그인이 완료되었습니다.");
+      this.props.history.push({
+          pathname: "/",
+        }      );
     } else {
-      window.location.href = "/signin";
       alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
+      this.props.history.push("/signin");
     }
+    this.dataSend();
     return {
       // redux 전달을 위해서 사용.
       id: id,
       passwd: passwd,
       state: state,
     };
+  }
+  dataSend() {
+    console.log('in');
+    return <MyPage user={this.state.userId} />;
   }
 
   render() {
@@ -124,11 +132,11 @@ class SignIn extends React.Component {
             type="password"
             onChange={this.passwdChange}
           ></Input>
-            <LoginButton
-              onClick={() => {
-                this.signinValueChange();
-              }}
-            ></LoginButton>
+          <LoginButton
+            onClick={() => {
+              this.signinValueChange();
+            }}
+          ></LoginButton>
           <Link
             to="/signup"
             style={{ color: "inherit", textDecoration: "none" }}

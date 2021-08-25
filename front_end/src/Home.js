@@ -1,9 +1,10 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import background from "./image/homeBg.svg";
-
 import { Link } from "react-router-dom";
 
+import HomeButton from "./components/HomeButton";
+import TopBar from "./components/TopBar";
 /* CHECK
 - 회원가입 페이지 여부
 */
@@ -15,17 +16,11 @@ const Home = (props) => {
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
                 </Link>
-                <MarginLeft />
-                <ContentButton>기초학습</ContentButton>
-                <ContentButton>심화학습</ContentButton>
-                <Link to="./questions">
-                    <ContentButton>질문하기</ContentButton>
-                </Link>
-                <ContentButton>마이페이지</ContentButton>
-                <Link to="./signIn">
+                <MarginLeft/>
+                <TopBar></TopBar> 
+                <Link to="./signin">
                     <RoundButton>로그인</RoundButton>
-                </Link>
-                
+                </Link>  
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
@@ -58,37 +53,6 @@ const Header = styled.div`
 
 const MarginLeft = styled.div`
     margin-left: auto;
-`;
-
-const HomeButton = styled.button`
-    margin: 60px 0px 0px 30px;
-    background-color: #54B192;
-    border: 0;
-    color: #3F3D56;
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 30px;
-    cursor: pointer;
-    position: absolute;
-    top: -25px; left: 30px;
-`;
-
-
-const ContentButton = styled.button`
-    margin: 60px 30px 0px 0px;
-    font-size: 17px;
-    float: right;
-    background-color: #00ff0000;
-    border:0;
-    padding: 5px 10px 10px 10px;
-    border-radius: 20px;
-    height: 35px; 
-    
-    &:hover {
-    background: #dadbdb;
-    }
 `;
 
 const RoundButton = styled.button`

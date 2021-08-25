@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 // mysql
 const db = require('../../db/database');
+//user_info
+var user_info = require('../varient');
 
 // 비밀번호 암호화 bcrypt hash 함수
 const bcrypt = require('bcrypt');
@@ -30,19 +32,18 @@ router.post('/register', (req, res, next) => {
     const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number]
     bcrypt.hash(param[1], saltRounds, (err, hash) => {
         param[1] = hash;
-        db.query('INSERT INTO student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
+        db.query('INSERT INTO Student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
             if (err) console.log(err);
         });
     });
     res.end();
 });
 
-var loginState = false; // login되면 true, logout 혹은 초기값은 false
 // 로그인 GET
 router.get('/login', function (req, res, next) {
     console.log('in -> /api/home/login');
     let session = req.session;
-    if(loginState == false){
+    if(user_info[0] == false){
         res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
     }else{
         res.send('{"state": true}');
@@ -53,14 +54,16 @@ router.get('/login', function (req, res, next) {
 router.post('/login', (req, res, next) => {
     const param = [req.body.id, req.body.passwd]
     console.log('Login Data:', (param));
-    db.query('SELECT id, passwd FROM Student WHERE id=?', param[0], (err, row) => {
+
+    db.query('SELECT id, passwd, name FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
-            console.log('ERROR: DB: Login:')
+            console.log('ERROR: Connect DB')
             console.log(err)
         }
 
         if (row.length > 0) {
             //ID가 존재합니다.
+            console.log('Result: ',row);
             bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
                 if(result){
                     req.session.loginData = req.body
@@ -69,11 +72,14 @@ router.post('/login', (req, res, next) => {
                         console.log(error)
                     }}) 
                     console.log('success');
-                    loginState = true;          
+                    user_info[1] = param[0];
+                    user_info[2] = row[2].name;
+                    user_info[0] = true;
+                    console.log(user_info);          
                 }else{
                     console.log('Error: Login: can not find id')
                     console.log('fail');
-                    loginState = false;
+                    user_info[0] = false;
                 }
             })
         } else {

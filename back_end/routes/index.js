@@ -9,6 +9,6 @@ const mypage = require("./mypage/index");
 
 router.use('/api/home', home);
 router.use('/posts', posts);
-router.use('/mypage', mypage);
+router.use('/api/mypage', mypage);
 
 module.exports = router;
