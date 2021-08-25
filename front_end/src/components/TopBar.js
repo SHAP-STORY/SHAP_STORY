@@ -1,22 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 class TopBar extends React.Component {
-  render() {
-    return (
-      <div>
-        <ContentButton>기초학습</ContentButton>
-        <ContentButton>심화학습</ContentButton>
-        <Link to="./questions">
-          <ContentButton>질문하기</ContentButton>
-        </Link>
-        <Link to="./mypage">
-          <ContentButton>마이페이지</ContentButton>
-        </Link>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Link to="./basic">
+                    <ContentButton>기초학습</ContentButton>
+                </Link>
+                <ContentButton>심화학습</ContentButton>
+                <Link to="./questions">
+                    <ContentButton>질문하기</ContentButton>
+                </Link>
+                <Link to="./mypage">
+                    <ContentButton>마이페이지</ContentButton>
+                </Link>
+            </div>
+        );
+    }
 }
 
 const ContentButton = styled.button`
