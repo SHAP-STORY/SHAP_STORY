@@ -42,43 +42,31 @@ class TopBar extends React.Component {
   }
 
   basicLessonLink(){
-    if(this.state.loginState == false){
+    if(this.state.loginState === false){
       alert("로그인이 필요한 서비스입니다.");
-      this.props.history.push("/");
-    }else{
-      
     }
 
   }
   hardLessonLink(){
-    if(this.state.loginState == false){
+    if(this.state.loginState === false){
       alert("로그인이 필요한 서비스입니다.");
-      this.props.history.push("/");
-    }else{
-      
     }
 
   }
   questionLink(){
-    if(this.state.loginState == false){
+    if(this.state.loginState === false){
       alert("로그인이 필요한 서비스입니다.");
-      this.props.history.push("/");
-    }else{
-      this.props.history.push("/questions");
     }
-
   }
+
   mypageLink(){
-    if(this.state.loginState == false){
+    if(this.state.loginState === false){
       alert("로그인이 필요한 서비스입니다.");
-      this.props.history.push("/");
-    }else{
-      this.props.history.push("/mypage");
     }
 
   }
   handlePage(){
-    if(this.state.loginState == false){
+    if(this.state.loginState === false){
       return(
         <Link to="./signin">
           <RoundButton>로그인</RoundButton>
@@ -102,14 +90,17 @@ class TopBar extends React.Component {
     }
   }
 
-
   render() {
     return (
       <div>
         <ContentButton onClick={this.basicLessonLink}>기초학습</ContentButton>
         <ContentButton onClick={this.hardLessonLink}>심화학습</ContentButton>
+        <Link to={this.state.loginState ? './questions' : '/'}>
           <ContentButton onClick={this.questionLink}>질문하기</ContentButton>
+          </Link>
+          <Link to={this.state.loginState ? './mypage' : '/'}>
           <ContentButton onClick={this.mypageLink}>마이페이지</ContentButton>
+          </Link>
         <Link to="./signin">
           {this.handlePage()}
         </Link>

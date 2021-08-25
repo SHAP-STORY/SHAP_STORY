@@ -16,7 +16,6 @@ const Questions = (props) => {
                 </Link>
                 <MarginLeft/>
                 <TopBar> </TopBar>
-                <RoundButton>로그인</RoundButton>
             </Header>
 
             <QuestionBar>
