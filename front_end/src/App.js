@@ -14,6 +14,8 @@ import Questions from "./QuestionBoard";
 import DoQuestion from "./DoQuestion";
 import SignIn from "./SignIn";
 import Mypage from "./MyPage";
+import SignUp from './SignUp';
+import SignUpComplete from './SignUpComplete';
 
 class App extends React.Component {
     constructor(props) {
@@ -29,6 +31,10 @@ class App extends React.Component {
                 <Route path="/doQuestion" component={DoQuestion}/>
                 <Route path="/signIn" component={SignIn}/>
                 <Route path="/mypage" component={Mypage}/>
+                <Route path="/doQuestion" component={DoQuestion}></Route>
+                <Route path="/signIn" component={SignIn}></Route>
+                <Route path="/signUp" component={SignUp}></Route>
+                <Route path="/signUpComplete" component={SignUpComplete}></Route>
             </div>
         );
     }
