@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import MyPage from "./MyPage";
+import user_info from "./variables/user_info";
 
 //Redux
 import { connect } from "react-redux";
@@ -85,6 +86,10 @@ class SignIn extends React.Component {
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
     if (this.state.loginState) {
+      user_info[0] = true;
+      user_info[1] = this.state.userId;
+      user_info[2] = this.state.userName;
+      user_info[3] = this.state.userimg;
       alert("로그인이 완료되었습니다.");
       this.props.history.push({
           pathname: "/",
