@@ -15,9 +15,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
+//Redux
+import { connect } from "react-redux";
+import * as actions from "./_actions/user_action";
 
 
 import {
@@ -342,6 +343,11 @@ class MyPage extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
+  MypageUser: () => dispatch(actions.mypageAction()),
+});
+
 const Title = styled.div`
   display: flex;
   padding: 0 0 0 20px;
@@ -427,4 +433,4 @@ const ProfileBtn = styled.button`
 //-------------------------------------------
 //가운데 section (각 수업 진도율/ 나의 질문)
 
-export default MyPage;
+export default connect(mapDispatchToProps)(MyPage);
