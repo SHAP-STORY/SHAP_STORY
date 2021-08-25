@@ -9,7 +9,9 @@ class TopBar extends React.Component {
                 <Link to="./basic">
                     <ContentButton>기초학습</ContentButton>
                 </Link>
-                <ContentButton>심화학습</ContentButton>
+                <Link to="./levelUp">
+                    <ContentButton>심화학습</ContentButton>
+                </Link>
                 <Link to="./questions">
                     <ContentButton>질문하기</ContentButton>
                 </Link>

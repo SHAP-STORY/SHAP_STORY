@@ -17,6 +17,7 @@ import Mypage from "./MyPage";
 import SignUp from './SignUp';
 import SignUpComplete from './SignUpComplete';
 import Basic from "./Basic";
+import LevelUp from "./LevelUp";
 
 
 class App extends React.Component {
@@ -38,6 +39,7 @@ class App extends React.Component {
                 <Route path="/signUp" component={SignUp}></Route>
                 <Route path="/signUpComplete" component={SignUpComplete}></Route>
                 <Route path="/basic" component={Basic}/>
+                <Route path="/levelUp" component={LevelUp}/>
             </div>
         );
     }

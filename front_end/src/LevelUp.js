@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import basicImg from "./image/basic_image.png"
+import levelUpImg from "./image/level_up_image.png"
 import divider from "./image/divider.png"
 
 
-const Basic = (props) => {
+const LevelUp = (props) => {
     return (
         <RowAlign>
             <ColAlign>
-                <img style={{width: "90px", margin: "40% 0 40% 0"}} src={basicImg}></img>
+                <img style={{width: "150px", margin: "40% 0 13% 0"}} src={levelUpImg}></img>
                 <h3 style={{marginBottom: "5%"}}>목차</h3>
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🤍 1차시</ContentButton>
@@ -19,7 +19,7 @@ const Basic = (props) => {
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🙋‍♀ 질문하기</ContentButton>
             </ColAlign>
-            <iframe src="../content/개미와배짱이.html" width="100%" height="768px"></iframe>
+
         </RowAlign>
     )
 }
@@ -52,4 +52,4 @@ const ColAlign = styled.div`
     box-shadow: 10px 10px 10px #dadbdb;
 `;
 
-export default Basic;
+export default LevelUp;
