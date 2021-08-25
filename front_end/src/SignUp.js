@@ -1,47 +1,82 @@
-import {React, useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import signupBg from "./image/signupBg.svg";
 import arrowIcon from "./image/arrowIcon.svg";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { post } from 'axios';
 
-const SignUp = (props) => {
-    const [selected, setSelected] = useState("");
+class SignUp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: "",
+            userPasswd: "",
+            userGrade: "",
+            userName: "",
+            userPhonenumber: "",
+        };
+        this.signUpValueChange = this.signUpValueChange.bind(this)
+        this.onChange = this.onChange.bind(this)
+    }
 
-    const options = [
-        { value: '선생님', label: '선생님'},
-        { value: '초등학생', label: '초등학생'},
-        { value: '중학생', label: '중학생'},
-        { value: '고등학생', label: '고등학생'}
-    ]
+    signUpValueChange() {
+        // 입력한 ID, Passwd server로 보내는 function.(post)
+        const post = {
+            userId: this.state.userId,
+            userPasswd: this.state.userPasswd,
+            userGrade: this.state.userGrade,
+            userName: this.state.userName,
+            userPhonenumber: this.state.userPhonenumber,
+        };
 
-    return (
-        <Background>
-            <Header>
-                <Link to={"/"}>
-                    <HomeButton>#.</HomeButton>
-                </Link>
-            </Header>
-            <SignUpContent>
-                <text style={{fontSize: "55px", textAlign: "left"}}>여러분을 환영합니다🎉</text>
-                <Input placeholder="이름을 입력하세요"></Input>
-                <Input placeholder="휴대폰 번호를 입력해주세요"></Input>
-                <Input placeholder="아이디를 입력해주세요"></Input>
-                <div style={{display:"flex"}}>
-                    <Input style={{width: "395px"}} placeholder="비밀번호를 입력해주세요"></Input>
-                    <BelongSelect aria-label="소속">
-                        <Option selected value="소속">소속을 선택해주세요</Option>
-                        <option>선생님</option>
-                        <option>초등학생</option>
-                        <option>중학생</option>
-                        <option>고등학생</option>
-                    </BelongSelect>
-                </div>
-                <Link to="./signUpComplete">
-                    <SignUpButton>회원가입</SignUpButton>
-                </Link>
-            </SignUpContent>
-        </Background>
-    );
+        fetch("http://localhost:5000/api/home/register", {
+            method: "post",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(post),
+        })
+    }
+
+    onChange(e) {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    render() {
+        return (
+            <Background>
+                <Header>
+                    <Link to={"/"}>
+                        <HomeButton>#.</HomeButton>
+                    </Link>
+                </Header>
+                <SignUpContent>
+                    <text style={{ fontSize: "55px", textAlign: "left" }}>여러분을 환영합니다🎉</text>
+                    <Input type='text' name='userName' value={this.state.userName} onChange={this.onChange} placeholder="이름을 입력하세요"></Input>
+                    <Input type='text' name='userId' value={this.state.userId} onChange={this.onChange} placeholder="아이디를 입력해주세요"></Input>
+                    {/* <button onClick={this.checkID}>id 중복 확인</button> */}
+                    <Input type='text' name='userPhonenumber' value={this.state.userPhonenumber} onChange={this.onChange} placeholder="휴대폰 번호를 입력해주세요"></Input>
+                    <div style={{ display: "flex" }}>
+                        <Input style={{ width: "395px" }} type='password' name='userPasswd' value={this.state.userPasswd} onChange={this.onChange} placeholder="비밀번호를 입력해주세요"></Input>
+                        <BelongSelect name='userGrade' value={this.state.userGrade} onChange={this.onChange} aria-label="소속">
+                            <Option>학년을 선택해주세요(초등학교) </Option>
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="4">4학년</option>
+                            <option value="5">5학년</option>
+                            <option value="6">6학년</option>
+                        </BelongSelect>
+                    </div>
+                    <Link to="/signUpComplete">
+                        <SignUpButton onClick={this.signUpValueChange}> SUBMIT </SignUpButton>
+                    </Link>
+                </SignUpContent>
+            </Background >
+        );
+    }
 }
 
 const Background = styled.div`
