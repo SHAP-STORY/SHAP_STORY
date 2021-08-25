@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
+import user_info from "./variables/user_info";
 /* CHECK
 - 회원가입 페이지 여부
 */

@@ -1,8 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import user_info from "../variables/user_info";
+/*NOTE
+- loginstate에 따라 link이동 가능 or 불가능 결정
+*/
 
 class TopBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userimg: "",
+      userName: "",
+      loginState: "",
+    };
+  }
+  
   render() {
     return (
       <div>
