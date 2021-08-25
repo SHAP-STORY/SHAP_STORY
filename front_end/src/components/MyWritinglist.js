@@ -7,7 +7,7 @@ class MyWritinglist extends React.Component {
       <div>
         <Question>
           <div>
-            <h4>{this.props.title}</h4>
+            <text style={{ fontSize: "17px",fontWeight: "bold"}}>{this.props.title}</text>
           </div>
             <text style={{ position: "relative", top: "-30px", left: "480px"}}>
               작성일: {this.props.date}
@@ -26,7 +26,7 @@ class MyWritinglist extends React.Component {
 const Question = styled.div`
   width: 700px;
   height: 100px;
-  margin: 15px px;
+  margin: 15px 0px;
   border-radius: 15px;
   text-align: left;
   cursor: pointer;
