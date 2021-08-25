@@ -20,6 +20,7 @@ const Basic = (props) => {
                <ContentButton>🙋‍♀ 질문하기</ContentButton>
            </ColAlign>
         </RowAlign>
+
     )
 }
 
@@ -49,7 +50,7 @@ const RowAlign = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    
+    border-radius: 20px;
     box-shadow: 10px 10px 10px #dadbdb;
 `
 
