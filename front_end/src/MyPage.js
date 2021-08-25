@@ -12,6 +12,7 @@ import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
 import Contentachievement from "./components/Contentachievement";
+import user_info from "./variables/user_info";
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -36,6 +37,7 @@ NOTE 추가해야할 부분
 - 진도 현황에서 연결
 - 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
+- Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
 
 COMMENT
 - 내 글 보기 디자인 좀더 추가
@@ -46,8 +48,8 @@ COMMENT
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
-    this.username = "이채영";
-    this.userId = "lchy0413";
+    this.username = user_info[2];
+    this.userId = user_info[1];
     this.state = {
       All_achievement: "",
       userImg: profile,
