@@ -34,6 +34,7 @@ NOTE 추가해야할 부분
 - 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
 - Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
+- callApi Id 보내서 받게 하기.
 
 COMMENT
 - 내 글 보기 디자인 좀더 추가
@@ -141,11 +142,12 @@ class MyPage extends React.Component {
     this.callHardAchievementApi()
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
-
-    /*this.callUserDataApi()
-      .then((res) => this.userDataChange(res))
-      .catch((err) => console.log(err));*/
   }
+
+  componentWillUnmount() { //TEST
+    clearInterval(this.timer);
+  }
+
 
   userDataChange(data) {
     this.userId = data.userId;

@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import * as actions from "./_actions/user_action";
 
 // NOTE test 해보려면 id:test, passwd: test로 가능!
+// user_info -> name 이름 받기
 
 class SignIn extends React.Component {
   constructor(props) {
