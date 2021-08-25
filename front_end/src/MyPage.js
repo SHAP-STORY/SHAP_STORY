@@ -128,7 +128,6 @@ class MyPage extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.user);
     this.timer = setInterval(this.progress, 20);
 
     this.callMywritingApi()
@@ -143,10 +142,11 @@ class MyPage extends React.Component {
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
 
-    this.callUserDataApi()
+    /*this.callUserDataApi()
       .then((res) => this.userDataChange(res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));*/
   }
+
   userDataChange(data) {
     this.userId = data.userId;
     this.username = data.userName;
@@ -174,25 +174,24 @@ class MyPage extends React.Component {
     });
   }
 
-  addPhoto() {
-    const url = "/api/photo";
-    const formData = new FormData();
-    formData.append("image", this.state.file);
-    formData.append("id", this.userId);
-    const config = {
+  handleFormSubmit() {
+    console.log('in'); 
+    var data = "";
+    // 입력한 ID, Passwd server로 보내는 function.(post)
+    const post = {
+      file: this.state.file,
+      id: this.userId,
+    };
+    fetch("http://localhost:5000/api/mypage/photo", {
+      method: "post",
       headers: {
         "content-type": "multipart/form-data",
       },
-    };
-    return post(url, formData, config);
-  }
+      body: JSON.stringify(post),
+    })
+    .then(response => data = response.json())
+    .then(response => {console.log(response)});
 
-  handleFormSubmit() {
-    this.addPhoto()
-    .then((response) => {
-      console.log(response.data);
-      this.props.stateRefresh();
-    });
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
     //- 아니면 '다시한번 더 시도해주세요 알람'

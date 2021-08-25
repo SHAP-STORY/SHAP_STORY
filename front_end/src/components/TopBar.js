@@ -12,10 +12,10 @@ class TopBar extends React.Component {
     this.state = {
       userimg: "",
       userName: "",
-      loginState: "",
+      loginState: user_info[0],
     };
   }
-  
+
   render() {
     return (
       <div>
@@ -26,6 +26,9 @@ class TopBar extends React.Component {
         </Link>
         <Link to="./mypage">
           <ContentButton>마이페이지</ContentButton>
+        </Link>
+        <Link to="./signin">
+          <RoundButton>로그인</RoundButton>
         </Link>
       </div>
     );
@@ -46,5 +49,15 @@ const ContentButton = styled.button`
     background: #dadbdb;
   }
 `;
-
+const RoundButton = styled.button`
+    margin: 60px 50px 0px 15px;
+    font-size: 17px;
+    float: right;
+    background-color: #3F3D56;
+    border: 0;
+    color: white;
+    width: 110px;
+    height: 40px;
+    border-radius: 30px;
+`;
 export default TopBar;
