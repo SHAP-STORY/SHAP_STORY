@@ -118,13 +118,15 @@ class SignIn extends React.Component {
         </Link>
         <Image src={character}></Image>
         <LoginContent>
-          <h4 style={{ textAlign: "right" }}>Welcome to #STORY</h4>
-          <h1 style={{ fontSize: "40px", margin: "40px" }}>
-            # STORY에 오신걸 환영합니다
-          </h1>
-          <h3 style={{ margin: "30px" }}>
-            회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
-          </h3>
+          <div style={{display: "flex", flexDirection: "column"}}>
+            <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
+            <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
+              # STORY에 오신걸 환영합니다
+            </text>
+            <text style={{ marginTop: "20px", marginBottom: "35px" }}>
+              회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
+            </text>
+          </div>
           <Input
             placeholder="아이디를 입력해주세요"
             id="userId"
@@ -141,12 +143,14 @@ class SignIn extends React.Component {
               this.signinValueChange();
             }}
           ></LoginButton>
-          <Link
-            to="/signup"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            <h3 style={{ margin: "70px 0px" }}>계정이 없으신가요? 회원가입</h3>
-          </Link>
+          <div style={{margin: "50px 0"}}>
+            <Link
+              to="/signup"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
+            </Link>
+          </div>
         </LoginContent>
       </BackGround>
     );
@@ -165,17 +169,18 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const BackGround = styled.div`
-    background-position:center;
+    background-position: center;
     background-repeat: no-repeat;
+    min-height: 100%;
+    background-size: cover;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-image: url(${base});
-    resizeMode="stretch"
 `;
 
 const Image = styled.img`
   width: 504px;
-  height: 720px;
+  height: 700px;
   position: absolute;
   top: 20px;
   left: 150px;
