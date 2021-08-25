@@ -4,11 +4,21 @@ import profile from "./image/profile.png";
 import profileButton from "./image/changeProfile.png";
 import contentImage from "./image/contentImg.png";
 import { Link } from "react-router-dom";
+import { post } from "axios";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
 import Contentachievement from "./components/Contentachievement";
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+
 
 import {
   CircularProgressbarWithChildren,
@@ -19,12 +29,11 @@ import "react-circular-progressbar/dist/styles.css";
 /*
 NOTE 추가해야할 부분
 - 진도 현황에서 연결
-- 카메라 버튼 눌렀을 때 profile 바꾸기 -> Diaglog
 - 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
 
 COMMENT
-- 내 글 보기 칸 좀더 추가
+- 내 글 보기 디자인 좀더 추가
 - 로그아웃 버튼
 */
 
@@ -39,6 +48,7 @@ class MyPage extends React.Component {
       userImg: profile,
       file: "",
       fileName: "",
+      open: false,
       basic: [
         {
           id: "1",
@@ -83,6 +93,9 @@ class MyPage extends React.Component {
     //this.serverConnect = this.serverConnect.bind(this);
     this.userphotoChange = this.userphotoChange.bind(this);
     this.userDataChange = this.userDataChange.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
   callUserDataApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
@@ -126,7 +139,6 @@ class MyPage extends React.Component {
     this.callHardAchievementApi()
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
-    //NOTE 전체 진도 현황 숫자 수정하게 만들기
 
     this.callUserDataApi()
       .then((res) => this.userDataChange(res))
@@ -145,6 +157,42 @@ class MyPage extends React.Component {
       file: e.target.files[0],
       fileName: e.target.value,
     });
+  }
+
+  handleClickOpen() {
+    this.setState({
+      open: true,
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      open: false,
+    });
+  }
+
+  addPhoto() {
+    const url = "/api/photo";
+    const formData = new FormData();
+    formData.append("image", this.state.file);
+    formData.append("id", this.userId);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    return post(url, formData, config);
+  }
+
+  handleFormSubmit() {
+    this.addPhoto()
+    .then((response) => {
+      console.log(response.data);
+      this.props.stateRefresh();
+    });
+    //CHECK
+    //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
+    //- 아니면 '다시한번 더 시도해주세요 알람'
   }
 
   render() {
@@ -173,10 +221,55 @@ class MyPage extends React.Component {
         <Container>
           <Profile>
             <ProfileImg src={profile}></ProfileImg>
-            <ProfileBtn>
+            <ProfileBtn onClick={this.handleClickOpen}>
               <img src={profileButton}></img>
             </ProfileBtn>
           </Profile>
+          <Dialog open={this.state.open} onClose={this.handleClose}>
+            <DialogTitle>Profile 사진 변경</DialogTitle>
+            <DialogContent>
+              <input
+                accept="image/*"
+                id="raised-button-file"
+                type="file"
+                file={this.state.file}
+                value={this.state.fileName}
+                onChange={this.userphotoChange}
+              />
+
+              <label htmlFor="raised-button-file">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                  name="file"
+                >
+                  {this.state.fileName === ""
+                    ? "프로필 이미지 선택"
+                    : this.state.fileName}
+                </Button>
+              </label>
+              <br />
+            </DialogContent>
+
+            <DialogActions>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleFormSubmit}
+              >
+                저장
+              </Button>
+
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.handleClose}
+              >
+                닫기
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <div style={{ marginBottom: "60px" }}>
             <div>
@@ -319,7 +412,6 @@ const ProfileImg = styled.img`
   height: 90px;
   border-radius: 60px;
 `;
-
 
 const ProfileBtn = styled.button`
   width: 40px;
