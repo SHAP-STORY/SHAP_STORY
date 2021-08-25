@@ -63,9 +63,8 @@ router.post('/login', (req, res, next) => {
 
         if (row.length > 0) {
             //ID가 존재합니다.
-            console.log(row);
+            console.log('Result: ',row);
             bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
-                console.log(param[1], row[0].passwd);
                 if(result){
                     req.session.loginData = req.body
                     req.session.save(error => {if(error) {
@@ -74,7 +73,7 @@ router.post('/login', (req, res, next) => {
                     }}) 
                     console.log('success');
                     user_info[1] = param[0];
-                    user_info[2] = row[2];
+                    user_info[2] = row[2].name;
                     user_info[0] = true;
                     console.log(user_info);          
                 }else{

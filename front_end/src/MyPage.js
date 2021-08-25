@@ -9,7 +9,6 @@ import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import MyWritinglist from "./components/MyWritinglist";
 import Contentachievement from "./components/Contentachievement";
-import SignIn from "./SignIn"; //로그인 정보를 받아오기 위해
 
 import {
   CircularProgressbarWithChildren,
@@ -20,6 +19,7 @@ import "react-circular-progressbar/dist/styles.css";
 /*
 NOTE 추가해야할 부분
 - 진도 현황에서 연결
+- 카메라 버튼 눌렀을 때 profile 바꾸기 -> Diaglog
 - 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
 
@@ -34,9 +34,11 @@ class MyPage extends React.Component {
     super(props);
     this.username = "이채영";
     this.userId = "lchy0413";
-    this.userImg= "";
     this.state = {
       All_achievement: "",
+      userImg: profile,
+      file: "",
+      fileName: "",
       basic: [
         {
           id: "1",
@@ -109,36 +111,40 @@ class MyPage extends React.Component {
     return body;
   };
 
-  componentDidMount(){
-      console.log(this.props.user);
-      this.timer = setInterval(this.progress, 20);
+  componentDidMount() {
+    console.log(this.props.user);
+    this.timer = setInterval(this.progress, 20);
 
-      this.callMywritingApi()
-      .then((res) => this.setState({mywriting: res}))
+    this.callMywritingApi()
+      .then((res) => this.setState({ mywriting: res }))
       .catch((err) => console.log(err));
 
-      this.callBasicAchievementApi()
-      .then((res) => this.setState({basic: res}))
+    this.callBasicAchievementApi()
+      .then((res) => this.setState({ basic: res }))
       .catch((err) => console.log(err));
 
-      this.callHardAchievementApi()
-      .then((res) => this.setState({hard: res}))
+    this.callHardAchievementApi()
+      .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
-      //NOTE 전체 진도 현황 숫자 수정하게 만들기
+    //NOTE 전체 진도 현황 숫자 수정하게 만들기
 
-      this.callUserDataApi()
+    this.callUserDataApi()
       .then((res) => this.userDataChange(res))
       .catch((err) => console.log(err));
   }
-  userDataChange(data){
+  userDataChange(data) {
     this.userId = data.userId;
     this.username = data.userName;
-    this.userImg = data.userImg
+    this.setState({
+      userImg: data.userImg,
+    });
   }
 
-  userphotoChange(){
-    //CHECK Image 올려서 DB에 저장할 수 있게 하기
-      console.log('in');
+  userphotoChange(e) {
+    this.setState({
+      file: e.target.files[0],
+      fileName: e.target.value,
+    });
   }
 
   render() {
@@ -167,7 +173,7 @@ class MyPage extends React.Component {
         <Container>
           <Profile>
             <ProfileImg src={profile}></ProfileImg>
-            <ProfileBtn onClick={this.userphotoChange}>
+            <ProfileBtn>
               <img src={profileButton}></img>
             </ProfileBtn>
           </Profile>
@@ -197,7 +203,9 @@ class MyPage extends React.Component {
               })}
             </div>
             <div>
-              <Title style={{ marginTop: "50px", marginBottom: "60px" }}>내 글 목록</Title>
+              <Title style={{ marginTop: "50px", marginBottom: "60px" }}>
+                내 글 목록
+              </Title>
               <div>
                 {this.state.mywriting.map((c) => {
                   return (
@@ -312,6 +320,7 @@ const ProfileImg = styled.img`
   border-radius: 60px;
 `;
 
+
 const ProfileBtn = styled.button`
   width: 40px;
   height: 40px;
@@ -325,26 +334,5 @@ const ProfileBtn = styled.button`
 
 //-------------------------------------------
 //가운데 section (각 수업 진도율/ 나의 질문)
-
-//각 수업 진도율
-const Class = styled.div`
-  width: 700px;
-  height: 120px;
-  margin: 15px auto;
-  border-radius: 15px;
-  box-shadow: 3px 3px 3px 3px #e2e2e2;
-  display: flex;
-`;
-
-const PlayButton = styled.button`
-  width: 48px;
-  height: 48px;
-  border-radius: 15px;
-  border: none;
-  background-color: #32cf9a;
-  box-shadow: 2px 2px 2px 2px #e2e2e2;
-  margin: auto;
-  cursor: pointer;
-`;
 
 export default MyPage;
