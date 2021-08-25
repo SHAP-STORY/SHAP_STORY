@@ -22,7 +22,7 @@ class TopBar extends React.Component {
 const ContentButton = styled.button`
   margin: 60px 30px 0px 0px;
   font-size: 17px;
-  float: right;
+  float: left;
   background-color: #00ff0000;
   border: 0;
   padding: 5px 10px 10px 10px;
