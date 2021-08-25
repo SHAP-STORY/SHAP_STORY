@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import user_info from "../variables/user_info";
 /*NOTE
@@ -7,6 +7,26 @@ import user_info from "../variables/user_info";
 */
 
 class TopBar extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <Link to="./basic">
+                    <ContentButton>기초학습</ContentButton>
+                </Link>
+                <Link to="./levelUp">
+                    <ContentButton>심화학습</ContentButton>
+                </Link>
+                <Link to="./questions">
+                    <ContentButton>질문하기</ContentButton>
+                </Link>
+                <Link to="./mypage">
+                    <ContentButton>마이페이지</ContentButton>
+                </Link>
+            </div>
+        );
+    }
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -96,8 +116,8 @@ class TopBar extends React.Component {
       </div>
     );
   }
-}
 
+}
 const ContentButton = styled.button`
   margin: 60px 30px 0px 0px;
   font-size: 17px;

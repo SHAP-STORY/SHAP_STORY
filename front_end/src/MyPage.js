@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {DropdownButton, Dropdown} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components";
 import profile from "./image/profile.png";
 import profileButton from "./image/changeProfile.png";
@@ -27,6 +29,8 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 /*
 NOTE 추가해야할 부분
@@ -208,8 +212,11 @@ class MyPage extends React.Component {
           </Link>
           <MarginLeft />
           <TopBar></TopBar>
-          <UserInfo>
-            <img
+          <UserInfo>  
+            <DropdownButton variant="light" title={this.username}>
+              <Dropdown.Item>로그아웃</Dropdown.Item>
+              <Dropdown.Item>회원정보</Dropdown.Item>
+            {/* <img
               src={profile}
               style={{
                 width: "35px",
@@ -217,8 +224,8 @@ class MyPage extends React.Component {
                 borderRadius: "30px",
                 margin: "auto 5px",
               }}
-            ></img>
-            <div style={{ lineHeight: "40px" }}>{this.username} 님</div>
+            ></img> */}
+            </DropdownButton>
           </UserInfo>
           {/* <RoundButton>로그인</RoundButton> */}
         </Header>
@@ -375,7 +382,7 @@ const MarginLeft = styled.div`
 
 const UserInfo = styled.div`
   margin: 60px 50px 0px 15px;
-  font-size: 17px;
+  font-size: 25px;
   float: right;
   display: flex;
   flex-direction: row;
