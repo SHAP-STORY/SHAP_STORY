@@ -18,10 +18,7 @@ const Home = (props) => {
                     <HomeButton>#.</HomeButton>
                 </Link>
                 <MarginLeft/>
-                <TopBar></TopBar> 
-                <Link to="./signin">
-                    <RoundButton>로그인</RoundButton>
-                </Link>  
+                <TopBar></TopBar>   
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>

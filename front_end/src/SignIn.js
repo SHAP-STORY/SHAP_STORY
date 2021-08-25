@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import * as actions from "./_actions/user_action";
 
 // NOTE test 해보려면 id:test, passwd: test로 가능!
+// user_info -> name 이름 받기
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -47,7 +48,6 @@ class SignIn extends React.Component {
   };
 
   signinValueChange() {
-    var data = "";
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       id: this.state.userId,
@@ -61,7 +61,6 @@ class SignIn extends React.Component {
       },
       body: JSON.stringify(post),
     })
-    .then(response => data = response.json())
     .then(this.serverConnect())
     .then(response => {console.log(response)});
   }

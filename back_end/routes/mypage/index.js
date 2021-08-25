@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const multer = require("multer");
+const upload = multer({ dest: "./upload" });
 //user_info
 var user_info = require('../varient');
 
@@ -37,7 +39,7 @@ router.get('/user', function (req, res, next) {
 });
 
 router.get('/hardachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[user_info[1]], function (error, results, fields) {
+    db.query('SELECT class_id, complete FROM LessonRate where Student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -46,7 +48,7 @@ router.get('/hardachievement', function(req, res, next) {
 });
 
 router.get('/basicachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? ',[user_info[1]], function (error, results, fields) {
+    db.query('SELECT class_id, complete FROM LessonRate where Student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -65,6 +67,19 @@ router.get('/mywriting', function(req, res, next) {
         console.log(req.cookies);
     }
 });
+
+router.use("/image", express.static("./upload"));
+
+router.post('/photo', upload.single("image"), (req, res) => {
+    console.log(req);
+    let sql = "UPDATE Student SET img = ? Where id = ?";
+    let image = "http://localhost:5000/image/" + req.file.filename;
+    let id = req.body.id;
+    let params = [image, id];
+    connection.query(sql, params, (err, rows, fields) => {
+      res.send(rows);
+    });
+  });
 
 // 진도현황 - 기초학습, 심화학습 -> 그 학습 페이지로 들어가기
 // 내글 목록

@@ -38,6 +38,7 @@ NOTE 추가해야할 부분
 - 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
 - Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
+- callApi Id 보내서 받게 하기.
 
 COMMENT
 - 내 글 보기 디자인 좀더 추가
@@ -132,7 +133,6 @@ class MyPage extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.user);
     this.timer = setInterval(this.progress, 20);
 
     this.callMywritingApi()
@@ -146,11 +146,13 @@ class MyPage extends React.Component {
     this.callHardAchievementApi()
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
-
-    this.callUserDataApi()
-      .then((res) => this.userDataChange(res))
-      .catch((err) => console.log(err));
   }
+
+  componentWillUnmount() { //TEST
+    clearInterval(this.timer);
+  }
+
+
   userDataChange(data) {
     this.userId = data.userId;
     this.username = data.userName;
@@ -178,25 +180,24 @@ class MyPage extends React.Component {
     });
   }
 
-  addPhoto() {
-    const url = "/api/photo";
-    const formData = new FormData();
-    formData.append("image", this.state.file);
-    formData.append("id", this.userId);
-    const config = {
+  handleFormSubmit() {
+    console.log('in'); 
+    var data = "";
+    // 입력한 ID, Passwd server로 보내는 function.(post)
+    const post = {
+      file: this.state.file,
+      id: this.userId,
+    };
+    fetch("http://localhost:5000/api/mypage/photo", {
+      method: "post",
       headers: {
         "content-type": "multipart/form-data",
       },
-    };
-    return post(url, formData, config);
-  }
+      body: JSON.stringify(post),
+    })
+    .then(response => data = response.json())
+    .then(response => {console.log(response)});
 
-  handleFormSubmit() {
-    this.addPhoto()
-    .then((response) => {
-      console.log(response.data);
-      this.props.stateRefresh();
-    });
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
     //- 아니면 '다시한번 더 시도해주세요 알람'
