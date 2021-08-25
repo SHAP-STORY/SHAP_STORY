@@ -25,7 +25,7 @@ ReactDOM.render(
         Reducer,
         // Chrome에서 extension을 사용하기 위함
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
+        window.__REDUX_DEVTOOLS_EXTENSION__()
       )}
     >
       <App />

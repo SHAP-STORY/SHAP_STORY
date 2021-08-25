@@ -14,20 +14,44 @@ const saltRounds = 10; //ANCHOR passwd varchar(255)로 바꿔줌.(그 전에걸�
 // home.ctrl을 불러와서 그 안에 객체들 이용.
 const ctrl = require("./home.ctrl");
 
-router.get('/', function(req, res, next) {
-    if(req.cookies){
+router.get('/', function (req, res, next) {
+    if (req.cookies) {
         console.log(req.cookies);
     }
     res.render("home/home");
 });
 
 
-//register 화면
-router.get('/register', ctrl.register);
+//register get
+var registerState = false; // register되면 true, 초기값 false
 
-router.post('/register', (req, res, next) => {
+router.get('/register', function (req, res, next) {
+    console.log('in -> /api/home/register');
+
+});
+
+router.post('/register', function (req, res, next) {
     console.log(req.body);
-    const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number]
+    let user_id = req.body.id;     //req는 데이터를 받은건데 ①에서 data객체를 보내줫었다
+
+    console.log(req.body.id);
+    //sql 쿼리문-> id 에맞는 row들고 오고싶다
+    let sql = 'select id from student where id=?' //sql 쿼리문-> id 에맞는 row들고 오고싶다
+    db.query(sql, [user_id], function (err, rows, fields) {
+        console.log(rows);
+        let checkid = new Object();
+        checkid.tf = false;              // 이 아이디를 사용가능 한가요??
+
+        if (rows[0] === undefined) { //중복되는게 없으면
+            checkid.tf = true;  //없음 사용가능
+            res.send(checkid);  //다시 클라이언트로 보낸다 checkid 객체를
+        }
+        else {
+            checkid.tf = false; // 중복됨 사용x
+            res.send(checkid);
+        }
+    })
+    const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number];
     bcrypt.hash(param[1], saltRounds, (err, hash) => {
         param[1] = hash;
         db.query('INSERT INTO student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
@@ -42,9 +66,9 @@ var loginState = false; // login되면 true, logout 혹은 초기값은 false
 router.get('/login', function (req, res, next) {
     console.log('in -> /api/home/login');
     let session = req.session;
-    if(loginState == false){
+    if (loginState == false) {
         res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
-    }else{
+    } else {
         res.send('{"state": true}');
     }
 });
@@ -61,16 +85,18 @@ router.post('/login', (req, res, next) => {
 
         if (row.length > 0) {
             //ID가 존재합니다.
-            bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
-                if(result){
+            bcrypt.compare(param[1], row[0].passwd, (error, result) => {
+                if (result) {
                     req.session.loginData = req.body
-                    req.session.save(error => {if(error) {
-                        console.log('Error: Login: save session')
-                        console.log(error)
-                    }}) 
+                    req.session.save(error => {
+                        if (error) {
+                            console.log('Error: Login: save session')
+                            console.log(error)
+                        }
+                    })
                     console.log('success');
-                    loginState = true;          
-                }else{
+                    loginState = true;
+                } else {
                     console.log('Error: Login: can not find id')
                     console.log('fail');
                     loginState = false;
@@ -81,7 +107,7 @@ router.post('/login', (req, res, next) => {
         }
     })
     res.end()
-})
+});
 
 
 router.get('/loginCheck', (req, res) => {

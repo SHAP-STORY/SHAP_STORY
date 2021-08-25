@@ -44,7 +44,14 @@ var routes = require('./routes');
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
+
+const corsOptions = {
+    origin: 'http://localhost:5000',
+    credentials: true,
+}
 //use -> 미들웨어 등록해주는 메서드
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", routes);

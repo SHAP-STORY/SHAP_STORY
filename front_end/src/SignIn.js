@@ -22,7 +22,7 @@ class SignIn extends React.Component {
       loginState: "",
     };
     // 함수 이름 작성 시 명사+동사, 명사+명사+동사 이런식으로 형식 시키기!(시작 명사 제외하고는 중간 명사, 중간 동사 시작할 때 대문자 사용해야 한다.)
-    this.serverConnect = this.serverConnect.bind(this); 
+    this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
   }
@@ -68,7 +68,7 @@ class SignIn extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  siginCheck(){
+  siginCheck() {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
