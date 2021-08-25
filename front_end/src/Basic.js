@@ -8,7 +8,7 @@ const Basic = (props) => {
     return (
         <RowAlign>
             <ColAlign>
-                <img style={{width: "90px", margin: "40% 0 40% 0"}} src={basicImg}></img>
+                <img style={{width: "90px", margin: "40% 0 20% 0"}} src={basicImg}></img>
                 <h3 style={{marginBottom: "5%"}}>목차</h3>
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🤍 1차시</ContentButton>
