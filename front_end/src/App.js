@@ -1,11 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import {
-BrowserRouter as Router,
-Switch,
 Route,
-Link
 } from "react-router-dom";
 
 import Home from "./Home";
@@ -17,7 +13,7 @@ import Mypage from "./MyPage";
 import SignUp from './SignUp';
 import SignUpComplete from './SignUpComplete';
 import Basic from "./Basic";
-import LevelUp from "./LevelUp";
+import Advanced from "./LevelUp";
 
 
 class App extends React.Component {
@@ -39,7 +35,7 @@ class App extends React.Component {
                 <Route path="/signUp" component={SignUp}></Route>
                 <Route path="/signUpComplete" component={SignUpComplete}></Route>
                 <Route path="/basic" component={Basic}/>
-                <Route path="/levelUp" component={LevelUp}/>
+                <Route path="/advanced" component={Advanced}/>
             </div>
         );
     }
