@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import basicImg from "./image/basic_image.png"
 import divider from "./image/divider.png"
-import exit from "./image/lessonout.png"
 
+import ExitButton from "./components/ExitButton";
 
 class Basic extends React.Component {
-    
 
     render(){
     return (
@@ -18,12 +17,10 @@ class Basic extends React.Component {
                 <ContentButton>🤍 1차시</ContentButton>
                 <ContentButton>🤍 2차시</ContentButton>
                 <ContentButton style={{marginBottom: "20%"}}>🤍 3차시</ContentButton>
-
                 <h3 style={{marginBottom: "5%"}}>소통하기</h3>
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🙋‍♀ 질문하기</ContentButton>
-                <img style={{marginTop: "110%", marginBottom: "5%"}} src={exit}></img>
-                
+                <ExitButton/>
             </ColAlign>
             <div>
             <iframe src="../content/개미와배짱이.html" width="100%" height="768px"></iframe>
