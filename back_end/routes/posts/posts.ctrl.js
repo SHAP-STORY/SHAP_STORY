@@ -4,10 +4,14 @@ const db = require('../../db/database');
 
 // posts.js 의 create연결
 const show = (req, res) => {
-    var query = db.query('select `idx`,`title`,`student_id`,`show`,`date` from post', function (err, rows) {
-        if (err) console.log(err)        // 만약 에러값이 존재한다면 로그에 표시합니다.
-        console.log('rows :' + rows);
-        res.render('posts/show', { title: 'Board List', rows: rows }); // view 디렉토리에 있는 list 파일로 이동합니다.
+    var query = db.query('SELECT `idx`,`title`,`student_id`,`show`,`date` FROM Post', function (err, rows) {
+        if (err) {
+            console.log(err) // 만약 에러값이 존재한다면 로그에 표시합니다.
+        } else {
+            console.log('rows :' + rows);
+            // res.render('posts/show', { title: 'Board List', rows: rows }); // view 디렉토리에 있는 list 파일로 이동합니다.
+            res.send(rows);
+        }
     });
 };
 
@@ -18,11 +22,10 @@ const write = (req, res) => {
     var student_id = body.student_id;
     var title = req.body.title;
     var content = req.body.content;
-    var show = req.body.show;
     db.beginTransaction(function (err) {
         if (err) console.log(err);
-        db.query('insert into post (`title`,`student_id`,`content`,`show`) values(?,?,?,?)'
-            , [title, student_id, content, show]
+        db.query('INSERT INTO Post (`title`,`student_id`,`body`) VALUES(?,?,?)'
+            , [title, student_id, content]
             , function (err) {
                 if (err) {
                     /* 이 쿼리문에서 에러가 발생했을때는 쿼리문의 수행을 취소하고 롤백합니다.*/
@@ -31,7 +34,7 @@ const write = (req, res) => {
                         console.error('rollback error1');
                     })
                 }
-                db.query('SELECT `LAST_INSERT_ID() as idx`', function (err, rows) {
+                db.query('SELECT LAST_INSERT_ID() as idx', function (err, rows) {
                     if (err) {
                         /* 이 쿼리문에서 에러가 발생했을때는 쿼리문의 수행을 취소하고 롤백합니다.*/
                         console.log(err);
@@ -53,7 +56,8 @@ const write = (req, res) => {
 };
 
 const create = (req, res) => {
-    res.render("posts/create", { title: '글 쓰기 페이지' });
+    // res.render("posts/create", { title: '글 쓰기 페이지' });
+    console.log('in -> /api/posts/create');
 };
 
 const read = (req, res) => {
@@ -79,7 +83,8 @@ const read = (req, res) => {
                     db.commit(function (err) {
                         if (err) console.log(err);
                         console.log("row : " + results);
-                        res.render('posts/read', { title: title, rows: results });
+                        // res.render('posts/read', { title: title, rows: results });
+                        res.send(results);
                     })
                 }
             })

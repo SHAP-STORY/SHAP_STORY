@@ -1,12 +1,25 @@
-import React from "react";
-import styled, {keyframes} from "styled-components";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 import profile from "./image/profile.png"
 import background from "./image/questionBg.svg";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 
+// class Questions extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             title: "",
+//             body: "",
+//             show: "",
+//             student_id: "",
+//             date: "",
+//         };
+//     }
+
+// }
 const Questions = (props) => {
     return (
         <Background>
@@ -14,7 +27,7 @@ const Questions = (props) => {
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
                 </Link>
-                <MarginLeft/>
+                <MarginLeft />
                 <TopBar> </TopBar>
             </Header>
 
@@ -27,37 +40,37 @@ const Questions = (props) => {
                 <ContentDiv>
                     <ProfileImg src={profile}></ProfileImg>
                     <Title_Author>
-                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
                     </Title_Author>
-                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
                 <ContentDiv>
                     <ProfileImg src={profile}></ProfileImg>
                     <Title_Author>
-                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
                     </Title_Author>
-                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
                 <ContentDiv>
                     <ProfileImg src={profile}></ProfileImg>
                     <Title_Author>
-                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
                     </Title_Author>
-                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
                 <ContentDiv>
                     <ProfileImg src={profile}></ProfileImg>
                     <Title_Author>
-                        <h4 style={{margin: "0"}}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{fontSize: "80%", marginTop: "10px"}}>방희연</text>
+                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
+                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
                     </Title_Author>
-                    <text style={{fontSize: "80%", fontWeight: "bold"}}>작성일: 2021.07.24 오전 11:30</text>
+                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
                 </ContentDiv>
                 <Link to="./doQuestion">
-                    <SearchButton style={{width: "150px", marginTop: "10px"}}>질문하기</SearchButton>
+                    <SearchButton style={{ width: "150px", marginTop: "10px" }}>질문하기</SearchButton>
                 </Link>
             </QuestionDiv>
 
