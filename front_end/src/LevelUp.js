@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Iframe from "react-iframe";
-import basicImg from "./image/basic_image.png";
+import basicImg from "./image/level_up_image.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
 
@@ -68,8 +68,7 @@ class Advanced extends React.Component {
           </div>
         </ColAlign>
         <div style={{ marginLeft: "5%", border: "10px" }}>
-          
-          
+      
         </div>
       </RowAlign>
     );
