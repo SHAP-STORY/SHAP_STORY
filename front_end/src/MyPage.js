@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import {DropdownButton, Dropdown} from "react-bootstrap";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components";
 import profile from "./image/profile.png";
 import profileButton from "./image/changeProfile.png";
 import contentImage from "./image/contentImg.png";
 import { Link } from "react-router-dom";
-import { post } from "axios";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
@@ -29,8 +27,6 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 /*
 NOTE 추가해야할 부분
@@ -39,7 +35,6 @@ NOTE 추가해야할 부분
 - 해당 퍼센트에이지로 칸 변하기
 - Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
 - callApi Id 보내서 받게 하기.
-
 COMMENT
 - 내 글 보기 디자인 좀더 추가
 - 로그아웃 버튼
@@ -49,11 +44,12 @@ COMMENT
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
-    this.username = user_info[2];
-    this.userId = user_info[1];
     this.state = {
       All_achievement: "",
-      userImg: profile,
+      userImg: user_info[3],
+      userName: user_info[2],
+      loginState: user_info[0],
+      userId: user_info[1],
       file: "",
       fileName: "",
       open: false,
@@ -100,17 +96,10 @@ class MyPage extends React.Component {
     };
     //this.serverConnect = this.serverConnect.bind(this);
     this.userphotoChange = this.userphotoChange.bind(this);
-    this.userDataChange = this.userDataChange.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
-  callUserDataApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/user");
-    const body = await response.json();
-    return body;
-  };
 
   callMywritingApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
@@ -138,14 +127,6 @@ class MyPage extends React.Component {
       id: this.state.userId,
     };
 
-    this.callMywritingApi()
-      .then((res) => this.setState({ mywriting: res }))
-      .catch((err) => console.log(err));
-
-    this.callMywritingApi()
-      .then((res) => this.setState({ mywriting: res }))
-      .catch((err) => console.log(err));
-
     this.callBasicAchievementApi()
       .then((res) => this.setState({ basic: res }))
       .catch((err) => console.log(err));
@@ -171,18 +152,10 @@ class MyPage extends React.Component {
   
   }
 
-  componentWillUnmount() { //TEST
+  componentWillUnmount() {
     clearInterval(this.timer);
   }
 
-
-  userDataChange(data) {
-    this.userId = data.userId;
-    this.username = data.userName;
-    this.setState({
-      userImg: data.userImg,
-    });
-  }
 
   userphotoChange(e) {
     this.setState({
@@ -204,8 +177,6 @@ class MyPage extends React.Component {
   }
 
   handleFormSubmit() {
-    console.log('in'); 
-    var data = "";
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       file: this.state.file,
@@ -218,7 +189,7 @@ class MyPage extends React.Component {
       },
       body: JSON.stringify(post),
     })
-    .then(response => data = response.json())
+    .then(response => response.json())
     .then(response => {console.log(response)});
 
     //CHECK
@@ -235,22 +206,6 @@ class MyPage extends React.Component {
           </Link>
           <MarginLeft />
           <TopBar></TopBar>
-          <UserInfo>  
-            <DropdownButton variant="light" title={this.username}>
-              <Dropdown.Item>로그아웃</Dropdown.Item>
-              <Dropdown.Item>회원정보</Dropdown.Item>
-            {/* <img
-              src={profile}
-              style={{
-                width: "35px",
-                height: "35px",
-                borderRadius: "30px",
-                margin: "auto 5px",
-              }}
-            ></img> */}
-            </DropdownButton>
-          </UserInfo>
-          {/* <RoundButton>로그인</RoundButton> */}
         </Header>
         <Container>
           <Profile>
@@ -311,7 +266,7 @@ class MyPage extends React.Component {
               {this.state.basic.map((c) => {
                 return (
                   <Contentachievement
-                    img={contentImage} // FIX 나중에 c.img로 수정
+                    img={c.img} 
                     id={c.class_id}
                     title={c.title}
                     achievement={c.complete}
@@ -321,7 +276,7 @@ class MyPage extends React.Component {
               {this.state.advanced.map((c) => {
                 return (
                   <Contentachievement
-                    img={contentImage} // FIX 나중에 c.img로 수정
+                    img={c.img}
                     id={c.class_id}
                     title={c.title}
                     achievement={c.complete}
@@ -335,6 +290,7 @@ class MyPage extends React.Component {
               </Title>
               <div>
                 {this.state.mywriting.map((c) => {
+                  console.log(this.state.mywriting);
                   return (
                     <MyWritinglist
                       title={c.title}
@@ -403,27 +359,6 @@ const MarginLeft = styled.div`
   margin-left: auto;
 `;
 
-const UserInfo = styled.div`
-  margin: 60px 50px 0px 15px;
-  font-size: 25px;
-  float: right;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const RoundButton = styled.button`
-  margin: 60px 50px 0px 15px;
-  font-size: 17px;
-  float: right;
-  background-color: #3f3d56;
-  border: 0;
-  color: white;
-  width: 110px;
-  height: 40px;
-  border-radius: 30px;
-`;
-
 //---------------------------------------------
 //Main Section 부분 스타일링
 
@@ -465,5 +400,4 @@ const ProfileBtn = styled.button`
 
 //-------------------------------------------
 //가운데 section (각 수업 진도율/ 나의 질문)
-
 export default connect(mapDispatchToProps)(MyPage);
