@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Iframe from "react-iframe";
 import basicImg from "./image/basic_image.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
@@ -14,10 +15,18 @@ class Basic extends React.Component {
     this.state = {
       userId: user_info[1],
       content_data: "",
-      content: "../content/개미와배짱이.html",
+      content: "./content/개미와베짱이.html",
       page: "",
     };
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
   }
+  handleNext() {
+    console.log("in");
+  }
+
+  handlePreview() {}
+
   componentDidMount() {}
 
   render() {
@@ -41,13 +50,26 @@ class Basic extends React.Component {
             🙋‍♀ 질문하기
           </ContentButton>
           <div>
-          <PreviewBtn style={{ marginBottom: "15%", width: "40px", marginRight:"20px" }} src={previewButton}></PreviewBtn>
+            <PreviewBtn
+              style={{
+                marginBottom: "15%",
+                width: "40px",
+                marginRight: "20px",
+              }}
+              src={previewButton}
+              onClick={this.handlePreview}
+            ></PreviewBtn>
             <ExitButton />
-            <NextBtn style={{ marginBottom: "15%", width: "40px" }} src={nextButton}></NextBtn>
+            <NextBtn
+              style={{ marginBottom: "15%", width: "40px" }}
+              src={nextButton}
+              onClick={this.handleNext}
+            ></NextBtn>
           </div>
         </ColAlign>
         <div style={{ marginLeft: "5%", border: "10px" }}>
-          <iframe src={this.state.content} width="100%" height="768px"></iframe>
+          
+          
         </div>
       </RowAlign>
     );
@@ -84,7 +106,6 @@ const ColAlign = styled.div`
 
 const NextBtn = styled.img`
   cursor: pointer;
-
 `;
 
 const PreviewBtn = styled.img`
