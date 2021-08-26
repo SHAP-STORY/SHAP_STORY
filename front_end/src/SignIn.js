@@ -112,47 +112,90 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <BackGround>
-        <Link to={"/"}>
-          <HomeButton>#.</HomeButton>
-        </Link>
-        <Image src={character}></Image>
-        <LoginContent>
-          <div style={{display: "flex", flexDirection: "column"}}>
-            <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
-            <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
-              # STORY에 오신걸 환영합니다
-            </text>
-            <text style={{ marginTop: "20px", marginBottom: "35px" }}>
-              회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
-            </text>
-          </div>
-          <Input
-            placeholder="아이디를 입력해주세요"
-            id="userId"
-            onChange={this.idChange}
-          ></Input>
-          <Input
-            placeholder="비밀번호를 입력해주세요"
-            id="userPasswd"
-            type="password"
-            onChange={this.passwdChange}
-          ></Input>
-          <LoginButton
-            onClick={() => {
-              this.signinValueChange();
-            }}
-          ></LoginButton>
-          <div style={{margin: "50px 0"}}>
-            <Link
-              to="/signup"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
-            </Link>
-          </div>
-        </LoginContent>
-      </BackGround>
+      <div style={{height: "100%"}}>
+        <BackGround>
+          <Link to={"/"}>
+            <HomeButton>#.</HomeButton>
+          </Link>
+          <Image src={character}></Image>
+          <LoginContent>
+            <div style={{display: "flex", flexDirection: "column"}}>
+              <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
+              <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
+                # STORY에 오신걸 환영합니다
+              </text>
+              <text style={{ marginTop: "20px", marginBottom: "35px" }}>
+                회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
+              </text>
+            </div>
+            <Input
+              placeholder="아이디를 입력해주세요"
+              id="userId"
+              onChange={this.idChange}
+            ></Input>
+            <Input
+              placeholder="비밀번호를 입력해주세요"
+              id="userPasswd"
+              type="password"
+              onChange={this.passwdChange}
+            ></Input>
+            <LoginButton
+              onClick={() => {
+                this.signinValueChange();
+              }}
+            ></LoginButton>
+            <div style={{margin: "50px 0"}}>
+              <Link
+                to="/signup"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
+              </Link>
+            </div>
+          </LoginContent>
+        </BackGround>
+      </div>
+      // <BackGround>
+      //   <Link to={"/"}>
+      //     <HomeButton>#.</HomeButton>
+      //   </Link>
+      //   <Image src={character}></Image>
+      //   <LoginContent>
+      //     <div style={{display: "flex", flexDirection: "column"}}>
+      //       <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
+      //       <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
+      //         # STORY에 오신걸 환영합니다
+      //       </text>
+      //       <text style={{ marginTop: "20px", marginBottom: "35px" }}>
+      //         회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
+      //       </text>
+      //     </div>
+      //     <Input
+      //       placeholder="아이디를 입력해주세요"
+      //       id="userId"
+      //       onChange={this.idChange}
+      //     ></Input>
+      //     <Input
+      //       placeholder="비밀번호를 입력해주세요"
+      //       id="userPasswd"
+      //       type="password"
+      //       onChange={this.passwdChange}
+      //     ></Input>
+      //     <LoginButton
+      //       onClick={() => {
+      //         this.signinValueChange();
+      //       }}
+      //     ></LoginButton>
+      //     <div style={{margin: "50px 0"}}>
+      //       <Link
+      //         to="/signup"
+      //         style={{ color: "inherit", textDecoration: "none" }}
+      //       >
+      //         <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
+      //       </Link>
+      //     </div>
+      //   </LoginContent>
+      // </BackGround>
     );
   }
 }
@@ -170,11 +213,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 const BackGround = styled.div`
     background-position: center;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    min-height: 100%;
-    background-size: cover;
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-image: url(${base});
 `;
 
