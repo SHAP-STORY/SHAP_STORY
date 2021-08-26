@@ -14,9 +14,6 @@ const show = (req, res) => {
         }
     });
 };
-// const search = (req, res) => {
-//     var query = db.query('SELECT `index`,`title`,`student_id`,`date` FROM Post', function (err, rows) {
-// }
 
 // POST 방식의 요청이 들어왔을 때 데이터를 DB에 저장하고 해당하는 DB의 IDX값을
 // 가지고 온 후 Read 페이지로 이동합니다.
@@ -67,8 +64,8 @@ const read = (req, res) => {
     /* GET 방식의 연결이므로 read 페이지 조회에 필요한 idx 값이 url 주소에 포함되어 전송됩니다.
      이 idx값을 참조하여 DB에서 해당하는 정보를 가지고 옵니다.
     * url에서 idx 값을 가져오기 위해 request 객체의 params 객체를 통해 idx값을 가지고 옵니다.*/
-    var idx = req.params.idx;
-    console.log("idx : " + idx);
+    var index = req.params.index;
+    console.log("index : " + index);
 
     db.beginTransaction(function (err) {
         if (err) console.log(err);
