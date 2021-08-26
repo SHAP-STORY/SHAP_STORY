@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {DropdownButton, Dropdown} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components";
@@ -387,17 +387,6 @@ const UserInfo = styled.div`
   justify-content: space-around;
 `;
 
-const RoundButton = styled.button`
-  margin: 60px 50px 0px 15px;
-  font-size: 17px;
-  float: right;
-  background-color: #3f3d56;
-  border: 0;
-  color: white;
-  width: 110px;
-  height: 40px;
-  border-radius: 30px;
-`;
 
 //---------------------------------------------
 //Main Section 부분 스타일링

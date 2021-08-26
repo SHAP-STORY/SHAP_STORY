@@ -30,7 +30,6 @@ class SignIn extends React.Component {
     this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
-    this.dataSend = this.dataSend.bind(this);
   }
 
   idChange = (e) => {
@@ -47,7 +46,8 @@ class SignIn extends React.Component {
     });
   };
 
-  signinValueChange() {
+  signinValueChange(e) {
+    e.preventDefault();
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       id: this.state.userId,
@@ -61,11 +61,28 @@ class SignIn extends React.Component {
       },
       body: JSON.stringify(post),
     })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);
+      this.setState({ loginState: json.loginstate });
+      if (this.state.loginState === true) {
+        user_info[0] = true;
+        user_info[1] = this.state.userId;
+        user_info[2] = json.name;
+        user_info[3] = json.img;
+        alert("로그인이 완료되었습니다.");
+        this.props.history.push("/");
+      } else {
+        alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
+        this.props.history.push("/signin");
+      }
+      this.siginCheck();
+    })
     .then(this.serverConnect())
     .then(response => {console.log(response)});
   }
 
-  callApi = async () => {
+  /*callApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
     const response = await fetch("api/home/login");
     const body = await response.json();
@@ -76,38 +93,19 @@ class SignIn extends React.Component {
     // signinValueChange()로 보낸 이후 login 성공 여부를 변수로 받아오는 function (get)
     this.callApi()
       .then((res) => this.setState({ loginState: res.state })) // 받은 'state' 데이터를 loginState에 넣기.
-      .then((res) => this.siginCheck()) // 만약 데이터를 받은 이후 다른 동작을 하기 위해 함수를 부름. 같은 함수 내로 작성하면 같이 동작해서 오류발생.
       .catch((err) => console.log(err));
-  }
+  }*/
 
   siginCheck() {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
-    if (this.state.loginState) {
-      user_info[0] = true;
-      user_info[1] = this.state.userId;
-      user_info[2] = this.state.userName;
-      user_info[3] = this.state.userimg;
-      alert("로그인이 완료되었습니다.");
-      this.props.history.push({
-          pathname: "/",
-        }      );
-    } else {
-      alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
-      this.props.history.push("/signin");
-    }
-    this.dataSend();
     return {
       // redux 전달을 위해서 사용.
       id: id,
       passwd: passwd,
       state: state,
     };
-  }
-  dataSend() {
-    console.log('in');
-    return <MyPage user={this.state.userId} />;
   }
 
   render() {
@@ -139,10 +137,7 @@ class SignIn extends React.Component {
             onChange={this.passwdChange}
           ></Input>
           <LoginButton
-            onClick={() => {
-              this.signinValueChange();
-            }}
-          ></LoginButton>
+            onClick={this.signinValueChange}></LoginButton>
           <div style={{margin: "50px 0"}}>
             <Link
               to="/signup"

@@ -5,14 +5,10 @@ import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
-import user_info from "./variables/user_info";
 
 //Redux
 import { connect } from "react-redux";
 import * as actions from "./_actions/start_action";
-/* CHECK
-- 회원가입 페이지 여부
-*/
 
 const Home = (props) => {
     return (
