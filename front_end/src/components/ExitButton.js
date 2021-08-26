@@ -22,21 +22,18 @@ class ExitButton extends React.Component {
           onClick={() => {
             this.handlePage();
           }}
-          style={{ marginBottom: "5%", marginRight:"20px"}}
+          style={{ marginBottom: "15%", marginRight:"20px", }}
+          src={exit}
         ></ExitBtn>
     );
   }
 }
 
-const ExitBtn = styled.button`
-background-image: url(${exit});
-border: none;
-background-color: white;
-width: 30px;
-height: 30px;
+const ExitBtn = styled.img`
+width: 45px;
+height: 45px;
 position: relative;
 cursor: pointer;
-marginTop: 60px 
 `;
 
 export default withRouter(ExitButton);

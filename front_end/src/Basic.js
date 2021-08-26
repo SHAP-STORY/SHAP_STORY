@@ -41,9 +41,9 @@ class Basic extends React.Component {
             🙋‍♀ 질문하기
           </ContentButton>
           <div>
-          <PreviewBtn style={{ marginBottom: "10%", width: "40px", marginRight:"20px" }} src={previewButton}></PreviewBtn>
+          <PreviewBtn style={{ marginBottom: "15%", width: "40px", marginRight:"20px" }} src={previewButton}></PreviewBtn>
             <ExitButton />
-            <NextBtn style={{ marginBottom: "10%", width: "40px" }} src={nextButton}></NextBtn>
+            <NextBtn style={{ marginBottom: "15%", width: "40px" }} src={nextButton}></NextBtn>
           </div>
         </ColAlign>
         <div style={{ marginLeft: "5%", border: "10px" }}>
