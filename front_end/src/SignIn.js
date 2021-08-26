@@ -6,7 +6,6 @@ import loginButton from "./image/loginButton.png";
 import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
-import MyPage from "./MyPage";
 import user_info from "./variables/user_info";
 
 //Redux
@@ -27,7 +26,6 @@ class SignIn extends React.Component {
       loginState: "",
     };
     // 함수 이름 작성 시 명사+동사, 명사+명사+동사 이런식으로 형식 시키기!(시작 명사 제외하고는 중간 명사, 중간 동사 시작할 때 대문자 사용해야 한다.)
-    this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
   }
@@ -54,7 +52,7 @@ class SignIn extends React.Component {
       passwd: this.state.userPasswd,
     };
 
-    fetch("http://localhost:5000/api/home/login", {
+    fetch("/api/home/login", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -70,7 +68,8 @@ class SignIn extends React.Component {
         user_info[1] = this.state.userId;
         user_info[2] = json.name;
         user_info[3] = json.img;
-        alert("로그인이 완료되었습니다.");
+        console.log(user_info);
+        alert("로그인이 성공적으로 완료되었습니다.");
         this.props.history.push("/");
       } else {
         alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
@@ -78,8 +77,6 @@ class SignIn extends React.Component {
       }
       this.siginCheck();
     })
-    .then(this.serverConnect())
-    .then(response => {console.log(response)});
   }
 
   /*callApi = async () => {
