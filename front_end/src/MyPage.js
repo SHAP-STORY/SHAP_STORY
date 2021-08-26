@@ -142,6 +142,10 @@ class MyPage extends React.Component {
       .then((res) => this.setState({ mywriting: res }))
       .catch((err) => console.log(err));
 
+    this.callMywritingApi()
+      .then((res) => this.setState({ mywriting: res }))
+      .catch((err) => console.log(err));
+
     this.callBasicAchievementApi()
       .then((res) => this.setState({ basic: res }))
       .catch((err) => console.log(err));
