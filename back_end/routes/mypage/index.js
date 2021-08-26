@@ -38,7 +38,7 @@ router.get('/user', function (req, res, next) {
     res.send(data);
 });
 
-router.get('/hardachievement', function(req, res, next) {
+router.get('/advancedachievement', function(req, res, next) {
     db.query('SELECT class_id, complete FROM LessonRate where Student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
