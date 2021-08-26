@@ -183,6 +183,7 @@ class MyPage extends React.Component {
       file: e.target.files[0],
       fileName: e.target.value,
     });
+    console.log(this.state.file, this.state.fileName);
   }
 
   handleClickOpen() {
@@ -202,29 +203,14 @@ class MyPage extends React.Component {
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const formData = new FormData();
     formData.append('image', this.state.file);
+    formData.append('id', this.state.userId);
     const config = {
       headers: {
       'content-type': 'multipart/form-data'
       }
     } 
-    return post(url, formData, config);
+    post(url, formData, config); 
   }
-    /*const post = {
-      file: this.state.file,
-      id: this.userId,
-    };
-    fetch("http://localhost:5000/api/mypage/photo", {
-      method: "post",
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-      body: JSON.stringify(post),
-    })
-    .then(response => response.json())
-    .then(response => {console.log(response)});*/
-
-
-
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
     //- 아니면 '다시한번 더 시도해주세요 알람'

@@ -80,13 +80,20 @@ router.post('/mywriting', function(req, res, next) {
 router.use("/image", express.static("./upload"));
 
 router.post('/photo', upload.single("image"), (req, res) => {
-    console.log(req);
+    console.log(req.body.id);
     let sql = "UPDATE Student SET img = ? Where id = ?";
     let image = "http://localhost:5000/image/" + req.file.filename;
     let id = req.body.id;
     let params = [image, id];
-    connection.query(sql, params, (err, rows, fields) => {
-      res.send(rows);
+    db.query(sql, params, (err, rows, fields) => {
+      console.log(rows);
+    });
+    db.query("SELECT img FROM Student where id= ?",[req.body.id], function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(results);
+        res.send(results);
     });
   });
 
