@@ -6,6 +6,7 @@ import loginButton from "./image/loginButton.png";
 import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
+import MyPage from "./MyPage";
 import user_info from "./variables/user_info";
 
 //Redux
@@ -26,8 +27,10 @@ class SignIn extends React.Component {
       loginState: "",
     };
     // 함수 이름 작성 시 명사+동사, 명사+명사+동사 이런식으로 형식 시키기!(시작 명사 제외하고는 중간 명사, 중간 동사 시작할 때 대문자 사용해야 한다.)
+    this.serverConnect = this.serverConnect.bind(this);
     this.signinValueChange = this.signinValueChange.bind(this);
     this.siginCheck = this.siginCheck.bind(this);
+    this.dataSend = this.dataSend.bind(this);
   }
 
   idChange = (e) => {
@@ -44,42 +47,25 @@ class SignIn extends React.Component {
     });
   };
 
-  signinValueChange(e) {
-    e.preventDefault();
+  signinValueChange() {
     // 입력한 ID, Passwd server로 보내는 function.(post)
     const post = {
       id: this.state.userId,
       passwd: this.state.userPasswd,
     };
 
-    fetch("/api/home/login", {
+    fetch("http://localhost:5000/api/home/login", {
       method: "post",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(post),
     })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json);
-      this.setState({ loginState: json.loginstate });
-      if (this.state.loginState === true) {
-        user_info[0] = true;
-        user_info[1] = this.state.userId;
-        user_info[2] = json.name;
-        user_info[3] = json.img;
-        console.log(user_info);
-        alert("로그인이 성공적으로 완료되었습니다.");
-        this.props.history.push("/");
-      } else {
-        alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
-        this.props.history.push("/signin");
-      }
-      this.siginCheck();
-    })
+    .then(this.serverConnect())
+    .then(response => {console.log(response)});
   }
 
-  /*callApi = async () => {
+  callApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
     const response = await fetch("api/home/login");
     const body = await response.json();
@@ -90,13 +76,28 @@ class SignIn extends React.Component {
     // signinValueChange()로 보낸 이후 login 성공 여부를 변수로 받아오는 function (get)
     this.callApi()
       .then((res) => this.setState({ loginState: res.state })) // 받은 'state' 데이터를 loginState에 넣기.
+      .then((res) => this.siginCheck()) // 만약 데이터를 받은 이후 다른 동작을 하기 위해 함수를 부름. 같은 함수 내로 작성하면 같이 동작해서 오류발생.
       .catch((err) => console.log(err));
-  }*/
+  }
 
   siginCheck() {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
     const state = this.state.loginState;
+    if (this.state.loginState) {
+      user_info[0] = true;
+      user_info[1] = this.state.userId;
+      user_info[2] = this.state.userName;
+      user_info[3] = this.state.userimg;
+      alert("로그인이 완료되었습니다.");
+      this.props.history.push({
+          pathname: "/",
+        }      );
+    } else {
+      alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요.");
+      this.props.history.push("/signin");
+    }
+    this.dataSend();
     return {
       // redux 전달을 위해서 사용.
       id: id,
@@ -104,50 +105,61 @@ class SignIn extends React.Component {
       state: state,
     };
   }
+  dataSend() {
+    console.log('in');
+    return <MyPage user={this.state.userId} />;
+  }
 
   render() {
     return (
-      <BackGround>
-        <Link to={"/"}>
-          <HomeButton>#.</HomeButton>
-        </Link>
-        <Image src={character}></Image>
-        <LoginContent>
-          <div style={{display: "flex", flexDirection: "column"}}>
-            <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
-            <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
-              # STORY에 오신걸 환영합니다
-            </text>
-            <text style={{ marginTop: "20px", marginBottom: "35px" }}>
-              회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
-            </text>
-          </div>
-          <Input
-            placeholder="아이디를 입력해주세요"
-            id="userId"
-            onChange={this.idChange}
-          ></Input>
-          <Input
-            placeholder="비밀번호를 입력해주세요"
-            id="userPasswd"
-            type="password"
-            onChange={this.passwdChange}
-          ></Input>
-          <LoginButton
-            onClick={this.signinValueChange}></LoginButton>
-          <div style={{margin: "50px 0"}}>
-            <Link
-              to="/signup"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
-            </Link>
-          </div>
-        </LoginContent>
-      </BackGround>
+      <div style={{height: "100%"}}>
+        <BackGround>
+          <Link to={"/"}>
+            <HomeButton>#.</HomeButton>
+          </Link>
+          <Image src={character}></Image>
+          <LoginContent>
+            <div style={{display: "flex", flexDirection: "column"}}>
+              <text style={{ fontSize: "13px", textAlign: "right" }}>Welcome to #STORY</text>
+              <text style={{ fontSize: "40px", fontWeight: "bold", marginTop: "30px" }}>
+                # STORY에 오신걸 환영합니다
+              </text>
+              <text style={{ marginTop: "20px", marginBottom: "35px" }}>
+                회원가입을 통해서 다양한 컨텐츠를 즐겨보세요!
+              </text>
+            </div>
+            <Input
+              placeholder="아이디를 입력해주세요"
+              id="userId"
+              onChange={this.idChange}
+            ></Input>
+            <Input
+              placeholder="비밀번호를 입력해주세요"
+              id="userPasswd"
+              type="password"
+              onChange={this.passwdChange}
+            ></Input>
+            <LoginButton
+              onClick={() => {
+                this.signinValueChange();
+              }}
+            ></LoginButton>
+            <div style={{margin: "50px 0"}}>
+              <Link
+                to="/signup"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <text style={{ fontsize: "10px" }}>계정이 없으신가요? 회원가입</text>
+              </Link>
+            </div>
+          </LoginContent>
+        </BackGround>
+      </div>
     );
   }
 }
+
+
 const mapStateToProps = (state) => ({
   // ./_reducers/user_reducer.js 의 변수와 이름 동일. state 변수 전달.
   storeId: state.userid,
@@ -157,16 +169,16 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
-  SigninUser: () => dispatch(actions.signinAction()),
+  SigninUser: () => dispatch(actions.serverConnect()),
 });
 
 const BackGround = styled.div`
     background-position: center;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    min-height: 100%;
-    background-size: cover;
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-image: url(${base});
 `;
 

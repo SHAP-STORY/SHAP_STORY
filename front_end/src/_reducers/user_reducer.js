@@ -17,7 +17,7 @@ const reducers = (state = initialStates, action) => {
           userpasswd: action.payload.userpasswd,
           loginSuccess: action.payload.loginSuccess
         }
-      }case MYPAGE_USER.MypageUser: {
+      }case MYPAGE_USER.SigninUser: {
         return {
           ...state,
         }
