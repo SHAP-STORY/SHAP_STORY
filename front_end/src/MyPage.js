@@ -131,10 +131,32 @@ class MyPage extends React.Component {
       .then((res) => this.setState({ basic: res }))
       .catch((err) => console.log(err));
 
-    this.callHardAchievementApi()
-      .then((res) => this.setState({ hard: res }))
+      fetch("http://localhost:5000/api/mypage/basicachievement", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ basic: json })
+      })
       .catch((err) => console.log(err));
-    
+
+      fetch("http://localhost:5000/api/mypage/advancedachievement", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ advanced: json })
+      })
+      .catch((err) => console.log(err));
+      
 
       fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
