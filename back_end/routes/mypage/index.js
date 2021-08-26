@@ -39,7 +39,8 @@ router.get('/user', function (req, res, next) {
 });
 
 router.post('/advancedachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? and type = advanced',[req.body.id], function (error, results, fields) {
+    console.log(req.body.id)
+    db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE='advanced'",[req.body.id], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -48,7 +49,8 @@ router.post('/advancedachievement', function(req, res, next) {
 });
 
 router.post('/basicachievement', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where student_id= ? and type = basic',[req.body.id], function (error, results, fields) {
+    console.log(req.body.id)
+    db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE= 'basic'",[req.body.id], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
