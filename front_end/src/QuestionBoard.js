@@ -3,91 +3,78 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import profile from "./image/profile.png"
 import background from "./image/questionBg.svg";
+import axios from "axios";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
+import Boardlist from "./components/Boardlist";
 
-// class Questions extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             title: "",
-//             body: "",
-//             show: "",
-//             student_id: "",
-//             date: "",
-//         };
-//     }
+class Questions extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            boards: [],
+        };
+    }
+    //로딩 데이터 
+    loadingData = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/posts');
+            this.setState({ // boards: 'test' 
+                boards: response.data,
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    // showQuestion() {
+    componentDidMount() {
+        const { loadingData } = this;
+        loadingData();
+    }
 
-// }
-const Questions = (props) => {
-    return (
-        <Background>
-            <Header>
-                <Link to={"/"}>
-                    <HomeButton>#.</HomeButton>
-                </Link>
-                <MarginLeft />
-                <TopBar> </TopBar>
-            </Header>
 
-            <QuestionBar>
-                <Search></Search>
-                <SearchButton>검색</SearchButton>
-            </QuestionBar>
+    render() {
+        return (
+            <Background>
+                <Header>
+                    <Link to={"/"}>
+                        <HomeButton>#.</HomeButton>
+                    </Link>
+                    <MarginLeft />
+                    <TopBar> </TopBar>
+                </Header>
 
-            <QuestionDiv>
-                <ContentDiv>
-                    <ProfileImg src={profile}></ProfileImg>
-                    <Title_Author>
-                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
-                    </Title_Author>
-                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
-                </ContentDiv>
-                <ContentDiv>
-                    <ProfileImg src={profile}></ProfileImg>
-                    <Title_Author>
-                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
-                    </Title_Author>
-                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
-                </ContentDiv>
-                <ContentDiv>
-                    <ProfileImg src={profile}></ProfileImg>
-                    <Title_Author>
-                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
-                    </Title_Author>
-                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
-                </ContentDiv>
-                <ContentDiv>
-                    <ProfileImg src={profile}></ProfileImg>
-                    <Title_Author>
-                        <h4 style={{ margin: "0" }}>Basic 3강에서 질문있습니다! 자꾸 에러가 나요</h4>
-                        <text style={{ fontSize: "80%", marginTop: "10px" }}>방희연</text>
-                    </Title_Author>
-                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: 2021.07.24 오전 11:30</text>
-                </ContentDiv>
-                <Link to="./doQuestion">
-                    <SearchButton style={{ width: "150px", marginTop: "10px" }}>질문하기</SearchButton>
-                </Link>
-            </QuestionDiv>
+                <QuestionBar>
+                    <Search></Search>
+                    <SearchButton>검색</SearchButton>
+                </QuestionBar>
 
-            <BottomDiv>
-                <PageDiv>
-                    <PageButton>◀</PageButton>
-                    <PageButton>1</PageButton>
-                    <PageButton>2</PageButton>
-                    <PageButton>3</PageButton>
-                    <PageButton>4</PageButton>
-                    <PageButton>5</PageButton>
-                    <PageButton>▶</PageButton>
-                </PageDiv>
-            </BottomDiv>
-        </Background>
-    );
+                <QuestionDiv>
+                    {this.state.boards.map((board) => {
+                        return (
+                            <Boardlist
+                                index={board.index}
+                                title={board.title}
+                                student_id={board.student_id}
+                                date={board.date}
+                            />
+                        );
+                    })}
+                </QuestionDiv >
+
+                <SideDiv>
+                    <PageDiv>
+                        <Link to="./doQuestion">
+                            <ContentButton style={{ width: "150px", marginTop: "10px" }}>질문하기</ContentButton >
+                        </Link>
+                    </PageDiv>
+                </SideDiv>
+            </Background >
+        );
+    }
 }
+
 
 const Background = styled.div`
     background-position:center;
@@ -110,17 +97,19 @@ const MarginLeft = styled.div`
 `;
 
 const ContentButton = styled.button`
-    margin: 60px 30px 0px 0px;
+    margin: 0px 0px 0px 0px;
     font-size: 17px;
+    font-weight: 550;
     float: right;
-    background-color: #00ff0000;
-    border:0;
-    padding: 5px 10px 10px 10px;
-    border-radius: 20px;
-    height: 35px; 
-    
-    &:hover {
-    background: #dadbdb;
+    background-color: #3F3D56;
+    border: 0;
+    color: white;
+    width: 110px;
+    height: 48px;
+    border-radius: 30px;
+    &: hover{
+        background-color: #dadbdb;
+        color: black;
     }
 `;
 
@@ -187,7 +176,7 @@ const SearchButton = styled.button`
 const QuestionDiv = styled.div`
     position: absolute;
     width: 800px;
-    top: 230px;
+    top: 210px;
     left: 50%;
     transform: translate(-50%, 0%);
 `;
@@ -223,12 +212,12 @@ const ProfileImg = styled.img`
 // -------------------------------------------------------------------
 // BottomDiv - 12345 페이지 넘기기
 
-const BottomDiv = styled.div`
+const SideDiv = styled.div`
     position: absolute;
-    width: 800px;
-    top: 650px;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    width: 110px;
+    top: 137px;
+    margin-left: 1200px;
+    transform: translate(0%, 0%);
 `;
 
 const PageDiv = styled.div`

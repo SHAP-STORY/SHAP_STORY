@@ -4,7 +4,7 @@ const db = require('../../db/database');
 
 // posts.js 의 create연결
 const show = (req, res) => {
-    var query = db.query('SELECT `idx`,`title`,`student_id`,`show`,`date` FROM Post', function (err, rows) {
+    var query = db.query('SELECT `index`,`title`,`student_id`,`date` FROM Post', function (err, rows) {
         if (err) {
             console.log(err) // 만약 에러값이 존재한다면 로그에 표시합니다.
         } else {
@@ -14,6 +14,9 @@ const show = (req, res) => {
         }
     });
 };
+// const search = (req, res) => {
+//     var query = db.query('SELECT `index`,`title`,`student_id`,`date` FROM Post', function (err, rows) {
+// }
 
 // POST 방식의 요청이 들어왔을 때 데이터를 DB에 저장하고 해당하는 DB의 IDX값을
 // 가지고 온 후 Read 페이지로 이동합니다.
@@ -34,7 +37,7 @@ const write = (req, res) => {
                         console.error('rollback error1');
                     })
                 }
-                db.query('SELECT LAST_INSERT_ID() as idx', function (err, rows) {
+                db.query('SELECT LAST_INSERT_ID() as index', function (err, rows) {
                     if (err) {
                         /* 이 쿼리문에서 에러가 발생했을때는 쿼리문의 수행을 취소하고 롤백합니다.*/
                         console.log(err);
@@ -46,8 +49,8 @@ const write = (req, res) => {
                         db.commit(function (err) {
                             if (err) console.log(err);
                             console.log("row : " + rows);
-                            var idx = rows[0].idx;
-                            res.redirect('/posts/read/' + idx);
+                            var index = rows[0].index;
+                            res.redirect('/posts/read/' + index);
                         })
                     }
                 })
@@ -65,13 +68,12 @@ const read = (req, res) => {
      이 idx값을 참조하여 DB에서 해당하는 정보를 가지고 옵니다.
     * url에서 idx 값을 가져오기 위해 request 객체의 params 객체를 통해 idx값을 가지고 옵니다.*/
     var idx = req.params.idx;
-    var title = '글쓰기 페이지';
     console.log("idx : " + idx);
 
     db.beginTransaction(function (err) {
         if (err) console.log(err);
-        db.query('select `idx`,`title`,`content`,`student_id`,`date`' +
-            'from post where idx=?', [idx], function (err, results, field) {
+        db.query('SELECT `index`,`title`,`content`,`student_id`,`date`' +
+            'FROM Post WHERE index=?', [index], function (err, results, field) {
                 if (err) {
                     /* 이 쿼리문에서 에러가 발생했을때는 쿼리문의 수행을 취소하고 롤백합니다.*/
                     console.log(err);
