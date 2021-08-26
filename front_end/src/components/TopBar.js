@@ -77,7 +77,7 @@ class TopBar extends React.Component {
         <Link to={this.state.loginState ? './basic' : '/'}>
         <ContentButton onClick={this.basicLessonLink}>기초학습</ContentButton>
         </Link>
-        <Link to={this.state.loginState ? './levelUp' : '/'}>
+        <Link to={this.state.loginState ? './advanced' : '/'}>
         <ContentButton onClick={this.hardLessonLink}>심화학습</ContentButton>
         </Link>
         <Link to={this.state.loginState ? './questions' : '/'}>
