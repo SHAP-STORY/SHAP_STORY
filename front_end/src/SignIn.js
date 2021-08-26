@@ -165,7 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
-  SigninUser: () => dispatch(actions.serverConnect()),
+  SigninUser: () => dispatch(actions.signinAction()),
 });
 
 const BackGround = styled.div`
