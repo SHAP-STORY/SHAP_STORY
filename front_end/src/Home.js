@@ -79,9 +79,11 @@ const Body = styled.div`
     animation : ${SlideIn} 5s 1s
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
     font-size: 40px;
     text-align: left;
+    font-weight: bold;
+    margin-bottom: 15px;
     align: left;
 `;
 
@@ -132,7 +134,7 @@ const Our = styled.div`
     color: white;
     position:absolute;
     bottom:0;
-    font-size : 17px;
+    font-size : 15px;
     animation : ${move} 10s 1s infinite;
 `;
 
