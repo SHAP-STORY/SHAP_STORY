@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
-import user_info from "./variables/user_info";
-/* CHECK
-- 회원가입 페이지 여부
-*/
+
+//Redux
+import { connect } from "react-redux";
+import * as actions from "./_actions/start_action";
 
 const Home = (props) => {
     return (
@@ -32,6 +32,10 @@ const Home = (props) => {
         </Background>
     );
 }
+const mapDispatchToProps = (dispatch) => ({
+    // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
+    HomeUser: () => dispatch(actions.homeAction()),
+  });
 
 const Background = styled.div`
     background-position:center;
@@ -51,18 +55,6 @@ const Header = styled.div`
 
 const MarginLeft = styled.div`
     margin-left: auto;
-`;
-
-const RoundButton = styled.button`
-    margin: 60px 50px 0px 15px;
-    font-size: 17px;
-    float: right;
-    background-color: #3F3D56;
-    border: 0;
-    color: white;
-    width: 110px;
-    height: 40px;
-    border-radius: 30px;
 `;
 
 //--------------------------------------------------------
@@ -145,4 +137,4 @@ const Our = styled.div`
     animation : ${move} 10s 1s infinite;
 `;
 
-export default Home;
+export default connect(mapDispatchToProps)(Home);

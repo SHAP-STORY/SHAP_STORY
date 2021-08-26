@@ -1,32 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 import styled from "styled-components";
 import user_info from "../variables/user_info";
-/*NOTE
-- loginstate에 따라 link이동 가능 or 불가능 결정
-*/
+import { withRouter } from 'react-router-dom'
 
 class TopBar extends React.Component {
-
-    render() {
-        return (
-            <div>
-                <Link to="./basic">
-                    <ContentButton>기초학습</ContentButton>
-                </Link>
-                <Link to="./levelUp">
-                    <ContentButton>심화학습</ContentButton>
-                </Link>
-                <Link to="./questions">
-                    <ContentButton>질문하기</ContentButton>
-                </Link>
-                <Link to="./mypage">
-                    <ContentButton>마이페이지</ContentButton>
-                </Link>
-            </div>
-        );
-    }
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -41,73 +20,96 @@ class TopBar extends React.Component {
     this.handlePage = this.handlePage.bind(this);
   }
 
-  basicLessonLink(){
-    if(this.state.loginState === false){
+  basicLessonLink() {
+    if (this.state.loginState === false) {
       alert("로그인이 필요한 서비스입니다.");
     }
-
   }
-  hardLessonLink(){
-    if(this.state.loginState === false){
+  hardLessonLink() {
+    if (this.state.loginState === false) {
       alert("로그인이 필요한 서비스입니다.");
     }
-
   }
-  questionLink(){
-    if(this.state.loginState === false){
+  questionLink() {
+    if (this.state.loginState === false) {
       alert("로그인이 필요한 서비스입니다.");
     }
   }
 
-  mypageLink(){
-    if(this.state.loginState === false){
+  mypageLink() {
+    if (this.state.loginState === false) {
       alert("로그인이 필요한 서비스입니다.");
     }
-
   }
-  handlePage(){
-    if(this.state.loginState === false){
-      return(
+
+  handleLogout() {
+    console.log('in');
+    user_info[0] = false;
+    user_info[1] = '';
+    user_info[2] = '';
+    user_info[3] = '';
+  }
+
+  handlePage() {
+    if (this.state.loginState === false) {
+      return (
         <Link to="./signin">
           <RoundButton>로그인</RoundButton>
         </Link>
-      )
-    }else{
-      return(
+      );
+    } else {
+      return (
         <UserInfo>
-        <img
-          src={this.state.userImg}
-          style={{
-            width: "35px",
-            height: "35px",
-            borderRadius: "30px",
-            margin: "auto 5px",
-          }}
-        ></img>
-        <div style={{ lineHeight: "40px" }}>{this.state.userName} 님</div>
-      </UserInfo>
-      )
+          <img
+            src={this.state.userImg}
+            style={{
+              width: "35px",
+              height: "35px",
+              borderRadius: "30px",
+              margin: "auto 10px",
+            }}
+          />
+          <div style={{ lineHeight: "40px" }}>{this.state.userName} 님</div>
+          <DropdownButton
+            id="dropdown-basic-button"
+            title='Click'
+            variant="light"
+            style={{ marginLeft: "40px" }}
+          >
+            <Dropdown.Item onSelect={(eventKey) => console.log(eventKey)} eventKey="user">회원정보</Dropdown.Item>
+            <Dropdown.Item onSelect={ () => {
+              alert("로그아웃을 시도 하시겠습니까?") ;
+              this.setState({loginState: false});
+              this.handleLogout();
+              window.location.href = '/';
+            }} eventKey="logout">
+              로그아웃
+            </Dropdown.Item>
+          </DropdownButton>
+        </UserInfo>
+      );
     }
   }
 
   render() {
     return (
       <div>
-        <ContentButton onClick={this.basicLessonLink}>기초학습</ContentButton>
-        <ContentButton onClick={this.hardLessonLink}>심화학습</ContentButton>
-        <Link to={this.state.loginState ? './questions' : '/'}>
-          <ContentButton onClick={this.questionLink}>질문하기</ContentButton>
-          </Link>
-          <Link to={this.state.loginState ? './mypage' : '/'}>
-          <ContentButton onClick={this.mypageLink}>마이페이지</ContentButton>
-          </Link>
-        <Link to="./signin">
-          {this.handlePage()}
+        <Link to={this.state.loginState ? "./basic" : "/"}>
+          <ContentButton onClick={this.basicLessonLink}>기초학습</ContentButton>
         </Link>
+        <Link to={this.state.loginState ? "./advanced" : "/"}>
+          <ContentButton onClick={this.hardLessonLink}>심화학습</ContentButton>
+        </Link>
+        <Link to={this.state.loginState ? "./questions" : "/"}>
+          <ContentButton onClick={this.questionLink}>질문하기</ContentButton>
+        </Link>
+        <Link to={this.state.loginState ? "./mypage" : "/"}>
+          <ContentButton onClick={this.mypageLink}>마이페이지</ContentButton>
+        </Link>
+        {this.handlePage()}
       </div>
     );
   }
-
 }
 const ContentButton = styled.button`
   margin: 60px 30px 0px 0px;
@@ -124,15 +126,15 @@ const ContentButton = styled.button`
   }
 `;
 const RoundButton = styled.button`
-    margin: 60px 50px 0px 15px;
-    font-size: 17px;
-    float: right;
-    background-color: #3F3D56;
-    border: 0;
-    color: white;
-    width: 110px;
-    height: 40px;
-    border-radius: 30px;
+  margin: 60px 50px 0px 15px;
+  font-size: 17px;
+  float: right;
+  background-color: #3f3d56;
+  border: 0;
+  color: white;
+  width: 110px;
+  height: 40px;
+  border-radius: 30px;
 `;
 
 const UserInfo = styled.div`
@@ -143,4 +145,4 @@ const UserInfo = styled.div`
   flex-direction: row;
   justify-content: space-around;
 `;
-export default TopBar;
+export default withRouter(TopBar);
