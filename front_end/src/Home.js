@@ -57,16 +57,17 @@ const MarginLeft = styled.div`
     margin-left: auto;
 `;
 
+//--------------------------------------------------------
 // BODY
 
 const SlideIn = keyframes`
   from {
     margin-left: 70%;
   }
+
   to {
     margin-left: 35vh;
   }
-}
 `;
 
 const Body = styled.div`
@@ -78,11 +79,9 @@ const Body = styled.div`
     animation : ${SlideIn} 5s 1s
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
     font-size: 40px;
     text-align: left;
-    font-weight: bold;
-    margin-bottom: 15px;
     align: left;
 `;
 
@@ -110,12 +109,31 @@ const move = keyframes`
     0%{
         left: 10%;
     }
+    50% {
+        left 70%
+    }
+    100%{
+        left: 10%;
+    }
+`;
+
+const BackBar = styled.div`
+    position:absolute;
+    bottom:0;
+    background: #5FDBB2;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Our = styled.div`
     color: white;
     position:absolute;
     bottom:0;
-    font-size : 15px;
+    font-size : 17px;
     animation : ${move} 10s 1s infinite;
 `;
 
-export default Home;
+export default connect(mapDispatchToProps)(Home);

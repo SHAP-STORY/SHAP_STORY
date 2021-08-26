@@ -135,8 +135,7 @@ class MyPage extends React.Component {
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
     
-      
-      console.log(user_info);
+
       fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
         headers: {
@@ -149,7 +148,6 @@ class MyPage extends React.Component {
         this.setState({ mywriting: json })
       })
       .catch((err) => console.log(err));
-  
   }
 
   componentWillUnmount() {
