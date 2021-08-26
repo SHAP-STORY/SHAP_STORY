@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import basicImg from "./image/basic_image.png"
 import divider from "./image/divider.png"
+import exit from "./image/lessonout.png"
 
 
-const Basic = (props) => {
+class Basic extends React.Component {
+    
+
+    render(){
     return (
         <RowAlign>
             <ColAlign>
-                <img style={{width: "90px", margin: "40% 0 20% 0"}} src={basicImg}></img>
+                <img style={{width: "80px", margin: "40% 0 20% 0"}} src={basicImg}></img>
                 <h3 style={{marginBottom: "5%"}}>목차</h3>
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🤍 1차시</ContentButton>
@@ -18,10 +22,15 @@ const Basic = (props) => {
                 <h3 style={{marginBottom: "5%"}}>소통하기</h3>
                 <img style={{marginBottom: "5%"}} src={divider}></img>
                 <ContentButton>🙋‍♀ 질문하기</ContentButton>
+                <img style={{marginTop: "110%", marginBottom: "5%"}} src={exit}></img>
+                
             </ColAlign>
+            <div>
             <iframe src="../content/개미와배짱이.html" width="100%" height="768px"></iframe>
+            </div>
         </RowAlign>
     )
+    }
 }
 
 const ContentButton = styled.button`
@@ -43,7 +52,7 @@ const RowAlign = styled.div`
 `
 
 const ColAlign = styled.div`
-    width: 13%;
+    width: 15%;
     height: 100vh;
     display: flex;
     align-items: center;
