@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Iframe from "react-iframe";
-import basicImg from "./image/basic_image.png";
+import basicImg from "./image/level_up_image.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
 
@@ -9,7 +9,7 @@ import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
 
-class Basic extends React.Component {
+class Advanced extends React.Component {
     constructor(props) {
         super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
         this.state = {
@@ -72,7 +72,6 @@ class Basic extends React.Component {
                 </ColAlign>
                 <div style={{marginLeft: "5%", border: "10px"}}>
 
-
                 </div>
             </RowAlign>
         );
@@ -115,4 +114,4 @@ const PreviewBtn = styled.img`
   cursor: pointer;
 `;
 
-export default Basic;
+export default Advanced;
