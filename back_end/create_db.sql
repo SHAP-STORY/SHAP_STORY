@@ -22,7 +22,7 @@ CREATE TABLE BasicSubject (
   `contents` VARCHAR(255),
   `type` VARCHAR(255)
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-CREATE TABLE AdvancedSubject (
+CREATE TABLE HardSubject (
   `index` INT PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `contents` VARCHAR(255),
