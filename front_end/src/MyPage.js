@@ -29,8 +29,6 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 /*
 NOTE 추가해야할 부분
@@ -442,5 +440,4 @@ const ProfileBtn = styled.button`
 
 //-------------------------------------------
 //가운데 section (각 수업 진도율/ 나의 질문)
-
 export default connect(mapDispatchToProps)(MyPage);

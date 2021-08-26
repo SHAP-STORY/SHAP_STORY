@@ -4,7 +4,7 @@ import {
   MYPAGE_USER
 } from './types'
 
-export const serverConnect = () => {
+export const signinAction = () => {
     return {
       type: SIGNIN_USER,
     }
