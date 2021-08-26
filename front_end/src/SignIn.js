@@ -159,6 +159,7 @@ class SignIn extends React.Component {
   }
 }
 
+
 const mapStateToProps = (state) => ({
   // ./_reducers/user_reducer.js 의 변수와 이름 동일. state 변수 전달.
   storeId: state.userid,
