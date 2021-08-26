@@ -93,7 +93,6 @@ const RowAlign = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-  border-radius: 20px;
 `;
 
 const ColAlign = styled.div`
@@ -104,6 +103,7 @@ const ColAlign = styled.div`
   flex-direction: column;
   align: left;
   box-shadow: 10px 10px 10px #dadbdb;
+  border-radius: 20px;
 `;
 
 const NextBtn = styled.img`
