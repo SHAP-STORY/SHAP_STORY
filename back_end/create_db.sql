@@ -10,9 +10,9 @@ CREATE TABLE Student (
   PRIMARY KEY(id)
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 CREATE TABLE Post (
+ `index` INT PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `body` VARCHAR(255) NOT NULL,
-  `show` TINYINT(1) NOT NULL,
   `student_id` VARCHAR(255) NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
