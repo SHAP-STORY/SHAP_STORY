@@ -42,11 +42,11 @@ router.post('/register', (req, res, next) => {
 // 로그인 GET
 router.get('/login', function (req, res, next) {
     let session = req.session;
-    const data = {
-        'state': user_info[0],
-        'name': user_info[2]
+    if(user_info[0] == false){
+        res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
+    }else{
+        res.send('{"state": true}');
     }
-    res.send(data);
 });
 
 // login function (main -> login clink)
@@ -54,7 +54,7 @@ router.post('/login', (req, res, next) => {
     const param = [req.body.id, req.body.passwd]
     console.log('Login Data:', (param));
 
-    db.query('SELECT id, passwd, name, img FROM Student WHERE id=?', param[0], (err, row) => {
+    db.query('SELECT id, passwd, name FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
             console.log('ERROR: Connect DB')
             console.log(err)
@@ -74,13 +74,7 @@ router.post('/login', (req, res, next) => {
                     user_info[1] = param[0];
                     user_info[2] = row[0].name;
                     user_info[0] = true;
-                    console.log(user_info);
-                    const data = {
-                        'loginstate': true,
-                        'name': row[0].name,
-                        'img': row[0].img
-                    }
-                    res.send(data);          
+                    console.log(user_info);          
                 }else{
                     console.log('Error: Login: can not find id')
                     console.log('fail');
@@ -91,6 +85,7 @@ router.post('/login', (req, res, next) => {
             console.log('ID가 존재하지 않습니다.')
         }
     })
+    res.end()
 })
 
 
