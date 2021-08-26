@@ -1,4 +1,5 @@
 import React from "react";
+import { post } from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components";
 import profile from "./image/profile.png";
@@ -197,8 +198,18 @@ class MyPage extends React.Component {
   }
 
   handleFormSubmit() {
+    const url = '/api/mypage/photo';
     // 입력한 ID, Passwd server로 보내는 function.(post)
-    const post = {
+    const formData = new FormData();
+    formData.append('image', this.state.file);
+    const config = {
+      headers: {
+      'content-type': 'multipart/form-data'
+      }
+    } 
+    return post(url, formData, config);
+  }
+    /*const post = {
       file: this.state.file,
       id: this.userId,
     };
@@ -210,12 +221,13 @@ class MyPage extends React.Component {
       body: JSON.stringify(post),
     })
     .then(response => response.json())
-    .then(response => {console.log(response)});
+    .then(response => {console.log(response)});*/
+
+
 
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
     //- 아니면 '다시한번 더 시도해주세요 알람'
-  }
 
   render() {
     return (

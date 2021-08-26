@@ -2,15 +2,15 @@
 import { BASIC_USER, ADVANCED_USER  } from "../_actions/types";
 
 const initialStates = {
-    complete: 0,
     
+
 
 }
 
 const reducers = (state = initialStates, action) => {
     const { type } = action;
     switch (type) {
-      case HOME_USER.HomeUser: {
+      case BASIC_USER.BaicUser: {
         return {
           ...state,
         }
