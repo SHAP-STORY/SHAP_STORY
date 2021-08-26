@@ -8,25 +8,6 @@ import user_info from "../variables/user_info";
 
 class TopBar extends React.Component {
 
-    render() {
-        return (
-            <div>
-                <Link to="./basic">
-                    <ContentButton>기초학습</ContentButton>
-                </Link>
-                <Link to="./levelUp">
-                    <ContentButton>심화학습</ContentButton>
-                </Link>
-                <Link to="./questions">
-                    <ContentButton>질문하기</ContentButton>
-                </Link>
-                <Link to="./mypage">
-                    <ContentButton>마이페이지</ContentButton>
-                </Link>
-            </div>
-        );
-    }
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +64,7 @@ class TopBar extends React.Component {
             borderRadius: "30px",
             margin: "auto 5px",
           }}
-        ></img>
+        />
         <div style={{ lineHeight: "40px" }}>{this.state.userName} 님</div>
       </UserInfo>
       )
@@ -93,17 +74,19 @@ class TopBar extends React.Component {
   render() {
     return (
       <div>
+        <Link to={this.state.loginState ? './basic' : '/'}>
         <ContentButton onClick={this.basicLessonLink}>기초학습</ContentButton>
+        </Link>
+        <Link to={this.state.loginState ? './levelUp' : '/'}>
         <ContentButton onClick={this.hardLessonLink}>심화학습</ContentButton>
+        </Link>
         <Link to={this.state.loginState ? './questions' : '/'}>
           <ContentButton onClick={this.questionLink}>질문하기</ContentButton>
           </Link>
           <Link to={this.state.loginState ? './mypage' : '/'}>
           <ContentButton onClick={this.mypageLink}>마이페이지</ContentButton>
           </Link>
-        <Link to="./signin">
           {this.handlePage()}
-        </Link>
       </div>
     );
   }
