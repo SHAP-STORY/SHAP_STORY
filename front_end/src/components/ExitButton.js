@@ -18,14 +18,12 @@ class ExitButton extends React.Component {
 
   render() {
     return (
-      <div>
         <ExitBtn
           onClick={() => {
             this.handlePage();
           }}
-          style={{ marginBottom: "5%"}}
+          style={{ marginBottom: "5%", marginRight:"20px"}}
         ></ExitBtn>
-      </div>
     );
   }
 }
