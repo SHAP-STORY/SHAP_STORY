@@ -56,12 +56,19 @@ router.get('/basicachievement', function(req, res, next) {
     });
 });
 
-router.get('/mywriting', function(req, res, next) {
-    db.query('SELECT title, body, date FROM Post where student_id= ?',[user_info[1]], function (error, results, fields) {
+router.post('/mywriting', function(req, res, next) {
+    console.log(req.body.id);
+    db.query('SELECT title, body, date FROM Post where student_id= ?',[req.body.id], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
-        res.send(results);
+        console.log(results);
+        if(results){
+            res.send(results);
+        }else{
+            res.send('');
+        }
+        
     });
     if(req.cookies){
         console.log(req.cookies);
