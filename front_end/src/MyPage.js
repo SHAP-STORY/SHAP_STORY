@@ -35,7 +35,6 @@ NOTE 추가해야할 부분
 - 해당 퍼센트에이지로 칸 변하기
 - Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
 - callApi Id 보내서 받게 하기.
-
 COMMENT
 - 내 글 보기 디자인 좀더 추가
 - 로그아웃 버튼
@@ -62,7 +61,7 @@ class MyPage extends React.Component {
           img: contentImage,
         },
       ],
-      hard: [
+      advanced: [
         {
           id: "2",
           title: "알라딘의 요술램프",
@@ -117,13 +116,16 @@ class MyPage extends React.Component {
   };
   callHardAchievementApi = async () => {
     // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/hardachievement");
+    const response = await fetch("api/mypage/advancedachievement");
     const body = await response.json();
     return body;
   };
 
   componentDidMount() {
     this.timer = setInterval(this.progress, 20);
+    const post = {
+      id: this.state.userId,
+    };
 
     this.callBasicAchievementApi()
       .then((res) => this.setState({ basic: res }))
@@ -133,9 +135,7 @@ class MyPage extends React.Component {
       .then((res) => this.setState({ hard: res }))
       .catch((err) => console.log(err));
     
-      const post = {
-        id: this.state.userId,
-      };
+      
       console.log(user_info);
       fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
@@ -273,7 +273,7 @@ class MyPage extends React.Component {
                   />
                 );
               })}
-              {this.state.hard.map((c) => {
+              {this.state.advanced.map((c) => {
                 return (
                   <Contentachievement
                     img={c.img}

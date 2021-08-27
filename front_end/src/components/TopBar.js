@@ -1,3 +1,4 @@
+  
 import React from "react";
 import { Link } from "react-router-dom";
 import { DropdownButton, Dropdown } from "react-bootstrap";
@@ -120,7 +121,6 @@ const ContentButton = styled.button`
   padding: 5px 10px 10px 10px;
   border-radius: 20px;
   height: 35px;
-
   &:hover {
     background: #dadbdb;
   }

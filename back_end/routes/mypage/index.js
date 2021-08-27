@@ -38,7 +38,7 @@ router.get('/user', function (req, res, next) {
     res.send(data);
 });
 
-router.get('/hardachievement', function(req, res, next) {
+router.get('/advancedachievement', function(req, res, next) {
     db.query('SELECT class_id, complete FROM LessonRate where Student_id= ? ',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -56,19 +56,12 @@ router.get('/basicachievement', function(req, res, next) {
     });
 });
 
-router.post('/mywriting', function(req, res, next) {
-    console.log(req.body.id);
-    db.query('SELECT title, body, date FROM Post where student_id= ?',[req.body.id], function (error, results, fields) {
+router.get('/mywriting', function(req, res, next) {
+    db.query('SELECT title, body, date FROM Post where student_id= ?',[user_info[1]], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
-        console.log(results);
-        if(results){
-            res.send(results);
-        }else{
-            res.send('');
-        }
-        
+        res.send(results);
     });
     if(req.cookies){
         console.log(req.cookies);

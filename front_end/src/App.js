@@ -6,14 +6,14 @@ Route,
 
 import Home from "./Home";
 //import QnABoard from "./QuestionBoard";
-import Questions from "./QuestionBoard";
+import Questions from "./Questions";
 import DoQuestion from "./DoQuestion";
 import SignIn from "./SignIn";
 import Mypage from "./MyPage";
 import SignUp from './SignUp';
 import SignUpComplete from './SignUpComplete';
 import Basic from "./Basic";
-import Advanced from "./LevelUp";
+import Advanced from "./Advanced";
 
 
 class App extends React.Component {
