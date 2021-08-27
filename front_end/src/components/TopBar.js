@@ -19,6 +19,7 @@ class TopBar extends React.Component {
     this.questionLink = this.questionLink.bind(this);
     this.mypageLink = this.mypageLink.bind(this);
     this.handlePage = this.handlePage.bind(this);
+    this.userImgChange = this.userImgChange.bind(this);
   }
 
   basicLessonLink() {
@@ -42,6 +43,16 @@ class TopBar extends React.Component {
       alert("로그인이 필요한 서비스입니다.");
     }
   }
+  userImgChange(img){
+    console('check');
+    this.setState({
+      userimg: img
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   handleLogout() {
     console.log('in');
@@ -62,7 +73,7 @@ class TopBar extends React.Component {
       return (
         <UserInfo>
           <img
-            src={this.state.userImg}
+            src={this.props.userImg}
             style={{
               width: "35px",
               height: "35px",

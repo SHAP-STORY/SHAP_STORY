@@ -4,7 +4,17 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require("multer");
-const upload = multer({ dest: "./upload" });
+const storage = multer.diskStorage({
+    destination: (req,res,cb) => {
+        cb(null, './upload');
+    },
+    filename: (req,file,cb) => {
+        console.log(file);
+        cb(null, Date.now() + '.png');
+    }
+});
+const upload = multer({storage});
+
 //user_info
 var user_info = require('../varient');
 
@@ -82,7 +92,7 @@ router.use("/image", express.static("./upload"));
 router.post('/photo', upload.single("image"), (req, res) => {
     console.log(req.body.id);
     let sql = "UPDATE Student SET img = ? Where id = ?";
-    let image = "http://localhost:5000/image/" + req.file.filename;
+    let image = "http://localhost:5000/api/mypage/image/" + req.file.filename;
     let id = req.body.id;
     let params = [image, id];
     db.query(sql, params, (err, rows, fields) => {
@@ -96,10 +106,5 @@ router.post('/photo', upload.single("image"), (req, res) => {
         res.send(results);
     });
   });
-
-// 진도현황 - 기초학습, 심화학습 -> 그 학습 페이지로 들어가기
-// 내글 목록
-// 전체 페이지 
-// 내 사진 수정하기
 
 module.exports = router; // 꼭 넣어주기 아니면 에러가 난다!

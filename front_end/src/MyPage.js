@@ -123,14 +123,17 @@ class MyPage extends React.Component {
   };
 
   componentDidMount() {
+    console.log(user_info);
     this.timer = setInterval(this.progress, 20);
     const post = {
       id: this.state.userId,
     };
 
-    this.callBasicAchievementApi()
-      .then((res) => this.setState({ basic: res }))
-      .catch((err) => console.log(err));
+    if(this.state.userImg === ''){
+      this.setState({
+        userImg: profile
+      })
+    }
 
       fetch("http://localhost:5000/api/mypage/basicachievement", {
         method: "post",
@@ -209,7 +212,12 @@ class MyPage extends React.Component {
       'content-type': 'multipart/form-data'
       }
     } 
-    post(url, formData, config); 
+    post(url, formData, config)
+    .then(res => {
+      this.setState({userImg: res.data[0].img});
+      user_info[3] = this.state.userImg;
+      console.log(user_info);
+    });
   }
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
@@ -223,11 +231,11 @@ class MyPage extends React.Component {
             <HomeButton>#.</HomeButton>
           </Link>
           <MarginLeft />
-          <TopBar></TopBar>
+          <TopBar userImg={this.state.userImg}></TopBar>
         </Header>
         <Container>
           <Profile>
-            <ProfileImg src={profile}></ProfileImg>
+            <ProfileImg src={this.state.userImg}></ProfileImg>
             <ProfileBtn onClick={this.handleClickOpen}>
               <img src={profileButton}></img>
             </ProfileBtn>

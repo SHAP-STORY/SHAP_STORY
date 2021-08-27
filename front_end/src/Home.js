@@ -9,8 +9,10 @@ import TopBar from "./components/TopBar";
 //Redux
 import { connect } from "react-redux";
 import * as actions from "./_actions/start_action";
+import user_info from "./variables/user_info";
 
-const Home = (props) => {
+class Home extends React.Component {
+    render() {
     return (
         <Background>
             <Header>
@@ -18,7 +20,7 @@ const Home = (props) => {
                     <HomeButton>#.</HomeButton>
                 </Link>
                 <MarginLeft/>
-                <TopBar></TopBar>   
+                <TopBar userImg={user_info[3]}></TopBar>   
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
@@ -30,7 +32,8 @@ const Home = (props) => {
                 <Our><b>#SHAP-STORY™ 방희연 서현주 이채영 김효민</b></Our>
             </BackBar>
         </Background>
-    );
+    )
+    }
 }
 const mapDispatchToProps = (dispatch) => ({
     // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
