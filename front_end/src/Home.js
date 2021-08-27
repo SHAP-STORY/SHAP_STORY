@@ -26,9 +26,9 @@ const Home = (props) => {
                 <RoundButton2>학습하기</RoundButton2>
             </Body>
 
-            <BackBar>
+            {/* <BackBar>
                 <Our><b>#SHAP-STORY™ 방희연 서현주 이채영 김효민</b></Our>
-            </BackBar>
+            </BackBar> */}
         </Background>
     );
 }
@@ -110,6 +110,8 @@ const move = keyframes`
     0%{
         left: 10%;
     }
+
+
     50% {
         left 70%
     }
@@ -127,6 +129,7 @@ const BackBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
 `;
 
 const Our = styled.div`

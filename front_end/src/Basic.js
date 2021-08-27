@@ -9,6 +9,9 @@ import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
 
+import BasicContent from "./components/BasicContentOne";
+import BasicContent1 from "./components/BasicContentOne";
+import BasicContentOne from "./components/BasicContentOne";
 class Basic extends React.Component {
     constructor(props) {
         super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
@@ -72,8 +75,8 @@ class Basic extends React.Component {
                 </ColAlign>
                 <div style={{marginLeft: "5%", border: "10px"}}>
 
-
                 </div>
+                
             </RowAlign>
         );
     }
