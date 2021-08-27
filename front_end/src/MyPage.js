@@ -51,6 +51,7 @@ class MyPage extends React.Component {
       userName: user_info[2],
       loginState: user_info[0],
       userId: user_info[1],
+      open_mywriting: false,
       file: "",
       fileName: "",
       open: false,
@@ -79,17 +80,17 @@ class MyPage extends React.Component {
       mywriting: [
         {
           title: "Basic 3강에서 질문있습니다! 자꾸 에러가 나요.",
-          question: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
+          body: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
           date: "2021.07.24 오전 11:30",
         },
         {
           title: "1강에서 이해가 안되는 것이 있어요.",
-          question: "기타가 어떻게 소리가 나게 되는 건가요!?",
+          body: "기타가 어떻게 소리가 나게 되는 건가요!?",
           date: "2021.07.24 오전 11:15",
         },
         {
           title: "질문이 있습니다.",
-          question:
+          body:
             "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
           date: "2021.07.24 오전 11:15",
         },
@@ -100,13 +101,7 @@ class MyPage extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.showWriting = this.showWriting.bind(this);
   }
-
- showWriting(){
-  console.log('click');
- }
-
 
   componentDidMount() {
     console.log(user_info);
@@ -309,7 +304,6 @@ class MyPage extends React.Component {
                       title={c.title}
                       question={c.body}
                       date={c.date}
-                      onClick = {this.showWriting}
                     />
                   );
                 })}
