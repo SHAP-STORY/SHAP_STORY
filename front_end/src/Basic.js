@@ -72,7 +72,7 @@ class Basic extends React.Component {
                 </ColAlign>
                 <div style={{marginLeft: "5%", border: "10px"}}>
 
-
+                
                 </div>
             </RowAlign>
         );

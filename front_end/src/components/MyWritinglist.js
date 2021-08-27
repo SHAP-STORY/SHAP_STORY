@@ -55,7 +55,7 @@ class MyWritinglist extends React.Component {
               }}
             >
               <text style={{ position: "relative", left: "-210px" }}>
-                {this.props.question}
+                {this.props.question.slice(0,20)+" ..."}
               </text>
             </div>
           </Writing>
