@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import microbit from "../src/image/microbit_basic.png"
+import microbit from "../image/microbit_basic.png"
 
 const Ad_contents03 = (props) => {
     return (

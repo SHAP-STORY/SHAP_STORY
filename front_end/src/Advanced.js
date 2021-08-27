@@ -8,6 +8,7 @@ import user_info from "./variables/user_info";
 import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
+import Ad_contents01 from "./components/Ad_contents01";
 
 class Advanced extends React.Component {
     constructor(props) {
@@ -70,10 +71,10 @@ class Advanced extends React.Component {
                         ></NextBtn>
                     </div>
                 </ColAlign>
-                <div style={{marginLeft: "5%", border: "10px"}}>
 
-                </div>
+                <Ad_contents01></Ad_contents01>
             </RowAlign>
+
         );
     }
 }
