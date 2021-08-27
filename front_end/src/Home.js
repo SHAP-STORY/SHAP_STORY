@@ -17,8 +17,8 @@ const Home = (props) => {
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
                 </Link>
-                <MarginLeft/>
-                <TopBar></TopBar>   
+                <MarginLeft />
+                <TopBar></TopBar>
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
@@ -35,7 +35,7 @@ const Home = (props) => {
 const mapDispatchToProps = (dispatch) => ({
     // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
     HomeUser: () => dispatch(actions.homeAction()),
-  });
+});
 
 const Background = styled.div`
     background-position:center;
@@ -110,14 +110,35 @@ const move = keyframes`
     0%{
         left: 10%;
     }
+
+
+    50% {
+        left 70%
+    }
+    100%{
+        left: 10%;
+    }
+`;
+
+const BackBar = styled.div`
+    position:absolute;
+    bottom:0;
+    background: #5FDBB2;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 `;
 
 const Our = styled.div`
     color: white;
     position:absolute;
     bottom:0;
-    font-size : 15px;
+    font-size : 17px;
     animation : ${move} 10s 1s infinite;
 `;
+
 
 export default Home;
