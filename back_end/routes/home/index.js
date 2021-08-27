@@ -60,18 +60,17 @@ router.get('/login', function (req, res, next) {
 
 // login function (main -> login clink)
 router.post('/login', (req, res, next) => {
+    console.log('IN URL /login ---------------------------')
     const param = [req.body.id, req.body.passwd]
-    console.log('Login Data:', (param));
-
+    console.log('Try Login Data:'+ (param) +"----------------------");
     db.query('SELECT id, passwd, name, img FROM Student WHERE id=?', param[0], (err, row) => {
         if (err) {
             console.log('ERROR: Connect DB')
             console.log(err)
         }
-
         if (row.length > 0) {
             //ID가 존재합니다.
-            console.log('Result: ', row);
+            console.log('Login Result: '+row+" ---------------------------------");
             bcrypt.compare(param[1], row[0].passwd, (error, result) => {
                 if (result) {
                     req.session.loginData = req.body
@@ -81,7 +80,7 @@ router.post('/login', (req, res, next) => {
                             console.log(error)
                         }
                     })
-                    console.log('success');
+                    console.log('Success ---------------------------------');
                     user_info[1] = param[0];
                     user_info[2] = row[0].name;
                     user_info[0] = true;
@@ -95,12 +94,13 @@ router.post('/login', (req, res, next) => {
                     res.send(data);
                 } else {
                     console.log('Error: Login: can not find id')
-                    console.log('fail');
+                    console.log('Fail ----------------------------------------------');
                     user_info[0] = false;
                 }
             })
         } else {
-            console.log('ID가 존재하지 않습니다.')
+            console.log('ID가 존재하지 않습니다. ---------------------------------------');
+            // ID가 존재하지 않습니다. 부분 나중에 추가
         }
     })
 })

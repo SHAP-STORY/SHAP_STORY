@@ -17,9 +17,7 @@ NOTE 추가해야할 부분
 - content html, 컴포넌트, img에 따라서 다르게 받게 하기
 - 다음 페이지로 넘겼을 때 DB로 보내기
 - 2차시로 넘어갈 수 있게 하기
-- Basic title 보이도록 추가
 - next나 pre 눌렀을 때 더 없으면 알람
-- 1/3 이렇게 페이지 보이기
 */
 
 /* NOTE 통신 동작
@@ -41,7 +39,8 @@ class Basic extends React.Component {
       page: 0,
       title: "",
       lessonrate: "",
-      class_order: 1,
+      lesson_number: 1,
+      lesson_img: '',
     };
     this.handleNext = this.handleNext.bind(this);
     this.handlePreview = this.handlePreview.bind(this);
