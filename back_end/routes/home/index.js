@@ -25,7 +25,6 @@ router.get('/', function (req, res, next) {
 
 
 //register 화면
-// router.get('/register', ctrl.register);
 router.get('/register', function (req, res, next) {
     console.log('in -> /api/home/register');
     let session = req.session;
@@ -51,14 +50,7 @@ router.post('/register', (req, res, next) => {
 
 // 로그인 GET
 router.get('/login', function (req, res, next) {
-    console.log('register post');
-    console.log('in -> /api/home/login');
     let session = req.session;
-    if (user_info[0] == false) {
-        res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
-    } else {
-        res.send('{"state": true}');
-    }
 });
 
 // login function (main -> login clink)
