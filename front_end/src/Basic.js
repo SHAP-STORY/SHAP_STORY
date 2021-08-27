@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Iframe from "react-iframe";
+import { post } from "axios";
 import basicImg from "./image/basic_image.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
@@ -8,17 +9,39 @@ import user_info from "./variables/user_info";
 import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
-
+import BC_one_1 from "./components/BC_one_1";
+import BC_one_2 from "./components/BC_one_2";
 import BC_one_3 from "./components/BC_one_3";
+/*
+NOTE 추가해야할 부분
+- content html, 컴포넌트, img에 따라서 다르게 받게 하기
+- 다음 페이지로 넘겼을 때 DB로 보내기
+- 2차시로 넘어갈 수 있게 하기
+- Basic title 보이도록 추가
+- next나 pre 눌렀을 때 더 없으면 알람
+- 1/3 이렇게 페이지 보이기
+*/
 
+/* NOTE 통신 동작
+- id랑 지금 차시로 lessonrate 있는지 확인
+- 지금 차시로 contents,title 받아오기
+- contents[page]로 1.이 null 이면 0으로 가져오기
+- lessonrate에 업데이트 이때 page는 다음 페이지로 complete는 (page+1)/content.length()*100
+- 다음 페이지로 넘어갈 때 마다 다음과 같이 lessonrate 업데이트
+
+2차시로 넘어가면 다음 home에서 2차시 인것만 다른 것
+*/
 class Basic extends React.Component {
   constructor(props) {
     super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
     this.state = {
       userId: user_info[1],
       content_data: "",
-      content: "./content/개미와베짱이.html",
-      page: "",
+      content: "",
+      page: 0,
+      title: "",
+      lessonrate: "",
+      class_order: 1,
     };
     this.handleNext = this.handleNext.bind(this);
     this.handlePreview = this.handlePreview.bind(this);
@@ -29,10 +52,40 @@ class Basic extends React.Component {
   }
 
   handlePreview() {}
-  componentDidMount() {}
+
+  componentDidMount() {
+      const post  = {
+          id: this.state.userId
+      }
+    fetch("http://localhost:5000/api/lesson/basic/content", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ content_data: json })
+      })
+      .catch((err) => console.log(err));
+  }
 
   render() {
     return (
+        <div >
+        <Header style={{ marginLeft: "85%"}}>
+        <img
+            src={this.props.userImg}
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "10px",
+              margin: "auto 10px",
+            }}
+          />
+        <h4 style={{ marginTop: "0.5%"}}> 기초학습</h4>
+    </Header>
       <RowAlign>
         <ColAlign>
           <img
@@ -51,6 +104,9 @@ class Basic extends React.Component {
           <ContentButton style={{ marginBottom: "100%" }}>
             🙋‍♀ 질문하기
           </ContentButton>
+          <div>
+              <h4 style={{ marginBottom: "20%"}}>1 / 3 </h4>
+              </div>
           <div>
             <PreviewBtn
               style={{
@@ -71,6 +127,7 @@ class Basic extends React.Component {
         </ColAlign>
         <BC_one_3 />
       </RowAlign>
+      </div>
     );
   }
 }
@@ -109,6 +166,12 @@ const NextBtn = styled.img`
 
 const PreviewBtn = styled.img`
   cursor: pointer;
+`;
+const Header = styled.div`    
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
 `;
 
 export default Basic;

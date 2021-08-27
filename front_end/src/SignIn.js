@@ -79,19 +79,6 @@ class SignIn extends React.Component {
     })
   }
 
-  /*callApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/home/login");
-    const body = await response.json();
-    return body;
-  };
-  serverConnect() {
-    // signinValueChange()로 보낸 이후 login 성공 여부를 변수로 받아오는 function (get)
-    this.callApi()
-      .then((res) => this.setState({ loginState: res.state })) // 받은 'state' 데이터를 loginState에 넣기.
-      .catch((err) => console.log(err));
-  }*/
-
   siginCheck() {
     const id = this.state.userId;
     const passwd = this.state.userPasswd;
