@@ -80,7 +80,6 @@ router.post('/mywriting', function(req, res, next) {
         }else{
             res.send('');
         }
-        
     });
     if(req.cookies){
         console.log(req.cookies);

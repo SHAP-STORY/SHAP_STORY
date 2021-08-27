@@ -147,8 +147,8 @@ class MyPage extends React.Component {
       })
       .catch((err) => console.log(err));
       
-
-      /*fetch("http://localhost:5000/api/mypage/mywriting", {
+/*
+      fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
         headers: {
           "content-type": "application/json",
