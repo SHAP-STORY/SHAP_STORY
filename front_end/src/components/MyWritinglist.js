@@ -2,9 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 class MyWritinglist extends React.Component {
+  constructor(props) {
+    super(props);
+    this.showWriting = this.showWriting.bind(this);
+  }
+  
+  showWriting(){
+    console.log('click');
+   }
+
   render() {
     return (
-      <div>
+      <div onClick = {this.showWriting}>
         <Question>
           <div>
             <text style={{ fontSize: "17px",fontWeight: "bold"}}>{this.props.title}</text>

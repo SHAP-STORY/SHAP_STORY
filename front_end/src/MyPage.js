@@ -100,27 +100,13 @@ class MyPage extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.showWriting = this.showWriting.bind(this);
   }
 
-  callMywritingApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/mywriting");
-    const body = await response.json();
-    return body;
-  };
+ showWriting(){
+  console.log('click');
+ }
 
-  callBasicAchievementApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/basicachievement");
-    const body = await response.json();
-    return body;
-  };
-  callHardAchievementApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/advancedachievement");
-    const body = await response.json();
-    return body;
-  };
 
   componentDidMount() {
     console.log(user_info);
@@ -162,7 +148,7 @@ class MyPage extends React.Component {
       .catch((err) => console.log(err));
       
 
-      fetch("http://localhost:5000/api/mypage/mywriting", {
+      /*fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -173,7 +159,7 @@ class MyPage extends React.Component {
       .then(json => {
         this.setState({ mywriting: json })
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));*/
   }
 
   componentWillUnmount() {
@@ -306,6 +292,7 @@ class MyPage extends React.Component {
                     id={c.class_id}
                     title={c.title}
                     achievement={c.complete}
+                    
                   />
                 );
               })}
@@ -322,6 +309,7 @@ class MyPage extends React.Component {
                       title={c.title}
                       question={c.body}
                       date={c.date}
+                      onClick = {this.showWriting}
                     />
                   );
                 })}
