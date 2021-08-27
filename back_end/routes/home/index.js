@@ -16,8 +16,8 @@ const saltRounds = 10; //ANCHOR passwd varchar(255)로 바꿔줌.(그 전에걸�
 // home.ctrl을 불러와서 그 안에 객체들 이용.
 const ctrl = require("./home.ctrl");
 
-router.get('/', function(req, res, next) {
-    if(req.cookies){
+router.get('/', function (req, res, next) {
+    if (req.cookies) {
         console.log(req.cookies);
     }
     res.render("home/home");
@@ -25,14 +25,23 @@ router.get('/', function(req, res, next) {
 
 
 //register 화면
-router.get('/register', ctrl.register);
+router.get('/register', function (req, res, next) {
+    console.log('in -> /api/home/register');
+    let session = req.session;
+    if (user_info[0] == false) {
+        res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
+    } else {
+        res.send('{"state": true}');
+    }
+});
 
 router.post('/register', (req, res, next) => {
     console.log(req.body);
-    const param = [req.body.id, req.body.passwd, req.body.name, req.body.grade, req.body.phone_number]
+    const param = [req.body.userId, req.body.userPasswd, req.body.userName, req.body.userGrade, req.body.userPhonenumber]
     bcrypt.hash(param[1], saltRounds, (err, hash) => {
         param[1] = hash;
         db.query('INSERT INTO Student(`id`, `passwd`, `name`, `grade`, `phone_number`) VALUES (?,?,?,?,?)', param, (err, row) => {
+            console.log('db in')
             if (err) console.log(err);
         });
     });
@@ -62,26 +71,29 @@ router.post('/login', (req, res, next) => {
 
         if (row.length > 0) {
             //ID가 존재합니다.
-            console.log('Result: ',row);
-            bcrypt.compare(param[1], row[0].passwd, (error, result) =>{
-                if(result){
+            console.log('Result: ', row);
+            bcrypt.compare(param[1], row[0].passwd, (error, result) => {
+                if (result) {
                     req.session.loginData = req.body
-                    req.session.save(error => {if(error) {
-                        console.log('Error: Login: save session')
-                        console.log(error)
-                    }}) 
+                    req.session.save(error => {
+                        if (error) {
+                            console.log('Error: Login: save session')
+                            console.log(error)
+                        }
+                    })
                     console.log('success');
                     user_info[1] = param[0];
                     user_info[2] = row[0].name;
                     user_info[0] = true;
                     console.log(user_info);
+
                     const data = {
                         'loginstate': true,
                         'name': row[0].name,
                         'img': row[0].img
                     }
-                    res.send(data);          
-                }else{
+                    res.send(data);
+                } else {
                     console.log('Error: Login: can not find id')
                     console.log('fail');
                     user_info[0] = false;

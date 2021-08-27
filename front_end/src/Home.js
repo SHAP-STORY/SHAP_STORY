@@ -28,9 +28,9 @@ class Home extends React.Component {
                 <RoundButton2>학습하기</RoundButton2>
             </Body>
 
-            <BackBar>
+            {/* <BackBar>
                 <Our><b>#SHAP-STORY™ 방희연 서현주 이채영 김효민</b></Our>
-            </BackBar>
+            </BackBar> */}
         </Background>
     )
     }
@@ -38,7 +38,7 @@ class Home extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
     HomeUser: () => dispatch(actions.homeAction()),
-  });
+});
 
 const Background = styled.div`
     background-position:center;

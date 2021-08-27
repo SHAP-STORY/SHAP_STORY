@@ -9,6 +9,9 @@ import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
 
+import BasicContent from "./components/BasicContentOne";
+import BasicContent1 from "./components/BasicContentOne";
+import BasicContentOne from "./components/BasicContentOne";
 class Basic extends React.Component {
     constructor(props) {
         super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
@@ -41,14 +44,14 @@ class Basic extends React.Component {
                         src={basicImg}
                     ></img>
                     <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>목차</h5>
-                    <img style={{marginBottom: "5%"}} src={divider}></img>
+                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
                     <ContentButton>🤍 1차시</ContentButton>
                     <ContentButton>🤍 2차시</ContentButton>
                     <ContentButton style={{marginBottom: "20%"}}>
                         🤍 3차시
                     </ContentButton>
                     <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>소통하기</h5>
-                    <img style={{marginBottom: "5%"}} src={divider}></img>
+                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
                     <ContentButton style={{marginBottom: "100%"}}>
                         🙋‍♀ 질문하기
                     </ContentButton>
@@ -70,10 +73,8 @@ class Basic extends React.Component {
                         ></NextBtn>
                     </div>
                 </ColAlign>
-                <div style={{marginLeft: "5%", border: "10px"}}>
-
+                <BasicContent1/>
                 
-                </div>
             </RowAlign>
         );
     }
@@ -94,7 +95,6 @@ const RowAlign = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-  border-radius: 20px;
 `;
 
 const ColAlign = styled.div`
@@ -105,6 +105,7 @@ const ColAlign = styled.div`
   flex-direction: column;
   align: left;
   box-shadow: 10px 10px 10px #dadbdb;
+  border-radius: 20px;
 `;
 
 const NextBtn = styled.img`
