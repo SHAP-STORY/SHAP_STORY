@@ -10,8 +10,9 @@ var user_info = require('../varient');
 // mysql
 const db = require('../../db/database');
 
-router.get('/basic', function(req, res, next) {
-    db.query('SELECT class_id, complete FROM LessonRate where Student_id= ? ',[user_info[1]], function (error, results, fields) {
+router.post('/basic/content', function(req, res, next) {
+    console.log(req.body.id)
+    db.query("SELECT contents, title FROM BasicSubject where student_id= ? AND TYPE='advanced'",[req.body.id], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -19,8 +20,7 @@ router.get('/basic', function(req, res, next) {
     });
 });
 
-
-router.post('/basic/content', function(req, res, next) {
+router.post('/basic/lessionrate', function(req, res, next) {
     console.log(req.body.id)
     db.query("SELECT contents, title FROM BasicSubject where student_id= ? AND TYPE='advanced'",[req.body.id], function (error, results, fields) {
         if (error) {

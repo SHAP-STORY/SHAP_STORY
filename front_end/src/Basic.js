@@ -18,15 +18,15 @@ NOTE 추가해야할 부분
 - 다음 페이지로 넘겼을 때 DB로 보내기
 - 2차시로 넘어갈 수 있게 하기
 - Basic title 보이도록 추가
-- 
-
+- next나 pre 눌렀을 때 더 없으면 알람
+- 1/3 이렇게 페이지 보이기
 */
 
-/* NOTE 동작
-- id랑 지금 차시로 lessonrate 있는지 확인 
+/* NOTE 통신 동작
+- id랑 지금 차시로 lessonrate 있는지 확인
 - 지금 차시로 contents,title 받아오기
 - contents[page]로 1.이 null 이면 0으로 가져오기
-- lessonrate에 업데이트 이떄 page는 다음 페이지로 complete는 (page+1)/content.length()*100
+- lessonrate에 업데이트 이때 page는 다음 페이지로 complete는 (page+1)/content.length()*100
 - 다음 페이지로 넘어갈 때 마다 다음과 같이 lessonrate 업데이트
 
 2차시로 넘어가면 다음 home에서 2차시 인것만 다른 것
@@ -52,6 +52,7 @@ class Basic extends React.Component {
   }
 
   handlePreview() {}
+
   componentDidMount() {
       const post  = {
           id: this.state.userId
@@ -72,6 +73,19 @@ class Basic extends React.Component {
 
   render() {
     return (
+        <div >
+        <Header style={{ marginLeft: "85%"}}>
+        <img
+            src={this.props.userImg}
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "10px",
+              margin: "auto 10px",
+            }}
+          />
+        <h4 style={{ marginTop: "0.5%"}}> 기초학습</h4>
+    </Header>
       <RowAlign>
         <ColAlign>
           <img
@@ -90,6 +104,9 @@ class Basic extends React.Component {
           <ContentButton style={{ marginBottom: "100%" }}>
             🙋‍♀ 질문하기
           </ContentButton>
+          <div>
+              <h4 style={{ marginBottom: "20%"}}>1 / 3 </h4>
+              </div>
           <div>
             <PreviewBtn
               style={{
@@ -110,6 +127,7 @@ class Basic extends React.Component {
         </ColAlign>
         <BC_one_3 />
       </RowAlign>
+      </div>
     );
   }
 }
@@ -148,6 +166,12 @@ const NextBtn = styled.img`
 
 const PreviewBtn = styled.img`
   cursor: pointer;
+`;
+const Header = styled.div`    
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
 `;
 
 export default Basic;
