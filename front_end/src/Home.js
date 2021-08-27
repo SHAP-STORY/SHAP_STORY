@@ -9,16 +9,18 @@ import TopBar from "./components/TopBar";
 //Redux
 import { connect } from "react-redux";
 import * as actions from "./_actions/start_action";
+import user_info from "./variables/user_info";
 
-const Home = (props) => {
+class Home extends React.Component {
+    render() {
     return (
         <Background>
             <Header>
                 <Link to={"/"}>
                     <HomeButton>#.</HomeButton>
                 </Link>
-                <MarginLeft />
-                <TopBar></TopBar>
+                <MarginLeft/>
+                <TopBar userImg={user_info[3]}></TopBar>   
             </Header>
             <Body>
                 <Title>Hello, #STORY</Title>
@@ -30,7 +32,8 @@ const Home = (props) => {
                 <Our><b>#SHAP-STORY™ 방희연 서현주 이채영 김효민</b></Our>
             </BackBar> */}
         </Background>
-    );
+    )
+    }
 }
 const mapDispatchToProps = (dispatch) => ({
     // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
@@ -57,16 +60,17 @@ const MarginLeft = styled.div`
     margin-left: auto;
 `;
 
+//--------------------------------------------------------
 // BODY
 
 const SlideIn = keyframes`
   from {
     margin-left: 70%;
   }
+
   to {
     margin-left: 35vh;
   }
-}
 `;
 
 const Body = styled.div`
@@ -78,11 +82,9 @@ const Body = styled.div`
     animation : ${SlideIn} 5s 1s
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
     font-size: 40px;
     text-align: left;
-    font-weight: bold;
-    margin-bottom: 15px;
     align: left;
 `;
 
@@ -110,8 +112,6 @@ const move = keyframes`
     0%{
         left: 10%;
     }
-
-
     50% {
         left 70%
     }
@@ -129,7 +129,6 @@ const BackBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
 `;
 
 const Our = styled.div`
@@ -140,5 +139,4 @@ const Our = styled.div`
     animation : ${move} 10s 1s infinite;
 `;
 
-
-export default Home;
+export default connect(mapDispatchToProps)(Home);

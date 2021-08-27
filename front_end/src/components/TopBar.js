@@ -42,6 +42,10 @@ class TopBar extends React.Component {
       alert("로그인이 필요한 서비스입니다.");
     }
   }
+  
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   handleLogout() {
     console.log('in');
@@ -62,7 +66,7 @@ class TopBar extends React.Component {
       return (
         <UserInfo>
           <img
-            src={this.state.userImg}
+            src={this.props.userImg}
             style={{
               width: "35px",
               height: "35px",

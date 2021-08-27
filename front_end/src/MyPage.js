@@ -1,4 +1,5 @@
 import React from "react";
+import { post } from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components";
 import profile from "./image/profile.png";
@@ -50,6 +51,7 @@ class MyPage extends React.Component {
       userName: user_info[2],
       loginState: user_info[0],
       userId: user_info[1],
+      open_mywriting: false,
       file: "",
       fileName: "",
       open: false,
@@ -78,17 +80,17 @@ class MyPage extends React.Component {
       mywriting: [
         {
           title: "Basic 3강에서 질문있습니다! 자꾸 에러가 나요.",
-          question: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
+          body: "3강을 수강하는 중에 에러가 납니다. 어떻게 해야할까요?",
           date: "2021.07.24 오전 11:30",
         },
         {
           title: "1강에서 이해가 안되는 것이 있어요.",
-          question: "기타가 어떻게 소리가 나게 되는 건가요!?",
+          body: "기타가 어떻게 소리가 나게 되는 건가요!?",
           date: "2021.07.24 오전 11:15",
         },
         {
           title: "질문이 있습니다.",
-          question:
+          body:
             "기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!? 기타가 어떻게 소리가 나게 되는 건가요!?",
           date: "2021.07.24 오전 11:15",
         },
@@ -101,42 +103,46 @@ class MyPage extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  callMywritingApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/mywriting");
-    const body = await response.json();
-    return body;
-  };
-
-  callBasicAchievementApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/basicachievement");
-    const body = await response.json();
-    return body;
-  };
-  callHardAchievementApi = async () => {
-    // serverConnect()에서 데이터 받아올 때 해당 URL로 불러와주는 function
-    const response = await fetch("api/mypage/advancedachievement");
-    const body = await response.json();
-    return body;
-  };
-
   componentDidMount() {
+    console.log(user_info);
     this.timer = setInterval(this.progress, 20);
     const post = {
       id: this.state.userId,
     };
 
-    this.callBasicAchievementApi()
-      .then((res) => this.setState({ basic: res }))
+    if(this.state.userImg === ''){
+      this.setState({
+        userImg: profile
+      })
+    }
+
+      fetch("http://localhost:5000/api/mypage/basicachievement", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ basic: json })
+      })
       .catch((err) => console.log(err));
 
-    this.callHardAchievementApi()
-      .then((res) => this.setState({ hard: res }))
+      fetch("http://localhost:5000/api/mypage/advancedachievement", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ advanced: json })
+      })
       .catch((err) => console.log(err));
-    
       
-      console.log(user_info);
+/*
       fetch("http://localhost:5000/api/mypage/mywriting", {
         method: "post",
         headers: {
@@ -148,8 +154,7 @@ class MyPage extends React.Component {
       .then(json => {
         this.setState({ mywriting: json })
       })
-      .catch((err) => console.log(err));
-  
+      .catch((err) => console.log(err));*/
   }
 
   componentWillUnmount() {
@@ -162,6 +167,7 @@ class MyPage extends React.Component {
       file: e.target.files[0],
       fileName: e.target.value,
     });
+    console.log(this.state.file, this.state.fileName);
   }
 
   handleClickOpen() {
@@ -177,25 +183,26 @@ class MyPage extends React.Component {
   }
 
   handleFormSubmit() {
+    const url = '/api/mypage/photo';
     // 입력한 ID, Passwd server로 보내는 function.(post)
-    const post = {
-      file: this.state.file,
-      id: this.userId,
-    };
-    fetch("http://localhost:5000/api/mypage/photo", {
-      method: "post",
+    const formData = new FormData();
+    formData.append('image', this.state.file);
+    formData.append('id', this.state.userId);
+    const config = {
       headers: {
-        "content-type": "multipart/form-data",
-      },
-      body: JSON.stringify(post),
-    })
-    .then(response => response.json())
-    .then(response => {console.log(response)});
-
+      'content-type': 'multipart/form-data'
+      }
+    } 
+    post(url, formData, config)
+    .then(res => {
+      this.setState({userImg: res.data[0].img});
+      user_info[3] = this.state.userImg;
+      console.log(user_info);
+    });
+  }
     //CHECK
     //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
     //- 아니면 '다시한번 더 시도해주세요 알람'
-  }
 
   render() {
     return (
@@ -205,11 +212,11 @@ class MyPage extends React.Component {
             <HomeButton>#.</HomeButton>
           </Link>
           <MarginLeft />
-          <TopBar></TopBar>
+          <TopBar userImg={this.state.userImg}></TopBar>
         </Header>
         <Container>
           <Profile>
-            <ProfileImg src={profile}></ProfileImg>
+            <ProfileImg src={this.state.userImg}></ProfileImg>
             <ProfileBtn onClick={this.handleClickOpen}>
               <img src={profileButton}></img>
             </ProfileBtn>
@@ -280,6 +287,7 @@ class MyPage extends React.Component {
                     id={c.class_id}
                     title={c.title}
                     achievement={c.complete}
+                    
                   />
                 );
               })}

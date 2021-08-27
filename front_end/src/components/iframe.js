@@ -11,7 +11,7 @@ const Iframe = ({ source }) => {
         // basic bootstrap classes. you can change with yours.
         <div className="col-md-12">
             <div className="emdeb-responsive">
-                <iframe src={src}></iframe>
+                <iframe src={src} width={'1340px'} height={'780px'}></iframe>
             </div>
         </div>
     );
