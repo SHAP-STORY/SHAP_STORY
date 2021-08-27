@@ -40,6 +40,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/user', function (req, res, next) {
+    console.log('IN URL /user ---------------------------')
     const data = {
         'userId': user_info[1],
         'userName': user_info[2],
@@ -49,6 +50,7 @@ router.get('/user', function (req, res, next) {
 });
 
 router.post('/advancedachievement', function(req, res, next) {
+    console.log('IN URL /advancedachievement ---------------------------')
     console.log(req.body.id)
     db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE='advanced'",[req.body.id], function (error, results, fields) {
         if (error) {
@@ -59,6 +61,7 @@ router.post('/advancedachievement', function(req, res, next) {
 });
 
 router.post('/basicachievement', function(req, res, next) {
+    console.log('IN URL /basicachievement ---------------------------')
     console.log(req.body.id)
     db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE= 'basic'",[req.body.id], function (error, results, fields) {
         if (error) {
@@ -69,6 +72,7 @@ router.post('/basicachievement', function(req, res, next) {
 });
 
 router.post('/mywriting', function(req, res, next) {
+    console.log('IN URL /mywriting ---------------------------')
     console.log(req.body.id);
     db.query('SELECT title, body, date FROM Post where student_id= ?',[req.body.id], function (error, results, fields) {
         if (error) {
@@ -89,6 +93,7 @@ router.post('/mywriting', function(req, res, next) {
 router.use("/image", express.static("./upload"));
 
 router.post('/photo', upload.single("image"), (req, res) => {
+    console.log('IN URL /photo ---------------------------')
     console.log(req.body.id);
     let sql = "UPDATE Student SET img = ? Where id = ?";
     let image = "http://localhost:5000/api/mypage/image/" + req.file.filename;
