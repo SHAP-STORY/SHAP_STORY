@@ -7,7 +7,7 @@ import direction from "../image/direction.png";
 class BasicContentOne extends React.Component {
     render() {
       return (
-          <div style={{display: "flex", flexDirection: "column"}}>
+          <ColAlign>
               <text style={{fontSize: "40px", textAlign:"left", marginBottom: "5px"}}>•마이크로비트란?</text>
               <text style={{textAlign: "left", marginLeft: "15px", marginBottom: "15px"}}>
                 마이크로비트는 입력(센서), 출력(제어)을 할 수 있는 작은 크기의 컴퓨터입니다.
@@ -44,9 +44,20 @@ class BasicContentOne extends React.Component {
                 <img src={microbit} style={{width: "20%"}}></img>
               </div>
               <text style={{textAlign: "left", fontSize: "18px", marginLeft: "35px"}}>😀여러분도 마이크로비트에게 명령을 내리고, 마이크로비트가 여러분이 원하는 행동을 하도록 만들어볼까요?</text>
-          </div>
+          </ColAlign>
       );
     }
 }
+
+const ColAlign = styled.div`
+  margin-left: 50px; 
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  align: left;
+`;
 
 export default BasicContentOne;

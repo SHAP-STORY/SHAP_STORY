@@ -44,14 +44,14 @@ class Basic extends React.Component {
                         src={basicImg}
                     ></img>
                     <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>목차</h5>
-                    <img style={{marginBottom: "5%"}} src={divider}></img>
+                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
                     <ContentButton>🤍 1차시</ContentButton>
                     <ContentButton>🤍 2차시</ContentButton>
                     <ContentButton style={{marginBottom: "20%"}}>
                         🤍 3차시
                     </ContentButton>
                     <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>소통하기</h5>
-                    <img style={{marginBottom: "5%"}} src={divider}></img>
+                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
                     <ContentButton style={{marginBottom: "100%"}}>
                         🙋‍♀ 질문하기
                     </ContentButton>
@@ -73,9 +73,7 @@ class Basic extends React.Component {
                         ></NextBtn>
                     </div>
                 </ColAlign>
-                <div style={{marginLeft: "5%", border: "10px"}}>
-
-                </div>
+                <BasicContent1/>
                 
             </RowAlign>
         );
