@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, ThemeConsumer } from "styled-components";
 import background from "./image/homeBg.svg";
 import user_info from "./variables/user_info";
 import { Link } from "react-router-dom";
@@ -16,6 +16,18 @@ class showQuestion extends React.Component {
             student_id: "",
             index: ""
         };
+    }
+    onClick(e) {
+        // e.preventDefault();
+        fetch("http://localhost:5000/api/posts/read/:index", {
+            method: "get",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(), // json화 해버리기
+        })
+            .then(response => response.json())
+
     }
 
     render() {
