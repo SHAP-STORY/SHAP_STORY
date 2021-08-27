@@ -9,75 +9,70 @@ import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
 
-import BasicContent from "./components/BasicContentOne";
-import BasicContent1 from "./components/BasicContentOne";
-import BasicContentOne from "./components/BasicContentOne";
+import BC_one_3 from "./components/BC_one_3";
+
 class Basic extends React.Component {
-    constructor(props) {
-        super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
-        this.state = {
-            userId: user_info[1],
-            content_data: "",
-            content: "./content/개미와베짱이.html",
-            page: "",
-        };
-        this.handleNext = this.handleNext.bind(this);
-        this.handlePreview = this.handlePreview.bind(this);
-    }
+  constructor(props) {
+    super(props); // content_data에 순서대로 배열에 들어가 있으면 page index에 따라 가져오는 것.
+    this.state = {
+      userId: user_info[1],
+      content_data: "",
+      content: "./content/개미와베짱이.html",
+      page: "",
+    };
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
+  }
 
-    handleNext() {
-        console.log("in");
-    }
+  handleNext() {
+    console.log("in");
+  }
 
-    handlePreview() {
-    }
+  handlePreview() {}
+  componentDidMount() {}
 
-    componentDidMount() {
-    }
-
-    render() {
-        return (
-            <RowAlign>
-                <ColAlign>
-                    <img
-                        style={{width: "80px", margin: "40% 0 20% 0"}}
-                        src={basicImg}
-                    ></img>
-                    <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>목차</h5>
-                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
-                    <ContentButton>🤍 1차시</ContentButton>
-                    <ContentButton>🤍 2차시</ContentButton>
-                    <ContentButton style={{marginBottom: "20%"}}>
-                        🤍 3차시
-                    </ContentButton>
-                    <h5 style={{marginBottom: "5%", fontWeight: "bold"}}>소통하기</h5>
-                    <img style={{marginBottom: "5%", width: "70%"}} src={divider}></img>
-                    <ContentButton style={{marginBottom: "100%"}}>
-                        🙋‍♀ 질문하기
-                    </ContentButton>
-                    <div>
-                        <PreviewBtn
-                            style={{
-                                marginBottom: "15%",
-                                width: "40px",
-                                marginRight: "20px",
-                            }}
-                            src={previewButton}
-                            onClick={this.handlePreview}
-                        ></PreviewBtn>
-                        <ExitButton/>
-                        <NextBtn
-                            style={{marginBottom: "15%", width: "40px"}}
-                            src={nextButton}
-                            onClick={this.handleNext}
-                        ></NextBtn>
-                    </div>
-                </ColAlign>
-                <BasicContent1/>
-                
-            </RowAlign>
-        );
-    }
+  render() {
+    return (
+      <RowAlign>
+        <ColAlign>
+          <img
+            style={{ width: "80px", margin: "40% 0 20% 0" }}
+            src={basicImg}
+          ></img>
+          <h5 style={{ marginBottom: "5%", fontWeight: "bold" }}>목차</h5>
+          <img style={{ marginBottom: "5%", width: "70%" }} src={divider}></img>
+          <ContentButton>🤍 1차시</ContentButton>
+          <ContentButton>🤍 2차시</ContentButton>
+          <ContentButton style={{ marginBottom: "20%" }}>
+            🤍 3차시
+          </ContentButton>
+          <h5 style={{ marginBottom: "5%", fontWeight: "bold" }}>소통하기</h5>
+          <img style={{ marginBottom: "5%", width: "70%" }} src={divider}></img>
+          <ContentButton style={{ marginBottom: "100%" }}>
+            🙋‍♀ 질문하기
+          </ContentButton>
+          <div>
+            <PreviewBtn
+              style={{
+                marginBottom: "15%",
+                width: "40px",
+                marginRight: "20px",
+              }}
+              src={previewButton}
+              onClick={this.handlePreview}
+            ></PreviewBtn>
+            <ExitButton />
+            <NextBtn
+              style={{ marginBottom: "15%", width: "40px" }}
+              src={nextButton}
+              onClick={this.handleNext}
+            ></NextBtn>
+          </div>
+        </ColAlign>
+        <BC_one_3 />
+      </RowAlign>
+    );
+  }
 }
 
 const ContentButton = styled.button`
