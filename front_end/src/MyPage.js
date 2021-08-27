@@ -32,13 +32,8 @@ import "react-circular-progressbar/dist/styles.css";
 /*
 NOTE 추가해야할 부분
 - 진도 현황에서 연결
-- 내 글 목록에서 누르면 자신의 글 크게 보기 -> Dialog
 - 해당 퍼센트에이지로 칸 변하기
-- Mypage에서 내 글 10글자 이상은 ...으로 보이게 하기
-- callApi Id 보내서 받게 하기.
-COMMENT
-- 내 글 보기 디자인 좀더 추가
-- 로그아웃 버튼
+
 */
 
 //마이페이지
@@ -196,13 +191,11 @@ class MyPage extends React.Component {
     post(url, formData, config)
     .then(res => {
       this.setState({userImg: res.data[0].img});
+      alert('성공적으로 프로필 사진이 업데이트 되었습니다. "닫기" 버튼을 눌러주세요');
       user_info[3] = this.state.userImg;
       console.log(user_info);
     });
   }
-    //CHECK
-    //- 성공적으로 됬으면 '성공적으로 저장되었습니다. 닫기를 눌러주세요'
-    //- 아니면 '다시한번 더 시도해주세요 알람'
 
   render() {
     return (
