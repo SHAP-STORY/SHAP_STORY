@@ -52,6 +52,20 @@ class Basic extends React.Component {
   handleNext() {
     if (this.state.page === this.state.content.length-1) {
       alert("마지막 페이지입니다.");
+      const data_complete = {
+        complete: 100,
+        id: this.state.userId,
+        class_num: this.state.lesson_number,
+        page: this.state.page+1
+      };
+  
+      fetch("http://localhost:5000/api/lesson/basic/complete", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data_complete),
+      })
     } else {
       this.setState({
         page: this.state.page + 1,
@@ -68,7 +82,7 @@ class Basic extends React.Component {
         page: this.state.page+1
       };
   
-      fetch("http://localhost:5000/api/lesson/basic/lessionrate", {
+      fetch("http://localhost:5000/api/lesson/basic/complete", {
         method: "post",
         headers: {
           "content-type": "application/json",

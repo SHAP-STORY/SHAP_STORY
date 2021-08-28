@@ -271,7 +271,7 @@ class MyPage extends React.Component {
           <div style={{ marginBottom: "60px" }}>
             <div>
               <Title>진도 현황</Title>
-              {this.state.basic.map((c) => {
+              {this.state.basic.slice(-2,-1).map((c) => {
                 return (
                   <Contentachievement
                     img={c.img} 

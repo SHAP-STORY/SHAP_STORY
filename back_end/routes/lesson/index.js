@@ -38,8 +38,7 @@ router.post('/basic/content', function(req, res, next) {
 // 다음페이지 넘어갈 때마다 진도율 업데이트
 router.post('/basic/complete', function(req, res, next) {
     console.log('IN URL /basic/complete ----------------------------')
-    console.log(req);
-    db.query("INSERT INTO LessonRate VALUES(?, ?, ?, `basic`, ?) ",[req.body.class_num, req.body.id, req.body.complete, req.body.page], function (error, results, fields) {
+    db.query("INSERT INTO LessonRate (`class_id`, `student_id`, `complete`, `type`,`page`) VALUES(?, ?, ?, 'basic', ?) ",[req.body.class_num, req.body.id, req.body.complete, Number(req.body.page)], function (error, results, fields) {
         if (error) {
             console.log(error);
         }

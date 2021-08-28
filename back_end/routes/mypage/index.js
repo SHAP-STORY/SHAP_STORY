@@ -63,7 +63,7 @@ router.post('/advancedachievement', function(req, res, next) {
 router.post('/basicachievement', function(req, res, next) {
     console.log('IN URL /basicachievement ---------------------------')
     console.log(req.body.id)
-    db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE= 'basic'",[req.body.id], function (error, results, fields) {
+    db.query("SELECT class_id, complete FROM LessonRate where student_id= ? AND TYPE= 'basic' AND complete!=100",[req.body.id], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
