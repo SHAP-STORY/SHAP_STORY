@@ -1,7 +1,10 @@
 import './App.css';
 import React from "react";
 import {
-Route,
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
 } from "react-router-dom";
 
 import Home from "./Home";
@@ -14,7 +17,7 @@ import SignUp from './SignUp';
 import SignUpComplete from './SignUpComplete';
 import Basic from "./Basic";
 import Advanced from "./Advanced";
-
+import showQuestion from './ShowQuestion';
 
 class App extends React.Component {
     constructor(props) {
@@ -25,17 +28,19 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <Route path="/" exact component={Home}/>
-                <Route path="/questions" component={Questions}/>
-                <Route path="/doQuestion" component={DoQuestion}/>
-                <Route path="/signIn" component={SignIn}/>
-                <Route path="/mypage" component={Mypage}/>
+                <Route path="/" exact component={Home} />
+                <Route path="/questions" component={Questions} />
+                <Route path="/doQuestion" component={DoQuestion} />
+                <Route path="/signIn" component={SignIn} />
+                <Route path="/mypage" component={Mypage} />
                 <Route path="/doQuestion" component={DoQuestion}></Route>
                 <Route path="/signIn" component={SignIn}></Route>
                 <Route path="/signUp" component={SignUp}></Route>
                 <Route path="/signUpComplete" component={SignUpComplete}></Route>
                 <Route path="/basic" component={Basic}/>
                 <Route path="/advanced" component={Advanced}/>
+                <Route path="/showQuestion/:idx" component={showQuestion} />
+
             </div>
         );
     }

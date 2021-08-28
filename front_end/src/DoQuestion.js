@@ -1,33 +1,80 @@
 import React from "react";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import background from "./image/homeBg.svg";
+import user_info from "./variables/user_info";
+import { Link } from "react-router-dom";
 
-import {Link} from "react-router-dom";
+class DoQuestion extends React.Component {
 
-const DoQuestion = (props) => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            content: "",
+            student_id: user_info[1],
+        };
+        this.goBack = this.goBack.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
 
-    return (
-        <Background>
-            <Modal>
-                <AlignCol>
-                    <Title>질문하기</Title>
-                    <ButtonOut
-                        onClick = {() => {
-                            props.history.goBack()
-                        }}
-                    >X</ButtonOut>
-                    <Input placeholder="제목을 입력해주세요"/>
-                    <Input placeholder="질문을 작성해주세요" style={{height: "330px"}}/>
-                    <SaveButton
-                        onClick={() => {
-                            props.history.goBack()
-                        }}
-                    >저장</SaveButton>
-                </AlignCol>
-            </Modal>
-        </Background>
-    );
+    onChange(e) {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    goBack = () => { //전 페이지로 다시 감.
+        window.history.back();
+    };
+
+    onSubmit(e) {
+        // e.preventDefault();
+        const data = {
+            student_id: this.state.student_id,
+            title: this.state.title,
+            content: this.state.content,
+        };
+
+        let length = this.state.content;
+
+        if (this.state.title === "" || this.state.content === "") {
+            alert("제목이나 내용을 입력해 주세요");
+            this.props.history.push("/doQuestion");
+        } else if (length.length >= 200) {
+            alert("200자를 초과 했어요");
+            this.props.history.push("/doQuestion");
+        } else {
+            fetch("http://localhost:5000/api/posts/create", {
+                method: "post",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(data), // json화 해버리기
+            });
+            alert("제출 되었습니다 감사합니다");
+            this.props.history.push("/questions");
+        }
+    };
+
+    render() {
+        return (
+            <Background>
+                <Modal>
+                    <AlignCol>
+                        <Title>질문하기</Title>
+                        <ButtonOut onClick={this.goBack}>X</ButtonOut>
+                        <Input name="title" value={this.state.title} onChange={this.onChange} placeholder="제목을 입력해주세요" />
+                        <Input name="content" value={this.state.content} onChange={this.onChange} placeholder="질문을 작성해주세요" style={{ height: "330px" }} />
+                        <SaveButton onClick={this.onSubmit}>저장</SaveButton>
+                    </AlignCol>
+                </Modal>
+            </Background>
+        );
+
+    }
 }
+
 
 const Background = styled.div`
     position: fixed;
