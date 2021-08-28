@@ -4,7 +4,7 @@ import microbit from "../image/microbit.png";
 import makecode from "../image/makecode.PNG";
 import direction from "../image/direction.png";
 
-class BC_one_2 extends React.Component {
+class bc_one_2 extends React.Component {
   render() {
     return (
       <ColAlign>
@@ -42,4 +42,4 @@ const ColAlign = styled.div`
   align: left;
 `;
 
-export default BC_one_2;
+export default bc_one_2;

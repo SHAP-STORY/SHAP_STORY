@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
 
 //register 화면
 router.get('/register', function (req, res, next) {
-    console.log('in -> /api/home/register');
+    console.log('IN URL: GET /login ---------------------------');
     let session = req.session;
     if (user_info[0] == false) {
         res.send('{"state": false}'); // 보낼 때는 json 형식으로 만.
@@ -70,7 +70,6 @@ router.post('/login', (req, res, next) => {
         }
         if (row.length > 0) {
             //ID가 존재합니다.
-            console.log('Login Result: '+row+" ---------------------------------");
             bcrypt.compare(param[1], row[0].passwd, (error, result) => {
                 if (result) {
                     req.session.loginData = req.body
@@ -84,7 +83,6 @@ router.post('/login', (req, res, next) => {
                     user_info[1] = param[0];
                     user_info[2] = row[0].name;
                     user_info[0] = true;
-                    console.log(user_info);
 
                     const data = {
                         'loginstate': true,

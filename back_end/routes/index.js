@@ -12,7 +12,7 @@ const content = require("./contents/index");
 router.use('/api/home', home);
 router.use('api/posts', posts);
 router.use('/api/mypage', mypage);
-router.use('api/lesson', lesson);
-router.use('api/contents', content);
+router.use('/api/lesson', lesson);
+router.use('/api/contents', content);
 
 module.exports = router;

@@ -10,7 +10,7 @@ const initialStates = {
 const reducers = (state = initialStates, action) => {
     const { type } = action;
     switch (type) {
-      case BASIC_USER.BaicUser: {
+      case BASIC_USER.BasicUser: {
         return {
           ...state,
         }
