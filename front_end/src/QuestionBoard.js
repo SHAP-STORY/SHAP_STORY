@@ -14,7 +14,6 @@ class Questions extends React.Component {
         super(props);
         this.state = {
             boards: [],
-            index: question_info[0],
         };
     }
 

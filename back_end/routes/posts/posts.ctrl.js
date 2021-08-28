@@ -35,7 +35,7 @@ const write = (req, res) => {
                         console.error('rollback error1');
                     })
                 }
-                db.query('SELECT LAST_INSERT_ID() as index', function (err, rows) {
+                db.query('SELECT LAST_INSERT_ID()', function (err, rows) {
                     if (err) {
                         /* 이 쿼리문에서 에러가 발생했을때는 쿼리문의 수행을 취소하고 롤백합니다.*/
                         console.log(err);
@@ -47,7 +47,7 @@ const write = (req, res) => {
                         db.commit(function (err) {
                             if (err) console.log(err);
                             console.log("row : " + rows);
-                            res.send(rows[0].index);
+                            // res.send(rows[0].index);
                         })
                     }
                 })
