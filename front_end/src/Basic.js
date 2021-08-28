@@ -14,6 +14,10 @@ import BC_one_1 from "./components/BC_one_1";
 import BC_one_2 from "./components/BC_one_2";
 import BC_one_3 from "./components/BC_one_3";
 import BC_one_4 from "./components/BC_one_4";
+
+//Redux
+import { connect } from "react-redux";
+import * as actions from "./_actions/lesson_action";
 /*
 NOTE 추가해야할 부분
 - content html, 컴포넌트, img에 따라서 다르게 받게 하기
@@ -125,6 +129,10 @@ class Basic extends React.Component {
           this.setState({
             page: 0,
           });
+        }else{
+          this.setState({
+            page: parseInt(json[0].page)
+          })
         }
         console.log(json);
         this.setState({ content_data: json });
@@ -246,6 +254,11 @@ class Basic extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  // ./_actions/user_action.js의 객체와 이름 동일. 함수를 통한 action 전달
+  BasicUser: () => dispatch(actions.basicAction()),
+});
+
 const ContentButton = styled.button`
   font-size: 15px;
   background-color: #00ff0000;
@@ -288,4 +301,4 @@ const Header = styled.div`
   align-items: center;
 `;
 
-export default Basic;
+export default connect(mapDispatchToProps)(Basic);
