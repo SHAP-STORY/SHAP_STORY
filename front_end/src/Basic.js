@@ -191,7 +191,7 @@ class Basic extends React.Component {
       <div>
         <Header style={{ marginLeft: "70%"}}>
           <img
-            src={microbit}
+            src={basicImg}
             style={{
               width: "50px",
               height: "50px",

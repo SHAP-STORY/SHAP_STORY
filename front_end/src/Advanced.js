@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Iframe from "react-iframe";
+import Iframe from "./components/iframe";
 import basicImg from "./image/level_up_image.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
@@ -33,6 +33,7 @@ class Advanced extends React.Component {
     this.handleNext = this.handleNext.bind(this);
     this.handlePreview = this.handlePreview.bind(this);
     this.changeShow = this.changeShow.bind(this);
+    this.changeShowH = this.changeShowH.bind(this);
   }
 
   handleNext() {
@@ -147,6 +148,7 @@ class Advanced extends React.Component {
         });
         if (this.state.content.slice(0, 4) === "http") {
           console.log("http");
+          this.changeShowH();
         } else if (this.state.content.slice(-4, -1) === ".png") {
           console.log("png");
         } else {
@@ -171,12 +173,20 @@ class Advanced extends React.Component {
     }
   }
 
+  changeShowH() {
+    return(
+      <div className="App">
+      <Iframe source={this.state.content} />
+  </div>
+    )
+  }
+
   render() {
     return (
       <div>
         <Header style={{ marginLeft: "70%" }}>
           <img
-            src={this.state.lesson_img}
+            src={basicImg}
             style={{
               width: "50px",
               height: "50px",
@@ -239,6 +249,10 @@ class Advanced extends React.Component {
             </div>
           </ColAlign>
           {this.changeShow()}
+          <div 
+          style={{ marginLeft: "5%", marginBottom: "1%"}}>
+          {this.changeShowH()}
+          </div>
         </RowAlign>
       </div>
     );

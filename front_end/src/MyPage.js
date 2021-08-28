@@ -271,6 +271,7 @@ class MyPage extends React.Component {
           <div style={{ marginBottom: "60px" }}>
             <div>
               <Title>진도 현황</Title>
+              <Link to="./basic">
               {this.state.basic.slice(-1).map((c) => {
                 return (
                   <Contentachievement
@@ -281,7 +282,9 @@ class MyPage extends React.Component {
                   />
                 );
               })}
-              {this.state.advanced.map((c) => {
+              </Link>
+              <Link to="/advanced">
+              {this.state.advanced.slice(-1).map((c) => {
                 return (
                   <Contentachievement
                     img={c.img}
@@ -292,6 +295,7 @@ class MyPage extends React.Component {
                   />
                 );
               })}
+              </Link>
             </div>
             <div>
               <Title style={{ marginTop: "50px", marginBottom: "60px" }}>
