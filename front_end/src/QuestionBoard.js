@@ -8,14 +8,16 @@ import axios from "axios";
 import HomeButton from "./components/HomeButton";
 import TopBar from "./components/TopBar";
 import Boardlist from "./components/Boardlist";
-
+import question_info from "./variables/user_info";
 class Questions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             boards: [],
+            index: question_info[0],
         };
     }
+
     //로딩 데이터 
     loadingData = async () => {
         try {
@@ -51,12 +53,13 @@ class Questions extends React.Component {
                 </QuestionBar>
 
                 <QuestionDiv>
-                    {this.state.boards.map((board) => {
+                    {this.state.boards.map((board) => { //.map삭제
                         return (
                             <Boardlist
                                 index={board.index}
                                 title={board.title}
                                 student_id={board.student_id}
+                                body={board.body}
                                 date={board.date}
                             />
                         );
@@ -70,6 +73,8 @@ class Questions extends React.Component {
                         </Link>
                     </PageDiv>
                 </SideDiv>
+
+
             </Background >
         );
     }

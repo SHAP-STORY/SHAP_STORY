@@ -4,7 +4,7 @@ const db = require('../../db/database');
 
 // posts.js 의 create연결
 const show = (req, res) => {
-    var query = db.query('SELECT `index`,`title`,`student_id`,`date` FROM Post', function (err, rows) {
+    var query = db.query('SELECT `index`,`title`,`student_id`,`date`, `body` FROM Post', function (err, rows) {
         if (err) {
             console.log(err) // 만약 에러값이 존재한다면 로그에 표시합니다.
         } else {
@@ -20,6 +20,7 @@ const show = (req, res) => {
 const write = (req, res) => {
     var body = req.body;
     var student_id = body.student_id;
+    var index = body.index;
     var title = req.body.title;
     var content = req.body.content;
     db.beginTransaction(function (err) {
@@ -46,8 +47,7 @@ const write = (req, res) => {
                         db.commit(function (err) {
                             if (err) console.log(err);
                             console.log("row : " + rows);
-                            var index = rows[0].index;
-                            res.redirect('/posts/read/' + index);
+                            res.send(rows[0].index);
                         })
                     }
                 })
@@ -64,9 +64,10 @@ const read = (req, res) => {
     /* GET 방식의 연결이므로 read 페이지 조회에 필요한 idx 값이 url 주소에 포함되어 전송됩니다.
      이 idx값을 참조하여 DB에서 해당하는 정보를 가지고 옵니다.
     * url에서 idx 값을 가져오기 위해 request 객체의 params 객체를 통해 idx값을 가지고 옵니다.*/
-    var index = req.params.index;
+    // var index = question_info[0];
+    var index = req.body.index;
     console.log("index : " + index);
-
+    res.send(req.params.index)
     db.beginTransaction(function (err) {
         if (err) console.log(err);
         db.query('SELECT `index`,`title`,`content`,`student_id`,`date`' +

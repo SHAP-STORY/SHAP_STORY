@@ -1,19 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
 
 class QuestionComponent extends React.Component {
+
+
     render() {
         return (
             <div>
                 <ContentDiv>
-                    <ProfileImg src={this.props.img}></ProfileImg>
+                    {/* <ProfileImg src={this.props.img}></ProfileImg> */}
                     <Title_Author>
                         <Link to={`/showQuestion/${this.props.index}`}>
-                            <h6 style={{ margin: "0", fontWeight: "bold" }}>{this.props.title}</h6></Link>
-                        <text style={{ fontSize: "80%", marginTop: "10px" }}>작성자: {this.props.student_id}</text>
+                            <h6 style={{ margin: "0", fontWeight: "bold" }}>질문 : {this.props.title}</h6></Link>
+
+                        <text style={{ fontSize: "150%", marginTop: "10px" }}>{this.props.body}</text>
+
                     </Title_Author>
-                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: {this.props.date}</text>
+                    <text style={{ fontSize: "80%", fontWeight: "bold" }}>작성일: {this.props.date}</text><br></br>
+                    <text style={{ fontSize: "80%", marginTop: "10px" }}>작성자{this.props.student_id}</text>
                 </ContentDiv>
             </div >
         );
