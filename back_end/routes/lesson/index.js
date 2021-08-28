@@ -13,10 +13,12 @@ const db = require('../../db/database');
 // 새로운 차시에 들어 갈 때마다 진도율과 어느 페이지까지 완료하였는지 데이터 전달
 router.post('/basic/lessionrate', function(req, res, next) {
     console.log('IN URL /basic/lessionrate ---------------------------')
-    db.query("SELECT complete, page FROM BasicSubject where class_id= ? AND stdent_id AND TYPE='basic'",[req.body.lesson_num, req.body.id], function (error, results, fields) {
+    db.query("SELECT complete, page FROM LessonRate where class_id= ? AND student_id= ? AND TYPE='basic'",[req.body.lesson_num, req.body.id], function (error, results, fields) {
         if (error) {
+            console.log('ERROR: Connect DB');
             console.log(error);
         }
+        console.log('Success Lessonrate: data' + results+'----------------------------')
         res.send(results);
     });
 });
@@ -24,7 +26,18 @@ router.post('/basic/lessionrate', function(req, res, next) {
 // 해당 차시에 content 전달해주는 부분
 router.post('/basic/content', function(req, res, next) {
     console.log('IN URL /basic/content ----------------------------')
-    db.query("SELECT contents, title, img FROM BasicSubject where student_id= ? AND index=?",[req.body.id, req.body.index], function (error, results, fields) {
+    db.query("SELECT * FROM BasicSubject WHERE `index`=?",[req.body.index], function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log('Success Lessonrate: data' + results+'----------------------------')
+        res.send(results);
+    });
+});
+
+router.post('/advanced/content', function(req, res, next) {
+    console.log('IN URL /advanced/content ----------------------------')
+    db.query("SELECT * FROM AdvancedSubject where `index`=?",[req.body.index], function (error, results, fields) {
         if (error) {
             console.log(error);
         }

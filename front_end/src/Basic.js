@@ -3,15 +3,16 @@ import styled from "styled-components";
 import Iframe from "react-iframe";
 import { post } from "axios";
 import basicImg from "./image/basic_image.png";
+import microbit from "./image/microbit.png";
 import divider from "./image/divider.png";
 import user_info from "./variables/user_info";
 
 import ExitButton from "./components/ExitButton";
 import nextButton from "./image/nextButton.png";
 import previewButton from "./image/PreviewButton.png";
-import BC_one_1 from "./components/BC_one_1";
-import BC_one_2 from "./components/BC_one_2";
-import BC_one_3 from "./components/BC_one_3";
+import bc_one_1 from "./components/BC_one_1";
+import bc_one_2 from "./components/BC_one_2";
+import bc_one_3 from "./components/BC_one_3";
 /*
 NOTE 추가해야할 부분
 - content html, 컴포넌트, img에 따라서 다르게 받게 하기
@@ -53,22 +54,66 @@ class Basic extends React.Component {
   handlePreview() {}
 
   componentDidMount() {
-      const post  = {
-          id: this.state.userId
+    const data_check = {
+      id: this.state.userId,
+      lesson_num: this.state.lesson_number
+    }
+
+    fetch("http://localhost:5000/api/lesson/basic/lessionrate", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data_check),
+    })
+    .then(res => res.json())
+    .then(json => {
+      if(json === ''){
+        this.setState({
+          page: 0,
+        })
       }
+      console.log(json)
+      this.setState({ content_data: json })
+    })
+    .catch((err) => console.log(err));
+      const data_content  = {
+          id: this.state.userId,
+          index: this.state.lesson_number,
+      }
+      
     fetch("http://localhost:5000/api/lesson/basic/content", {
         method: "post",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify(data_content),
       })
       .then(res => res.json())
       .then(json => {
-        this.setState({ content_data: json })
+        console.log(json)
+        this.setState({ 
+          content_data: json[0].contents,
+          title: json[0].title,
+          lesson_img: json[0].img
+         })
+         this.setState({ 
+          content: this.state.content_data.split(',')[this.state.page]
+         })
+         if(this.state.content.slice(0,4) === 'http'){
+           console.log('http');
+         }else if (this.state.content.slice(-4, -1) === '.png'){
+           console.log('png')
+         }else{
+           console.log('component');
+           const content_id = document.getElementById('content');
+           content_id.innerHTML = '<'+this.state.content.slice(1,-1)+' />';
+         }
+
       })
       .catch((err) => console.log(err));
   }
+
 
   render() {
     return (
@@ -124,7 +169,8 @@ class Basic extends React.Component {
             ></NextBtn>
           </div>
         </ColAlign>
-        <BC_one_3 />
+        <bc_one_1 />
+        
       </RowAlign>
       </div>
     );

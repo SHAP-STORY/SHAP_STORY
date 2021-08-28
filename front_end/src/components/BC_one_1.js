@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import microbit from "../image/microbit_basic.png";
 
-class BC_one_1 extends React.Component {
+class bc_one_1 extends React.Component {
   render() {
     return (
       <ColAlign>
@@ -53,4 +53,4 @@ const ColAlign = styled.div`
   align: left;
 `;
 
-export default BC_one_1;
+export default bc_one_1;
