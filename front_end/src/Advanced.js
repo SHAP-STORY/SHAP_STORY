@@ -186,7 +186,7 @@ class Advanced extends React.Component {
       <div>
         <Header style={{ marginLeft: "70%" }}>
           <img
-            src={this.state.lesson_img}
+            src={basicImg}
             style={{
               width: "50px",
               height: "50px",
