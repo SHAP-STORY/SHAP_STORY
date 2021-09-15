@@ -9,7 +9,6 @@
 ```
 cd back_end
 npm install
-npm update
 ```
     - 'front_end"
 ```
@@ -19,6 +18,7 @@ npm install
 
 ### Running Server
 ```
+cd backend
 npm start
 ```
 
